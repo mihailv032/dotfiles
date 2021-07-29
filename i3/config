@@ -1,0 +1,359 @@
+#monitor: ~90 | apps binds 330 | polybar 291 | movement ~140 |workspaces ~220
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%==*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@====#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+=====%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*======+%@@@@@@@@@@@@@@@@@@@@@#+++%@@@@@@@@@@@@%%####%@@@@@@@@@@
+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#========+@@@@@@@@@@@@@@@@@@@@@:   *@@@@@@@@%+:.        .-*@@@@@@
+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%=========++@@@@@@@@@@@@@@@@@@@@-   *@@@@@@@=    .:-==-.    .*@@@@
+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@%===========+*@@@@@@@@@@@@@@@@@@@%%%%@@@@@@@:   :#@@@@@@@%=    *@@@
+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@+=+==========+*@@@@@@@@@@@@@@@@@@@@@@@@@@@@+   :@@@@@@@@@@@=    @@@
+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@+=++++++======++*@@@@@@@@@@@@@@@@@*=+=%@@@@@.   +@@@@@@@@@@@%    %@@
+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@%*==+++++++====++*@@@@@@@@@@@@@@@@-   *@@@@@#***%@@@@@@@@@@@+   .@@@
+#%@@@@@@@@@@@@@@@@@@@@@@@@@**%@%*+=+++++++++=++#@@@@@@@@@@@@@@@-   *@@@@@@@@@@@@@@@@@@@%=   .#@@@
+#%@@@@@@@@@@@@@@@@@@@@@@@@*++++#%%#++++++++++=++#@@@@@@@@@@@@@@-   *@@@@@@@@@@@@@*:::..   :+@@@@@
+#%@@@@@@@@@@@@@@@@@@@@@@@*++++++++***++++++++++++#@@@@@@@@@@@@@-   *@@@@@@@@@@@@@=        -*%@@@@
+#%@@@@@@@@@@@@@@@@@@@@@@*+++++++++++++++++++++++++#@@@@@@@@@@@@-   *@@@@@@@@@@@@@@%%%%#+-    =@@@
+#%@@@@@@@@@@@@@@@@@@@@@*+*+++++++++++++++++++++++++#@@@@@@@@@@@-   *@@@@@@@@@@@@@@@@@@@@@%.   -@@
+#%@@@@@@@@@@@@@@@@@@@@*+********++++++++++++++++++++#@@@@@@@@@@-   *@@@@@@@@@@@@@@@@@@@@@@*    @@
+#%@@@@@@@@@@@@@@@@@@@*+*****+++======================*@@@@@@@@@-   *@@@@+ . -@@@@@@@@@@@@@%    %@
+#%@@@@@@@@@@@@@@@@@@*+**++============================*@@@@@@@@-   *@@@@#    %@@@@@@@@@@@@=   .@@
+#%@@@@@@@@@@@@@@@@@*+++================================*@@@@@@@-   *@@@@@-   .#@@@@@@@@@@=    #@@
+#%@@@@@@@@@@@@@@@%+===============+####*+===============+@@@@@@-   *@@@@@@=    :=*###*+-    .#@@@
+#%@@@@@@@@@@@@@@%===============*%@@@@@@@#+==============+@@@@@=   *@@@@@@@#-.            -*@@@@@
+#%@@@@@@@@@@@@@%===============#@@@@@@@@@@@+==============+@@@@@%%%@@@@@@@@@@@%*+=====+*#@@@@@@@@
+#%@@@@@@@@@@@@#===============#@@@@@@@@@@@@@+===============%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@@@@@@#===============+@@@@@@@@@@@@@@%================%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@@@@@*================#@@@@@@@@@@@@@@@+=========++++===%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@@@@*=================%@@@@@@@@@@@@@@@*==========++##%*+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@@@*==================%@@@@@@@@@@@@@@@*==============*%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@@+==================-*@@@@@@@@@@@@@@@+=================*%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@+==============++*##%@@@@@@@@@@@@@@@@%%#*++==============+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@+==========+*#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%#*+===========*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@%========+*%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%#*+=======*@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@%=====+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%#*+====*@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@#==+*%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%#*+-+@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+#setting default font
+font pango:monospace 8
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+#									monitor-settings
+#  ..............................................................................
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#   :==============================================================================:
+#                                      .:::...
+#                                       :::.
+#                                 :----------------.
+#                                  +****************=
+#                                  #################*
+#                                 .%%%%%%%%%%%%%%%%%%
+#                                 -++++++++++++++++++:
+#                              .-##******************#*-
+#                              =***++++++++++++++++++***-
+
+#setting default monitor resolution and position
+exec xrandr --output DVI-D-0 --mode 1920x1080 --pos 4497x180 --rotate normal --output HDMI-0 --mode 1920x1080 --pos 0x246 --rotate normal --output DP-0 --primary --mode 2560x1440 --pos 1937x0 --rotate normal
+
+#turn off the left and right monitors
+bindsym Control+mod4+1 exec xrandr --output HDMI-0 --off --output DVI-D-0 --off
+
+#turn on the left and right monitors and relauch the polybar
+bindsym Control+mod4+2 exec xrandr --output DVI-D-0 --mode 1920x1080 --pos 4497x180 --rotate normal --output HDMI-0 --mode 1920x1080 --pos 0x246 --rotate normal --output DP-0 --primary --mode 2560x1440 --pos 1937x0 --rotate normal 
+
+#setting the wallpaper
+exec ~/.fehbg &
+
+#################################################################
+####################### Border and gaps  ######################## 
+#################################################################
+
+for_window [class="^.*"] border pixel 4
+gaps inner 6
+gaps outer 7
+
+############################Border_Color############################
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #B3E2F7 #B3E2F7 #B3E2F7 #B3E2F7   #6b0000
+client.focused_inactive #ffffff #ffffff #ffffff #484e50   #ffffff
+client.unfocused        #934480 #934480 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #7E1B05 #900000   #900000
+client.placeholder      #000000 #0c0c0c #7E1B05 #000000   #0c0c0c
+
+
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id nm-applet
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+
+			#keys for moving around 
+#@@@@@@@@@@@@@@@@@@%%####%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#@@@@@@@@@@@@@@%#**##%%%%##*#@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%%%%%%#####***#%@@@@@@@@@@@**@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#####%%%%%@@@@@@@@@@@@@@@@@@+%@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#@@@@@@@@@@%*++++++++++++++++==+++++++++++++++#@@@@@@@@@@
+#@@@@@@@@@@=-::::::::::::::::-::::::::::::::: .%@@@@@@@@@
+#@@@@@@@@@@+==+=-----------------:::::::::::: .%@@@@@@@@@
+#@@@@@@@@@@+===--..::--. =..:::-: -:.:::-- .: .%@@@@@@@@@
+#@@@@@@@@@@+++=-=.-=--=. +.----=: =-:=:-=- .: .%@@@@@@@@@
+#@@@@@@@@@@++==-=::--==. =::--==- =-.--=== .: .%@@@@@@@@@
+#@@@@@@@@@@+===-=::--==. =::--==: --:--==- .. .%@@@@@@@@@
+#@@@@@@@@@@+===-:::::::::::::::::::::::::::.. .%@@@@@@@@@
+#@@@@@@@@@@=-::::::::::::::::::::::::::::::::..%@@@@@@@@@
+#@@@@@@@@@@#=-----------------------=========-+@@@@@@@@@@
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+# use these keys for focus, movement, and resize directions 
+set $up k
+set $down j
+set $left h
+set $right l
+
+
+# change focus
+bindsym Mod4+$left focus left
+bindsym Mod4+$down focus down
+bindsym Mod4+$up focus up
+bindsym Mod4+$right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym Mod4+Left focus left
+bindsym Mod4+Down focus down
+bindsym Mod4+Up focus up
+bindsym Mod4+Right focus right
+
+# move focused window
+bindsym Mod1+Mod4+$left move left
+bindsym Mod1+Mod4+$down move down
+bindsym Mod1+Mod4+$up move up
+bindsym Mod1+Mod4+$right move right
+
+# alternatively, you can use the cursor keys:
+bindsym Mod1+Shift+Left move left
+bindsym Mod1+Shift+Down move down
+bindsym Mod1+Shift+Up move up
+bindsym Mod1+Shift+Right move right
+
+# split in horizontal orientation
+bindsym Mod4+b split h
+
+# split in vertical orientation
+bindsym Mod4+v split v
+
+# enter fullscreen mode for the focused container
+bindsym Control+Mod1+f fullscreen toggle
+
+# use Mouse+Mod1 to drag floating windows to their wanted position
+floating_modifier Mod1
+
+# change container layout (stacked, tabbed, toggle split)
+#bindsym Mod1+s layout stacking
+#bindsym Mod1+w layout tabbed
+#bindsym Mod1+e layout toggle split
+
+# toggle tiling / floating
+bindsym Mod1+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym Mod1+space focus mode_toggle
+
+# focus the parent container
+bindsym Mod1+a focus parent
+
+# focus the child container
+#bindsym Mod1+d focus child
+
+# move the currently focused window to the scratchpad
+bindsym Mod1+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym Mod1+minus scratchpad show
+
+# Define names for default workspaces for which we configure key bindings later on.
+set $ws1 "1:a"
+set $ws2 "2:s"
+set $ws3 "3:d"
+set $ws4 "4:f"
+set $ws5 "5:u"
+set $ws6 "6:i"
+set $ws7 "7:o"
+set $ws8 "8:p"
+set $ws9 "9:n"
+set $ws10 "10:m"
+
+# switch to workspace
+bindsym Mod4+a workspace number $ws1
+bindsym Mod4+s workspace number $ws2
+bindsym Mod4+d workspace number $ws3
+bindsym Mod4+f workspace number $ws4
+bindsym Mod4+u workspace number $ws5
+bindsym Mod4+i workspace number $ws6
+bindsym Mod4+o workspace number $ws7
+bindsym Mod4+p workspace number $ws8
+bindsym Mod4+n workspace number $ws9
+bindsym Mod4+m workspace number $ws10
+
+# move focused container to workspace
+bindsym Mod4+Mod1+a move container to workspace number $ws1
+bindsym Mod4+Mod1+s move container to workspace number $ws2
+bindsym Mod4+Mod1+d move container to workspace number $ws3
+bindsym Mod4+Mod1+f move container to workspace number $ws4
+bindsym Mod4+Mod1+u move container to workspace number $ws5
+bindsym Mod4+Mod1+i move container to workspace number $ws6
+bindsym Mod4+Mod1+o move container to workspace number $ws7
+bindsym Mod4+Mod1+p move container to workspace number $ws8
+bindsym Mod4+Mod1+n move container to workspace number $ws9
+bindsym Mod4+Mod1+m move container to workspace number $ws10
+
+#assign specific workspace to monitor
+workspace 1 output HDMI-0
+workspace 5 output HDMI-0
+
+workspace 2 output DP-0
+workspace 4 output DP-0
+workspace 6 output DP-0
+
+workspace 3 output DVI-D-0
+workspace 7 output DVI-D-0
+
+
+#system related binds 
+
+# reload the configuration file
+bindsym Control+Shift+v reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym Mod1+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym Mod4+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+#kills the app
+bindsym Mod4+w kill
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym $left       resize shrink width 10 px or 10 ppt
+        bindsym $down       resize grow height 10 px or 10 ppt
+        bindsym $up         resize shrink height 10 px or 10 ppt
+        bindsym $right      resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left        resize shrink width 10 px or 10 ppt
+        bindsym Down        resize grow height 10 px or 10 ppt
+        bindsym Up          resize shrink height 10 px or 10 ppt
+        bindsym Right       resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or Mod1+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym Mod4+q mode "default"
+}
+
+bindsym Mod4+q mode "resize"
+
+#i3 default status bar
+#bar {
+#        status_command i3status
+#}
+
+#launch polybar instead of i3status
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+#						  binds for launching apps	
+#                         .=#@@@@@@@@%%%%%%%%#=
+#                        =%@@@@@@@@@@@@@@@@@@@@%+.
+#                      =%@@@@%%####%%%%#####%@@@@@+
+#                     +@@@@@*                +@@@@@*
+#                     *@@@@@=                -@@@@@#
+# %%%%%%%%%%%%%%%%%%%@@@@@@@%%%%%%%%%%%%%%%%%@@@@@@%%%%%%%%%%%%%%%%%%%%%
+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%
+#%@@@@@@@@@@@@@@@@@@@%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%
+#@@@@@@@@@@@@@@@@@@@%--=*#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%
+#@@@@@@@@@@@@@@@@@@@#-=--=**#%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%
+#@@@@@@@@@@@@@@@@@@@#-===-=+***##%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%
+#@@@@@@@@@@@@@@@@@@@#========+*#####%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%
+#@@@@@@@@@@@@@@@@@@@#==========+#######%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%
+#@@@@@@@@@@@@@@@@@@@#============*#%###%%%%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@%
+#@@@@@@@@@@@@@@@@@@@#=++++++++++==+*#%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@%
+#%@@@@@@@@@@@@@@@@@@%=+++++++++++++=+*%%%%%%%%#####%%@@@@@@@@@@@@@@@@@@@%
+#%@@@@@@@@@@@@@@@@@@%++++++++++++++++++*%%%%##########%%@@@@@@@@@@@@@@@@%
+#%@@@@@@@@@@@@@@@@@@%++++++++++++++++++++*###############%@@@@@@@@@@@@@@%
+#%@@@@@@@@@@@@@@@@@@%+++++++++++++++++*+===+##########%%%@@@@@@@@@@@@@@@%
+#%@@@@@@@@@@@@@@@@@@%+***************+=======*#####%%@@@@@@@@@@@@@@@@@@@%
+#%@@@@@@@@@@@@@@@@@@%**************+========--=#%%@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@@@@@@@@@@@@@%*************=======-==*#%@@@@@@@@@@@@@@@@@@@@@@@@@%
+#%@@@@@@@@@@@@@@@@@@%***********+====--=+*%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@@@@@@@@@@@@@%******##*+=---=+*#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@@@@@@@@@@@@@%######*+---=+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@@@@@@@@@@@@@%####*=-=+*%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@@@@@@@@@@@@@%##*+=*#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#%@@@@@@@@@@@@@@@@@@@%##%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%
+#:@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=
+# :*#%%@@@@@@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*:
+
+#binds using windows as mod
+bindsym Mod4+e exec thunar
+bindsym Mod4+t exec steam
+bindsym Mod4+4 exec chromium 
+bindsym Mod4+3 exec --no-startup-id discord
+bindsym Mod4+2 exec --no-startup-id ktorrent
+bindsym Mod4+g exec pavucontrol
+bindsym Mod4+Return exec alacritty
+bindsym Mod4+c exec gcolor2
+bindsym Mod4+r exec rofi -show run 
+bindsym Mod4+Shift+s exec flameshot gui
+#binds using alt as $Mod 
+bindsym Mod1+p exec code
+bindsym Mod1+e exec emacs
+bindsym Mod1+c exec gcolor2 
+bindsym Mod1+o exec fluent-reader 
+bindsym Mod1+l exec lutris
+bindsym Mod1+Control+d exec discord
+bindsym Mod1+Shift+o exec libreoffice
+
+#rest of the binds using Ctrl
+bindsym Control+m exec firefox
+bindsym Control+q exec qutebrowser
+
+#binds using KP && alt launching console programs
+bindsym Mod1+Mod2+KP_1 exec alacritty -e htop
+bindsym Mod1+Mod2+KP_2 exec alacritty -e 
+bindsym Mod1+Mod2+KP_4 exec alacritty -e vim ~/.config/i3/config
+bindsym Mod1+Mod2+KP_5 exec alacritty -e vim ~/.config/polybar/config
+bindsym Mod1+Mod2+KP_6 exec alacritty -e vim ~/.emacs
