@@ -26,7 +26,6 @@ height = 27
 ;offset-y = 1%
 ;radius = 6.0
 fixed-center = true
-
 background = ${colors.background}
 foreground = ${colors.foreground}
 
@@ -37,23 +36,22 @@ line-color = #f00
 ;border-color = #00000000
 
 padding-left = 0
-padding-right = 2
+padding-right = 4
 
 module-margin-left = 1
 module-margin-right = 2
 
-
-font-0 = RobotoMono Nerd Font:style=Bold:pixelsize=12;1
-font-1 = FontAwesome:fontformat=truetype:size=12;1
-font-2 = siji:pixelsize=10;1
-font-3 = Font Awesome 5 Free:style=Regular:pixelsize=12;1
-font-4 = Font Awesome 5 Free:style=Solid:pixelsize=12;1
-font-5 = Font Awesome 5 Brands:pixelsize=12;1
+font-0 = RobotoMono Nerd Font:style=Bold:pixelsize=12;0
+font-1 = FontAwesome:fontformat=truetype:size=12;0
+font-3 = Font Awesome 5 Free:style=Regular:pixelsize=12;0
+font-4 = Font Awesome 5 Free:style=Solid:pixelsize=12;0
+font-5 = Font Awesome 5 Brands:pixelsize=12;0
+font-2 = sm4tik:pixelsize=11;0
 
 
 modules-left = bspwm i3
 modules-center = date
-modules-right = r_p h_p g_p slash xkeyboard_barPrimary slash memory slash cpu slash eth slash temperature slash time slash powermenu
+modules-right = r_p h_p g_p  slash memory slash cpu slash eth slash xkeyboard_barPrimary slash powermenu
 
 ;tray-position = right
 ;tray-padding = 2
@@ -94,17 +92,17 @@ line-color = #f00
 ;border-size = 4
 ;border-color = #00000000
 
-padding-left = 0
+padding-left = 2
 padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
 font-0 = RobotoMono Nerd Font:style=Bold:pixelsize=12;1
 font-1 = FontAwesome:fontformat=truetype:size=12;1
-font-2 = FontAwesome:pixelsize=10;1
 font-3 = Font Awesome 5 Free:style=Regular:pixelsize=12;1
 font-4 = Font Awesome 5 Free:style=Solid:pixelsize=12;1
 font-5 = Font Awesome 5 Brands:pixelsize=12;1
+font-2 = sm4tik:pixelsize=11;1
 
 modules-left = bspwm i3
 modules-center = mpd date
@@ -156,10 +154,10 @@ module-margin-right = 2
 
 font-0 = RobotoMono Nerd Font:style=Bold:pixelsize=12;1
 font-1 = FontAwesome:fontformat=truetype:size=12;1
-font-2 = siji:pixelsize=10;1
 font-3 = Font Awesome 5 Free:style=Regular:pixelsize=12;1
 font-4 = Font Awesome 5 Free:style=Solid:pixelsize=12;1
 font-5 = Font Awesome 5 Brands:pixelsize=12;1
+font-2 = sm4tik:pixelsize=11;1
 
 modules-left = bspwm i3
 modules-center = mpd date
@@ -192,7 +190,7 @@ label = %title:0:30:...%
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format-prefix = " "
+format-pwefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 ;format-prefix-underline = ${colors.secondary}
 
@@ -209,17 +207,13 @@ label-indicator-background = ${colors.secondary}
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
 
 label-layout = %layout%
-label-layout-underline = ${colors.secondary}
 
 label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
 
 
 [module/h_p]
@@ -284,7 +278,7 @@ wrapping-scroll = true
 strip-wsnumbers = true
 pin-workspaces = true
 
-label-mode-padding = 2
+label-mode-padding = 1
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
@@ -292,11 +286,11 @@ label-mode-background = ${colors.primary}
 label-focused = %name%
 label-focused-background = ${colors.background-alt}
 ;label-focused-underline= ${colors.primary}
-label-focused-padding = 2
+label-focused-padding = 1
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %name%
-label-unfocused-padding = 2
+label-unfocused-padding = 1
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %name%
@@ -307,7 +301,7 @@ label-visible-padding = ${self.label-focused-padding}
 ; urgent = Workspace with urgency hint set
 label-urgent = %name%
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-padding = 1
 
 ; Separator in between workspaces
 ; label-separator = |
@@ -352,17 +346,15 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = "CPU  "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
+format-prefix = "CPU  "
+format-prefix-foreground = #C00DD5
 label = %percentage:2%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = "RAM  "
-format-prefix-foreground = ${#4bffbc}
-format-underline = #4bffdc
+format-prefix = "RAM  "
+format-prefix-foreground = #22DCED
 label = %percentage_used%%
 
 [module/wlan]
@@ -392,9 +384,8 @@ type = internal/network
 interface = enp3s0
 interval = 3.0
 
-format-connected-underline = #55aa55
 format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
+format-connected-prefix-foreground = #55aa55
 label-connected = %local_ip%
 
 format-disconnected =
@@ -405,13 +396,9 @@ format-disconnected =
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 1
 
 date = %d/%m/%Y
-date-alt = " %Y/%m/%d"
-
-time = %H:%M
-time-alt = %H:%M:%S
 
 ;format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
@@ -441,13 +428,13 @@ label = %date% %time%
 type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
-format-volume-prefix = "🔊 "
-format-volume-prefix-foreground = #6200E2
+format-volume-prefix = "墳 "
+format-volume-prefix-foreground = #c00dd5
 label-volume = %percentage%%
 label-volume-foreground = ${root.foreground}
 
-label-muted = 🔇 muted
-label-muted-foreground = #666
+label-muted = ﱝ muted
+label-muted-foreground = ${colors.secondary}
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #C50ED2
@@ -458,7 +445,7 @@ bar-volume-foreground-4 = #C50ED2
 bar-volume-foreground-5 = #f5a70a
 bar-volume-foreground-6 = #ff5555
 bar-volume-gradient = false
-bar-volume-indicator = |
+bar-volume-indicator = ﰉ
 bar-volume-indicator-font = 2
 bar-volume-fill = ─
 bar-volume-fill-font = 2
@@ -553,7 +540,7 @@ expand-right = true
 
 format-spacing = 1
 
-label-open = 
+label-open = 
 label-open-foreground = ${colors.secondary}
 label-close =  cancel
 label-close-foreground = ${colors.secondary}
@@ -590,7 +577,7 @@ margin-bottom = 5
 [module/slash]
 type = custom/text
 content = "%{T3}/%{T-}"
-content-foreground = ${colors.black-alt}
-content-padding = 3
+content-foreground = #ffffff
+content-padding = 0
 
 ; vim:ft=dosini
