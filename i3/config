@@ -1,4 +1,4 @@
-#monitor: ~90 | apps binds 330 | polybar 291 | movement ~140 |workspaces ~220
+#monitor: ~90 | apps binds 330 | polybar & rofi ~290 | movement ~140 |workspaces ~220
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%==*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -97,9 +97,8 @@ gaps inner 6
 gaps outer 7
 
 ############################Border_Color############################
-
 # class                 border  backgr. text    indicator child_border
-client.focused          #B3E2F7 #B3E2F7 #B3E2F7 #B3E2F7   #6b0000
+client.focused          #6b0000 #B3E2F7 #B3E2F7 #B3E2F7   #6b0000
 client.focused_inactive #ffffff #ffffff #ffffff #484e50   #ffffff
 client.unfocused        #934480 #934480 #888888 #292d2e   #222222
 client.urgent           #2f343a #900000 #7E1B05 #900000   #900000
@@ -118,7 +117,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 
-			#keys for moving around 
+					#keys for moving around 
 #@@@@@@@@@@@@@@@@@@%%####%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #@@@@@@@@@@@@@@%#**##%%%%##*#@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #%%%%%%#####***#%@@@@@@@@@@@**@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -214,6 +213,11 @@ set $ws8 "8:p"
 set $ws9 "9:n"
 set $ws10 "10:m"
 
+#define names of monitors
+set $monitorLeft HDMI-0
+set $monitorCenter DP-0 
+set $monitorRight DVI-D-0
+
 # switch to workspace
 bindsym Mod4+a workspace number $ws1
 bindsym Mod4+s workspace number $ws2
@@ -239,16 +243,15 @@ bindsym Mod4+Mod1+n move container to workspace number $ws9
 bindsym Mod4+Mod1+m move container to workspace number $ws10
 
 #assign specific workspace to monitor
-workspace 1 output HDMI-0
-workspace 5 output HDMI-0
+workspace $ws1 output $monitorLeft 
+workspace $ws5 output $monitorLeft
 
-workspace 2 output DP-0
-workspace 4 output DP-0
-workspace 6 output DP-0
+workspace $ws2 output $monitorCenter
+workspace $ws4 output $monitorCenter
+workspace $ws6 output $monitorCenter
 
-workspace 3 output DVI-D-0
-workspace 7 output DVI-D-0
-
+workspace $ws3 output $monitorRight
+workspace $ws7 output $monitorRight
 
 #system related binds 
 
@@ -293,6 +296,9 @@ bindsym Mod4+q mode "resize"
 #launch polybar instead of i3status
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
+#launch rofi
+bindsym Mod4+r exec rofi -show run -lines 10
+
 #						  binds for launching apps	
 #                         .=#@@@@@@@@%%%%%%%%#=
 #                        =%@@@@@@@@@@@@@@@@@@@@%+.
@@ -336,7 +342,6 @@ bindsym Mod4+2 exec --no-startup-id ktorrent
 bindsym Mod4+g exec pavucontrol
 bindsym Mod4+Return exec alacritty
 bindsym Mod4+c exec gcolor2
-bindsym Mod4+r exec rofi -show run 
 bindsym Mod4+Shift+s exec flameshot gui
 #binds using alt as $Mod 
 bindsym Mod1+p exec code
@@ -356,4 +361,6 @@ bindsym Mod1+Mod2+KP_1 exec alacritty -e htop
 bindsym Mod1+Mod2+KP_2 exec alacritty -e 
 bindsym Mod1+Mod2+KP_4 exec alacritty -e vim ~/.config/i3/config
 bindsym Mod1+Mod2+KP_5 exec alacritty -e vim ~/.config/polybar/config
-bindsym Mod1+Mod2+KP_6 exec alacritty -e vim ~/.emacs
+bindsym Mod1+Mod2+KP_6 exec alacritty -e vim ~/.config/rofi/config.rasi
+bindsym Mod1+Mod2+KP_7 exec alacritty -e vim ~/.config/picom/picom.conf
+
