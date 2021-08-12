@@ -536,8 +536,8 @@ ramp-foreground = ${colors.foreground-alt}
 [module/powermenu]
 type = custom/text
 content = ""
-content-foreground = ${colors.cyan}
-click-left = exec /home/krug/.config/rofi/bin/sysmenu
+content-foreground = ${colors.secondary}
+click-left = exec /home/krug/.config/rofi/powermenu/sysmenu
 
 [settings]
 screenchange-reload = true

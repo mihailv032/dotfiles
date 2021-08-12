@@ -18,7 +18,7 @@ configuration {
 	sidebar-mode: 					false;
 }
 
-@import "~/.config/rofi/config.rasi"
+@import "~/.config/rofi/powermenu/misc/config.rasi"
 
 
 window {
@@ -35,7 +35,7 @@ window {
 }
 
 prompt {
-    enabled: 						true;
+    enabled: 						false;
 	padding: 						0.0% 0.5% 0% 0%;
 	background-color: 				@background-alt;
 	text-color: 					@foreground;
@@ -58,7 +58,6 @@ listview {
 
 mainbox {
     background-color:               @background-alt;
-	border:							0% 0% 0% 0%;
     border-radius:                  0% 0% 0% 0%;
 	border-color:					@accent;
     children:                       [ inputbar, listview ];
@@ -76,7 +75,6 @@ element {
 
 element-icon {
     size:                           12px;
-    border:                         0px;
 }
 
 element-text {
@@ -89,7 +87,6 @@ element-text {
 element selected {
     background-color:               @background-bar;
     text-color:                     @foreground;
-	border:							0.1%;
     border-radius:                  4px;
     border-color:                  	@accent;
 }

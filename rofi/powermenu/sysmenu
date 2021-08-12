@@ -1,5 +1,11 @@
 #!/bin/bash
 
+## Author  : Aditya Shakya
+## Mail    : adi1090x@gmail.com
+## Github  : @adi1090x
+## Twitter : @adi1090x
+
+
 # Custom Rofi Script
 
 BORDER="#171a1f"
@@ -34,7 +40,7 @@ LIGHT_BLUE="#039be5"
 LIGHT_GREEN="#7cb342"
 
 theme="slingshotsys"
-dir="/home/krug/.config/rofi/launchers/misc"
+dir="$HOME/.config/rofi/powermenu/misc"
 
 
 # Launch Rofi
