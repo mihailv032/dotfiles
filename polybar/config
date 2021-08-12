@@ -181,7 +181,7 @@ cursor-scroll = ns-resize
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format-pwefix = " "
+format-pwefix = "  "
 format-prefix-foreground = ${colors.foreground-alt}
 ;format-prefix-underline = ${colors.secondary}
 

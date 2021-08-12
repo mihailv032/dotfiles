@@ -297,7 +297,7 @@ bindsym Mod4+q mode "resize"
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 #launch rofi
-bindsym Mod4+r exec rofi -show run -lines 10
+bindsym Mod4+r exec --no-startup-id rofi -show run -lines 10
 
 #						  binds for launching apps	
 #                         .=#@@@@@@@@%%%%%%%%#=
@@ -334,27 +334,26 @@ bindsym Mod4+r exec rofi -show run -lines 10
 # :*#%%@@@@@@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*:
 
 #binds using windows as mod
-bindsym Mod4+e exec thunar
-bindsym Mod4+t exec steam
-bindsym Mod4+4 exec chromium 
+bindsym Mod4+e exec --no-startup-id thunar 
+bindsym Mod4+t exec --no-startup-id steam
+bindsym Mod4+4 exec --no-startup-id chromium 
 bindsym Mod4+3 exec --no-startup-id discord
 bindsym Mod4+2 exec --no-startup-id ktorrent
-bindsym Mod4+g exec pavucontrol
-bindsym Mod4+Return exec alacritty
-bindsym Mod4+c exec gcolor2
-bindsym Mod4+Shift+s exec flameshot gui
+bindsym Mod4+g exec --no-startup-id pavucontrol
+bindsym Mod4+Return exec --no-startup-id alacritty
+bindsym Mod4+c exec --no-startup-id gcolor2
+bindsym Mod4+Shift+s exec --no-startup-id flameshot gui
 #binds using alt as $Mod 
-bindsym Mod1+p exec code
-bindsym Mod1+e exec emacs
-bindsym Mod1+c exec gcolor2 
-bindsym Mod1+o exec fluent-reader 
-bindsym Mod1+l exec lutris
-bindsym Mod1+Control+d exec discord
-bindsym Mod1+Shift+o exec libreoffice
+bindsym Mod1+p exec --no-startup-id code
+bindsym Mod1+e exec --no-startup-id emacs
+bindsym Mod1+o exec --no-startup-id fluent-reader 
+bindsym Mod1+l exec --no-startup-id lutris
+bindsym Mod1+Control+d exec --no-startup-id discord
+bindsym Mod1+Shift+o exec --no-startup-id libreoffice
 
 #rest of the binds using Ctrl
-bindsym Control+m exec firefox
-bindsym Control+q exec qutebrowser
+bindsym Control+m exec --no-startup-id firefox
+bindsym Control+q exec --no-startup-id qutebrowser
 
 #binds using KP && alt launching console programs
 bindsym Mod1+Mod2+KP_1 exec alacritty -e htop
