@@ -104,6 +104,8 @@ client.unfocused        #934480 #934480 #888888 #292d2e   #222222
 client.urgent           #2f343a #900000 #7E1B05 #900000   #900000
 client.placeholder      #000000 #0c0c0c #7E1B05 #000000   #0c0c0c
 
+####################################Picom################################
+exec --no-startup-id picom -CG --xrender-sync-fence
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
