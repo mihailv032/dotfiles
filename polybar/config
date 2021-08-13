@@ -51,7 +51,7 @@ font-2 = sm4tik:pixelsize=11;0
 
 modules-left = bspwm i3
 modules-center = date
-modules-right = r_p h_p g_p  slash memory slash cpu slash eth slash xkeyboard_barPrimary slash powermenu
+modules-right = r_p h_p g_p  slash memory slash cpu slash eth slash xkeyboard slash powermenu
 
 ;tray-position = right
 ;tray-padding = 2
@@ -181,31 +181,14 @@ cursor-scroll = ns-resize
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format-pwefix = "  "
-format-prefix-foreground = ${colors.foreground-alt}
-;format-prefix-underline = ${colors.secondary}
-
-label-layout = %layout%
-;label-layout-underline = ${colors.secondary}
-
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${colors.secondary}
-;label-indicator-underline = ${colors.secondary}
-
-
-[module/xkeyboard_barPrimary]
-type = internal/xkeyboard
-blacklist-0 = num lock
-
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = " "
+format-prefix-foreground = #FAA867
 
 label-layout = %layout%
 
 label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
-
 
 [module/h_p]
 type = internal/fs
@@ -352,7 +335,7 @@ type = internal/network
 interface = enp3s0
 interval = 3.0
 
-format-connected-prefix = " "
+format-connected-prefix = " "
 format-connected-prefix-foreground = #55aa55
 label-connected = %local_ip%
 
@@ -368,8 +351,8 @@ interval = 1
 
 date = %d/%m/%Y
 
-;format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = " "
+format-prefix-foreground = #55aa55 
 ;format-underline = #0a6cf5
 
 label = %date% %time%
@@ -378,19 +361,11 @@ label = %date% %time%
 [module/time]
 type = internal/date
 interval = 5
-
-date =
-date-alt = 
-
 time = %H : %M
 time-alt = %H:%M:%S
-
-;format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-;format-underline = #0a6cf5
-
+format-prefix = " "
+format-prefix-foreground = #8a1919 
 label = %date% %time%
-
 
 [module/pulseaudio]
 type = internal/pulseaudio
