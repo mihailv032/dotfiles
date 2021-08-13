@@ -63,7 +63,7 @@ MENU="$(rofi -no-lazy-grab -theme "$dir/$theme" -sep "|" -dmenu -i -p 'System' \
 -color-urgent "$BACKGROUND,$YELLOW,$BACKGROUND_ALT,$HIGHLIGHT_BACKGROUND,$HIGHLIGHT_FOREGROUND" \
 <<< "  Lock|  Logout|  Reboot|  Suspend|  Shutdown")"
 case "$MENU" in
-  *Lock) betterlockscreen -l ;;
+  *Lock) $HOME/.config/i3/lock.sh ;;
   *Logout) i3-msg exit ;;
   *Reboot) systemctl reboot ;;
   *Suspend) systemctl suspend ;;

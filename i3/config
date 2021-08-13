@@ -1,4 +1,4 @@
-#monitor: ~90 | apps binds 330 | polybar & rofi ~290 | movement ~140 |workspaces ~220
+#monitor: ~90 | apps binds 330 | polybar & rofi ~290 | movement ~140 |workspaces ~220 | sys related ~260
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%==*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -255,17 +255,15 @@ workspace $ws6 output $monitorCenter
 workspace $ws3 output $monitorRight
 workspace $ws7 output $monitorRight
 
-#system related binds 
-
+########################system related binds######################################
 # reload the configuration file
 bindsym Control+Shift+v reload
-
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym Mod1+Shift+r restart
-
 # exit i3 (logs you out of your X session)
 bindsym Mod4+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
+#i3lock
+bindsym Mod4+Shift+L exec --no-startup-id ~/.config/i3/lock.sh
 #kills the app
 bindsym Mod4+w kill
 
