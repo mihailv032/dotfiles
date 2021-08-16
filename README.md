@@ -4,10 +4,10 @@
 ![monitor_1](./monitor_1.png)
 
 ## Monitro 2
-![monitor_2](./monitor2.png)
+![monitor_2](./monitor_2.png)
 
 ## Monitor 3 
-![monitor_3](./monitor3.png)
+![monitor_3](./monitor_3.png)
 
 ### Rofi
 ![Rofi](./rofi_scr.png)
