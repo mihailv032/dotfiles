@@ -93,4 +93,4 @@ sounux
 
 [ds screenshare](https://www.reddit.com/r/discordapp/comments/f22vz6/guide_how_to_stream_audio_to_discord_on_linux/)
 
-[multimonitor configuration with xorg](https://www.x.org/releases/current/doc/man/man5/xorg.conf.5.xhtml#heading14) [archwiki](https://wiki.archlinux.org/title/Multihead) - [archwiki multihead](https://wiki.archlinux.org/title/Multihead)
+[multimonitor configuration with xorg](https://www.x.org/releases/current/doc/man/man5/xorg.conf.5.xhtml#heading14) - [archwiki multihead](https://wiki.archlinux.org/title/Multihead)
