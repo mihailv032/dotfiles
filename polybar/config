@@ -50,8 +50,8 @@ font-5 = Font Awesome 5 Brands:pixelsize=12;0
 
 
 modules-left = bspwm i3
-modules-center = date
-modules-right = r_p h_p g_p  slash memory cpu slash eth slash xkeyboard slash powermenu
+modules-center = date moc
+modules-right = r_p h_p g_p  slash memory cpu slash eth slash xkeyboard slash time powermenu
 
 ;tray-position = right
 ;tray-padding = 2
@@ -102,7 +102,7 @@ font-4 = Font Awesome 5 Free:style=Solid:pixelsize=12;1
 font-5 = Font Awesome 5 Brands:pixelsize=12;1
 
 modules-left = bspwm i3
-modules-center = mpd date
+modules-center = mpd date moc
 modules-right = pulseaudio xxbacklight slash xkeyboard slash time
 
 tray-position = right
@@ -395,6 +395,16 @@ bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = #272A37
+
+[module/moc]
+interval = 0.5
+type = custom/script
+exec = ~/.config/i3/i3blocks/moc.sh
+label = %output:0:20:...%
+format-prefix = " "
+label-close = "MOC   off"
+label-foreground = #0088CC
+format-foreground = ${colors.secondary}
 
 [module/battery]
 type = internal/battery
