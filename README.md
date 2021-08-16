@@ -9,10 +9,13 @@
 ## Monitor 3 
 ![monitor_3](./monitor_3.png)
 
+### Lockscreen
+![lockscreen](./lockscreen.png)
+
 ### Rofi
 ![Rofi](./rofi_scr.png)
 
-### Rofi powermenu menu (author Aditya Shakya https://github.com/adi1090x)
+### Rofi powermenu (author Aditya Shakya https://github.com/adi1090x)
 ![Rofi powermenu](./rofi_powermenu.png)
 
 ### Essential programs
@@ -87,4 +90,7 @@ sounux
 
 #### Fixes of some issues
 [Polybar cursor](https://www.reddit.com/r/Polybar/comments/fv1c2f/polybar_using_default_x_cursor/)
+
 [ds screenshare](https://www.reddit.com/r/discordapp/comments/f22vz6/guide_how_to_stream_audio_to_discord_on_linux/)
+
+[multimonitor configuration with xorg](https://www.x.org/releases/current/doc/man/man5/xorg.conf.5.xhtml#heading14) [archwiki](https://wiki.archlinux.org/title/Multihead) - [archwiki multihead](https://wiki.archlinux.org/title/Multihead)
