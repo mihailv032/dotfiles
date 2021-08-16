@@ -43,15 +43,15 @@ module-margin-right = 2
 
 font-0 = RobotoMono Nerd Font:style=Bold:pixelsize=12;0
 font-1 = FontAwesome:fontformat=truetype:size=12;0
+font-2 = sm4tik:pixelsize=11;0
 font-3 = Font Awesome 5 Free:style=Regular:pixelsize=12;0
 font-4 = Font Awesome 5 Free:style=Solid:pixelsize=12;0
 font-5 = Font Awesome 5 Brands:pixelsize=12;0
-font-2 = sm4tik:pixelsize=11;0
 
 
 modules-left = bspwm i3
 modules-center = date
-modules-right = r_p h_p g_p  slash memory slash cpu slash eth slash xkeyboard slash powermenu
+modules-right = r_p h_p g_p  slash memory cpu slash eth slash xkeyboard slash powermenu
 
 ;tray-position = right
 ;tray-padding = 2
@@ -96,10 +96,10 @@ module-margin-right = 2
 
 font-0 = RobotoMono Nerd Font:style=Bold:pixelsize=12;1
 font-1 = FontAwesome:fontformat=truetype:size=12;1
+font-2 = sm4tik:pixelsize=11;1
 font-3 = Font Awesome 5 Free:style=Regular:pixelsize=12;1
 font-4 = Font Awesome 5 Free:style=Solid:pixelsize=12;1
 font-5 = Font Awesome 5 Brands:pixelsize=12;1
-font-2 = sm4tik:pixelsize=11;1
 
 modules-left = bspwm i3
 modules-center = mpd date
@@ -150,10 +150,10 @@ module-margin-right = 2
 
 font-0 = RobotoMono Nerd Font:style=Bold:pixelsize=12;1
 font-1 = FontAwesome:fontformat=truetype:size=12;1
+font-2 = sm4tik:pixelsize=11;1
 font-3 = Font Awesome 5 Free:style=Regular:pixelsize=12;1
 font-4 = Font Awesome 5 Free:style=Solid:pixelsize=12;1
 font-5 = Font Awesome 5 Brands:pixelsize=12;1
-font-2 = sm4tik:pixelsize=11;1
 
 modules-left = bspwm i3
 modules-center = mpd date
@@ -349,7 +349,7 @@ format-disconnected =
 type = internal/date
 interval = 1
 
-date = %d/%m/%Y
+date = %Y/%m/%d
 
 format-prefix = " "
 format-prefix-foreground = #55aa55 
@@ -388,7 +388,7 @@ bar-volume-foreground-4 = #C50ED2
 bar-volume-foreground-5 = #f5a70a
 bar-volume-foreground-6 = #ff5555
 bar-volume-gradient = false
-bar-volume-indicator = ﰉ
+bar-volume-indicator = " "
 bar-volume-indicator-font = 2
 bar-volume-fill = ─
 bar-volume-fill-font = 2
