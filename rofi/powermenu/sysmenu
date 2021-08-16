@@ -61,14 +61,14 @@ MENU="$(rofi -no-lazy-grab -theme "$dir/$theme" -sep "|" -dmenu -i -p 'System' \
 -color-normal "$BACKGROUND_ALT,$FOREGROUND,$BACKGROUND_ALT,$HIGHLIGHT_BACKGROUND,$HIGHLIGHT_FOREGROUND" \
 -color-active "$BACKGROUND,$MAGENTA,$BACKGROUND_ALT,$HIGHLIGHT_BACKGROUND,$HIGHLIGHT_FOREGROUND" \
 -color-urgent "$BACKGROUND,$YELLOW,$BACKGROUND_ALT,$HIGHLIGHT_BACKGROUND,$HIGHLIGHT_FOREGROUND" \
-<<< "  Lock|  Logout|  Reboot|  Sleep|  Shutdown|羽 Turns off in 1:30h")"
+<<< "  Lock|  Logout|  Reboot|  Sleep|  Shutdown|羽 Shutdown in 1:30h")"
 case "$MENU" in
   *Lock) /home/krug/.config/i3/lock.sh ;;
   *Logout) i3-msg exit ;;
   *Reboot) systemctl reboot ;;
   *Suspend) systemctl suspend ;;
   *Shutdown) systemctl -i poweroff ;;
-  *Timer) shutdown -P 2 
+  *Timer) shutdown -P 100 
 esac
 
 # More Options
