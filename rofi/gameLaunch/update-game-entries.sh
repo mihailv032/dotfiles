@@ -57,12 +57,6 @@ update-game-entries() {
             appid=$(basename "$manifest" | tr -dc "[0-9]")
             entry=$APP_PATH/${appid}.desktop
 
-            # Don't update existing entries unless doing a full refresh
-            if [ -z $update ] && [ -f "$entry" ]; then
-                [ -z $quiet ] && echo "Not updating $entry"
-                continue
-            fi
-
             title=$(awk -F\" '/"name"/ {print $4}' "$manifest" | tr -d "™®")
             boxart=$STEAM_ROOT/appcache/librarycache/${appid}_library_600x900.jpg
 

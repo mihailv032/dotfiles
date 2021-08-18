@@ -7,10 +7,14 @@ configuration {
 @import "launcher"
 
 window {
-    height:                         360;
+    height:                         380;
+	background-color: #1A1D2B;
+	border-top: 1;
+	border-radius: 0;
 }
 
 listview {
+	border-color: 			@border-color;
     padding:                        12px;
     dynamic:                        true;
     columns:                        9;
@@ -32,16 +36,24 @@ element-icon {
     padding:                        0px -40px;
     border:                         4px 4px solid 4px 4px;
     border-color:                   transparent;
-    border-radius:                  16;
+    border-radius:                  0;
     size:                           240;
+	margin: 0px 0px 5px 0px;	
 }
 
 element-icon selected {
-    border-color:                   @primary;
+	border: 						3px;
+	background-color: 				transparent;
+    border-color:                   #C00DD5;
 }
 
 element-text {
     horizontal-align:               0.5;
     horizontal-align:               0.5;
     width:                          160px;
+	text-color:						#ffffff;
+}
+
+element-text selected {
+	text-color: #C00DD5;	
 }

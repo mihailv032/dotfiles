@@ -3,7 +3,7 @@
 
 window {
     // This height should match the height used in scripts/game-splash-menu.sh
-    height:                         360;
+    height:                         380;
 }
 
 mainbox {
@@ -23,21 +23,22 @@ icon-banner {
 @media (min-width: 1920) {
     icon-banner {
         size:                       1920;
-        padding:                    calc( (360 - 1920)/2 ) 0px;
+        padding:                    calc( (380 - 1920)/2 ) 0px;
+
     }
 }
 
 @media (min-width: 2560) {
     icon-banner {
         size:                       2560;
-        padding:                    calc( (360 - 2560)/2 ) 0px;
+        padding:                    calc( (380 - 2560)/2 ) 0px;
     }
 }
 
 @media (min-width: 3440) {
     icon-banner {
         size:                       3440;
-        padding:                    calc( (360 - 3440)/2 ) 0px;
+        padding:                    calc( (460 - 3440)/2 ) 0px;
     }
 }
 
@@ -79,6 +80,7 @@ textbox-width {
 listview {
     layout:                         vertical;
     padding:                        20px 0px;
+	border: 						0px;
 }
 
 element {
@@ -102,4 +104,8 @@ element-text {
 element-text selected {
     horizontal-align:               0.5;
     color:                          @background;
+}
+
+#element.selected.normal {
+	background-color: #C00DD5;
 }

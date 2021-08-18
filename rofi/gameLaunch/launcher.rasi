@@ -1,12 +1,12 @@
 window {
-    height:                         240;
+    height:                         380;
     width:                          100%;
     location:                       south;
     anchor:                         south;
     transparency:                   "real";
     background-color:               @background-transparent;
-    border:                         5px 0px 0px 0px;
-    border-color:                   @primary;
+    border:                         0px 0px 0px 0px;
+    border-color:                   #C00DD5;
 }
 
 mainbox {
@@ -17,12 +17,17 @@ mainbox {
 listview {
     padding:                        0px;
     dynamic:                        true;
+	
 }
 
 inputbar-box {
     children:                       [dummy, inputbar, dummy];
     orientation:                    horizontal;
     expand:                         false;
+	border:                         0px 0px 2px 0px;
+	padding:						0px 0px 5px 0px;
+    border-color:                   #C00DD5;
+
 }
 
 inputbar {
@@ -36,7 +41,7 @@ inputbar {
 
 textbox-prompt {
     font:                           "Font Awesome 18";
-    text-color:                     @background;
+    text-color:                     #ffffff;
     padding:                        0px 4px 0px 2px;
     horizontal-align:               0.5;
     vertical-align:                 0.5;
@@ -81,4 +86,8 @@ element-icon {
 element-text {
     horizontal-align:               0;
     width:                          200px;
+}
+
+#element.selected.normal {
+	background-color: transparent;
 }

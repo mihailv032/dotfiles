@@ -4,7 +4,7 @@
 
 cd $(dirname $(realpath $0))
 
-HEIGHT=360 # This should match height in game-splash-menu.rasi
+HEIGHT=380 # This should match height in game-splash-menu.rasi
 
 PLAY=""
 OPTIONS=""
