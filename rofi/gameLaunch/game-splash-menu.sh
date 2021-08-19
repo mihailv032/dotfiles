@@ -4,7 +4,7 @@
 
 cd $(dirname $(realpath $0))
 
-HEIGHT=380 # This should match height in game-splash-menu.rasi
+#HEIGHT=460 # This should match height in game-splash-menu.rasi
 
 PLAY=""
 OPTIONS=""
@@ -32,7 +32,7 @@ handle-option() {
         "$LIBRARY")       steam steam://nav/games/details/$APPID;;
         "$ACHIEVEMENTS")  steam steam://url/SteamIDAchievementsPage/$APPID;;
         "$NEWS")          steam steam://appnews/$APPID;;
-        "$BACK")          ./rofi-wrapper.sh games;;
+        "$BACK")          ./gl-wrapper.sh run;;
     esac
 }
 
@@ -45,6 +45,6 @@ get-display-width() {
            | sort -nr | head -n 1
 }
 
-./update-game-banner.sh -w $(get-display-width) -h $HEIGHT -a $APPID
+./update-game-banner.sh -a $APPID -w $(get-display-width) -h $HEIGHT 
 SELECTION="$(list-icons | rofi -dmenu -theme game-splash-menu)"
 handle-option $SELECTION &

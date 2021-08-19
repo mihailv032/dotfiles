@@ -1,9 +1,8 @@
 @import "launcher"
-
-
 window {
     // This height should match the height used in scripts/game-splash-menu.sh
-    height:                         380;
+    height:                         370;
+	padding: 0;
 }
 
 mainbox {
@@ -31,21 +30,21 @@ icon-banner {
 @media (min-width: 2560) {
     icon-banner {
         size:                       2560;
-        padding:                    calc( (380 - 2560)/2 ) 0px;
+        padding:                    calc( (460 - 2560)/2 ) 0px;
     }
 }
 
 @media (min-width: 3440) {
     icon-banner {
         size:                       3440;
-        padding:                    calc( (460 - 3440)/2 ) 0px;
+        padding:                    calc( ( 380 - 3440)/2 ) 0px;
     }
 }
 
 @media (min-width: 3840) {
     icon-banner {
         size:                       3840;
-        padding:                    calc( (360 - 3840)/2 ) 0px;
+        padding:                    calc( (380 - 3840)/2 ) 0px;
     }
 }
 
