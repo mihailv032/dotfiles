@@ -4,7 +4,7 @@
 
 cd $(dirname $(realpath $0))
 
-#HEIGHT=460 # This should match height in game-splash-menu.rasi
+HEIGHT=370 # This should match height in game-splash-menu.rasi
 
 PLAY=""
 OPTIONS=""
@@ -45,6 +45,6 @@ get-display-width() {
            | sort -nr | head -n 1
 }
 
-./update-game-banner.sh -a $APPID -w $(get-display-width) -h $HEIGHT 
+./update-banner.sh -w $(get-display-width) -h $HEIGHT -a $APPID
 SELECTION="$(list-icons | rofi -dmenu -theme game-splash-menu)"
 handle-option $SELECTION &

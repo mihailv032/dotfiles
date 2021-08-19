@@ -18,20 +18,10 @@ usage() {
     exit
 }
 
-bannerConfig() {
-cat <<EOF
-@import "game-splash-menu"
-icon-banner {
-	filename: $CACHE_DIR$1.$EXIT;
-	expand: false;
-}
-EOF
-}
-
 update-banner() {
     local OPTIND=1
     local appid width height force
-    local blend=0
+    local blend=200
 
     while getopts 'a:w:h:b:f' arg
     do
@@ -71,15 +61,15 @@ update-banner() {
         local right=$CACHE_DIR/right.tiff
         local center=$CACHE_DIR/center.tiff
 
-		#logo
-        convert $src -resize ${width}x${height} $center 
+
+        convert $src -resize ${width}x${height} $center
 
         # Generate gradient image used for blending the side extensions into
         # the center image and for fading the side images
-        magick -size ${height}x50 gradient: -rotate 90 $gradient
+        magick -size ${height}x${blend} gradient: -rotate 90 $gradient
 
         local center_width=$(identify -format "%W" $center)
-        local side_width=$(( (width - center_width + 1)/2 + 0 ))
+        local side_width=$(( (width - center_width + 1)/2 + blend ))
         local side_blend=$(( side_width/2 ))
 
         # Generate left extension
