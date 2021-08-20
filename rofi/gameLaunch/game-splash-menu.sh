@@ -4,8 +4,6 @@
 
 cd $(dirname $(realpath $0))
 
-HEIGHT=370 # This should match height in game-splash-menu.rasi
-
 PLAY=""
 OPTIONS=""
 LIBRARY=""
@@ -36,15 +34,5 @@ handle-option() {
     esac
 }
 
-# Get monitor width
-# TODO: Handle case of multimonitor setups with monitors of different widths
-# Currently, this just returns the width of the widest connected monitor
-get-display-width() {
-    xrandr | grep -e " connected " \
-           | grep -oP "[[:digit:]]+(?=x[[:digit:]]+)" \
-           | sort -nr | head -n 1
-}
-
-./update-banner.sh -w $(get-display-width) -h $HEIGHT -a $APPID
-SELECTION="$(list-icons | rofi -dmenu -theme game-splash-menu)"
+SELECTION="$(list-icons | rofi -dmenu -theme ./iconBanner/$APPID)"
 handle-option $SELECTION &

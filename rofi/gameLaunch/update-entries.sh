@@ -25,14 +25,15 @@ EOF
 update-game-entries() {
 
     local OPTIND=1
-    local quiet appid 
+    local quiet appid update
 
     while getopts 'a:m:q' arg
     do
         case ${arg} in
             a) appid=${OPTARG};;
-	    m) manifest=${OPTARG};;
+		    m) manifest=${OPTARG};;
             q) quiet=1;;
+			f) update=1;;
             *)
                 echo "Usage: $0 [-a] [-m] [-q]"
 		echo "  -m manifest"

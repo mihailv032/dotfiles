@@ -16,6 +16,7 @@ WIDTH=$(get-display-width)
 
 STEAM_ROOT=$HOME/.local/share/Steam
 ENTRIES=$HOME/.local/share/applications/steam
+BANNER=./iconBanner/
 
 # Fetch all Steam library folders.
 steam-libraries() {
@@ -32,6 +33,7 @@ steam-libraries() {
 #dir where all the entries will be stored
 mkdir -p "$ENTRIES" 
 
+mkdir -p "$BANNER"
 for library in $(steam-libraries); do
 # All installed Steam games correspond with an appmanifest_<appid>.acf file
     for manifest in "$library"/steamapps/appmanifest_*.acf; do
