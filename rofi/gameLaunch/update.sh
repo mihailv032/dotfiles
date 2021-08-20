@@ -4,15 +4,7 @@
 
 cd $(dirname $(realpath $0))
 
-#!!only gets the width of the widest monitor
-get-display-width() {
-    xrandr | grep -e " connected " \
-           | grep -oP "[[:digit:]]+(?=x[[:digit:]]+)" \
-           | sort -nr | head -n 1
-}
-
-HEIGHT=460 # This should match height in game-splash-menu.rasi
-WIDTH=$(get-display-width)
+scriptDir=$(dirname $(realpath $0))
 
 STEAM_ROOT=$HOME/.local/share/Steam
 ENTRIES=$HOME/.local/share/applications/steam
@@ -28,22 +20,41 @@ steam-libraries() {
     fi
 }
 
-####!!!Start of the main part of the program
+#create en etnry for update
+updEntry() {
+cat <<EOF
+[Desktop Entry]
+Name=Update
+Exec=$scriptDir/gl-wrapper.sh update
+Icon=$scriptDir/update.jpg
+Terminal=false
+Type=Application
+Categories=SteamLibrary;
+EOF
+}
+
+#gets the width only of the widest monitor
+get-display-width() {
+    xrandr | grep -e " connected " \
+           | grep -oP "[[:digit:]]+(?=x[[:digit:]]+)" \
+           | sort -nr | head -n 1
+}
+WIDTH="$(get-display-width)"
+HEIGHT=460 # This should match height in game-splash-menu.sh the rasiFile funciton description
+
+####Start of the main part of the program
 
 #dir where all the entries will be stored
 mkdir -p "$ENTRIES" 
-
 mkdir -p "$BANNER"
+
 for library in $(steam-libraries); do
 # All installed Steam games correspond with an appmanifest_<appid>.acf file
     for manifest in "$library"/steamapps/appmanifest_*.acf; do
-  	appid=$(basename "$manifest" | tr -dc "[0-9]")
+  		appid=$(basename "$manifest" | tr -dc "[0-9]")
 
-	./update-game-banner.sh -a $appid -w $(get-display-width) -h $HEIGHT -b 5
-#	./update-entries.sh -a $appid -m $manifest
+		./update-banner.sh -w $WIDTH -h $HEIGHT -a $appid -f
+		./update-entries.sh -a $appid -m $manifest 
 	done
 done
-
-#2560 (main monitors width)
-#./update-game-entries.sh -q
-
+updEntry > $HOME/.local/share/applications/steam/update.desktop
