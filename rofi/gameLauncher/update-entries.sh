@@ -55,12 +55,6 @@ update-game-entries() {
     if echo "$title" | grep -qe "Soundtrack"; then
 	exit 1
     fi
-    # Don't update existing entries unless doing a full refresh
-    if [ -z $update ] && [ -f "$entry" ]; then
-        [ -z $quiet ] && echo "Not updating $entry"
-        exit 1
-    fi
-
         
     [ -z $quiet ] && echo -e "Generating $entry\t($title)"
     desktop-entry "$appid" "$title" "$boxart" > "$entry"
