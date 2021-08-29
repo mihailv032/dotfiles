@@ -8,16 +8,16 @@ PLAY=""
 OPTIONS=""
 LIBRARY=""
 ACHIEVEMENTS=""
-NEWS=""
+AK=""
 BACK=""
 
 APPID=$1
 
 list-icons() {
     echo $PLAY Play
+    echo $AK open on other ACC
     echo $LIBRARY Open in library
     echo $ACHIEVEMENTS Achievements
-    echo $NEWS News
     echo $BACK Back
 }
 
@@ -26,13 +26,15 @@ list-icons() {
 
 handle-option() {
     case $1 in
-        "$PLAY")          steam steam://rungameid/$APPID;;
+        "$PLAY")          steam steam://rungameid/$APPID; pgrep picom | xargs kill;;
+#		"$AK")			  ./ac.sh $APPID ;;
         "$LIBRARY")       steam steam://nav/games/details/$APPID;;
         "$ACHIEVEMENTS")  steam steam://url/SteamIDAchievementsPage/$APPID;;
-        "$NEWS")          steam steam://appnews/$APPID;;
         "$BACK")          ./gl-wrapper.sh run;;
     esac
 }
 
 SELECTION="$(list-icons | rofi -dmenu -theme ./iconBanner/$APPID)"
 handle-option $SELECTION &
+#picom &
+exit 1;

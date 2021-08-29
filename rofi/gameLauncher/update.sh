@@ -33,6 +33,19 @@ Categories=SteamLibrary;
 EOF
 }
 
+#creates an entry for steam account switch
+changeAC() {
+cat <<EOF
+[Desktop Entry]
+Name=Steam
+Exec=$scriptDir/ac.sh
+Icon=$scriptDir/steam.jpg
+Terminal=false
+Type=Application
+Categories=SteamLibrary;
+EOF
+}
+
 #gets the width only of the widest monitor
 get-display-width() {
     xrandr | grep -e " connected " \
@@ -58,3 +71,4 @@ for library in $(steam-libraries); do
 	done
 done
 updEntry > $HOME/.local/share/applications/steam/update.desktop
+changeAC > $HOME/.local/share/applications/steam/steam.desktop
