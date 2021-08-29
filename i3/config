@@ -1,4 +1,4 @@
-#monitor: ~90 | apps binds 330 | polybar & rofi ~290 | movement ~140 |workspaces ~220 | sys related ~260
+#monitor: ~90 | apps binds 330 | movement ~140 |workspaces ~220 | sys related&&rofi ~260 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%==*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -86,7 +86,7 @@ bindsym Control+mod4+1 exec xrandr --output HDMI-0 --off --output DVI-D-0 --off
 bindsym Control+mod4+2 exec xrandr --output DVI-D-0 --mode 1920x1080 --pos 4497x180 --rotate normal --output HDMI-0 --mode 1920x1080 --pos 0x246 --rotate normal --output DP-0 --primary --mode 2560x1440 --pos 1937x0 --rotate normal && $HOME/.config/polybar/launch.sh 
 
 #setting the wallpaper
-exec ~/.fehbg &
+exec nitrogen --restore &
 
 #################################################################
 ####################### Border and gaps  ######################## 
@@ -183,8 +183,8 @@ bindsym Control+Mod1+f fullscreen toggle
 floating_modifier Mod1
 
 # change container layout (stacked, tabbed, toggle split)
-#bindsym Mod1+s layout stacking
-#bindsym Mod1+w layout tabbed
+bindsym Mod1+Mod4+r layout stacking
+bindsym Mod1+Mod4+w layout tabbed
 #bindsym Mod1+e layout toggle split
 
 # toggle tiling / floating
@@ -258,17 +258,29 @@ workspace $ws6 output $monitorCenter
 workspace $ws3 output $monitorRight
 workspace $ws7 output $monitorRight
 
-########################system related binds######################################
+######################## system related binds ######################################
 # reload the configuration file
 bindsym Mod4+Shift+v reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym Mod1+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym Mod4+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-#i3lock
-bindsym Mod4+Shift+L exec --no-startup-id ~/.config/i3/lock.sh
+#Lockscreen
+bindsym Mod4+Control+l exec --no-startup-id ~/.config/i3/lock.sh
 #kills the app
 bindsym Mod4+w kill
+
+### Rofi
+#launch rofi
+bindsym Mod4+r exec --no-startup-id rofi -show run -lines 10
+#rofi powermenu
+bindsym Control+Shift+Escape exec ~/.config/rofi/powermenu/sysmenu
+#rofi gamelauncher
+bindsym Mod4+Shift+R exec ~/.config/rofi/gameLauncher/gl-wrapper.sh run
+
+##Polybar
+#launch polybar instead of i3status
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -286,19 +298,12 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym Mod4+q mode "default"
 }
-
 bindsym Mod4+q mode "resize"
 
 #i3 default status bar
 #bar {
 #        status_command i3status
 #}
-
-#launch polybar instead of i3status
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
-#launch rofi
-bindsym Mod4+r exec --no-startup-id rofi -show run -lines 10
 
 #						  binds for launching apps	
 #                         .=#@@@@@@@@%%%%%%%%#=
@@ -334,14 +339,8 @@ bindsym Mod4+r exec --no-startup-id rofi -show run -lines 10
 #:@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=
 # :*#%%@@@@@@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*:
 
-#moc binds
-bindsym Control+Mod1+Mod2+KP_5 exec mocp -G #toggle pause
-bindsym Control+Mod1+MOd2+KP_7 exec mocp -p #play
-bindsym Control+Mod1+Mod2+KP_6 exec mocp -f #forward
-bindsym Control+Mod1+Mod2+KP_4 exec mocp -r #back
-
 #binds using windows as mod
-bindsym Mod4+e exec --no-startup-id nautilus 
+bindsym Mod4+e exec --no-startup-id thunar 
 bindsym Mod4+t exec --no-startup-id steam
 bindsym Mod4+4 exec --no-startup-id chromium 
 bindsym Mod4+3 exec --no-startup-id discord
@@ -350,13 +349,13 @@ bindsym Mod4+g exec --no-startup-id pavucontrol
 bindsym Mod4+Return exec --no-startup-id alacritty
 bindsym Mod4+c exec --no-startup-id gcolor2
 bindsym Mod4+Shift+s exec --no-startup-id flameshot gui
+
 #binds using alt as $Mod 
 bindsym Mod1+p exec --no-startup-id code
 bindsym Mod1+e exec --no-startup-id emacs
 bindsym Mod1+o exec --no-startup-id fluent-reader 
 bindsym Mod1+l exec --no-startup-id lutris
 bindsym Mod1+Control+d exec --no-startup-id discord
-bindsym Mod1+Shift+o exec --no-startup-id libreoffice
 
 #binds using Ctrl
 bindsym Control+q exec --no-startup-id qutebrowser
@@ -367,4 +366,15 @@ bindsym Mod1+Mod2+KP_2 exec alacritty -e mocp
 bindsym Mod1+Mod2+KP_4 exec alacritty -e vim ~/.config/i3/config
 bindsym Mod1+Mod2+KP_5 exec alacritty -e vim ~/.config/polybar/config
 bindsym Mod1+Mod2+KP_6 exec alacritty -e vim ~/.config/picom/picom.conf
+bindsym Mod4+Mod2+KP_4 exec emacs ~/.config/i3/config
+bindsym Mod4+Mod2+KP_5 exec emacs ~/.config/polybar/config
+bindsym Mod4+Mod2+KP_6 exec emacs ~/.config/picom/picom.conf
+
+#moc binds
+bindsym Control+Mod1+Mod2+KP_5 exec mocp -G #toggle pause
+bindsym Control+Mod1+Mod2+KP_7 exec mocp -p #play
+bindsym Control+Mod1+Mod2+KP_8 exec mocp -x #stop
+bindsym Control+Mod1+Mod2+KP_6 exec mocp -f #forward
+bindsym Control+Mod1+Mod2+KP_4 exec mocp -r #back
+
 
