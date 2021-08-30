@@ -1,0 +1,4 @@
+#!/bin/sh
+# /usr/share/sddm/Xsession
+# Xsetup - run as root before the login dialog appears
+xrandr --output DVI-D-0 --mode 1920x1080 --pos 4497x180 --rotate normal --output HDMI-0 --mode 1920x1080 --pos 0x246 --rotate normal --output DP-0 --primary --mode 2560x1440 --pos 1937x0 --rotate normal
