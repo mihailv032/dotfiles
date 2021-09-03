@@ -18,7 +18,7 @@ system() {
 
 full() {
   system
-  sudo pacman -S i3blocks imagemagick xorg-xrandr xorg-font soundux deluge deluge-gtk \
+  sudo pacman -S i3blocks imagemagick xorg-xrandr deluge deluge-gtk \
   steam ttf-liberation gcolor2 picom code lutris wine-staging winetricks sddm xmonad qtile openbox i3-wm \
   rofi audacity figma-linux gimp gnome-system-monitor android-file-transfer nitrogen neofetch \
   node npm
@@ -28,12 +28,12 @@ full() {
 }
 
 basePkg() {
-  sudo pacman -S git alacritty xterm htop moc ranger thunar feh emacs vim flameshot \
-  ruby rust eom vlc pavucontrol lxappearance xfce4-settings chromium qutebrowser firefox \
+  sudo pacman -S git alacritty xterm htop moc ranger thunar tumbler feh emacs gvim flameshot \
+  ruby rust eom vlc pavucontrol pulseaudio lxappearance xfce4-settings chromium qutebrowser firefox \
   discord
-  yay
-  cargo install bat 
-  gem install colorls
+#  yay
+  # cargo install bat 
+ # gem install colorls
 }
 
 yay() {
@@ -43,7 +43,7 @@ yay() {
 }
 
 aur() {
-  yay -S scrot siji-git ttf-font-awesome polybar luent-reader
+  yay -S scrot siji-git ttf-font-awesome polybar fluent-reader soundux rar
 }
 
 wine() {
@@ -64,7 +64,6 @@ vm() {
 config() {
   cd /tmp
   git clone git@github.com:mishgun032/i3-config.git
-  cd i3-config
   local config=$HOME/.config
   local i3=$config/i3
   local polybar=$config/polybar
@@ -75,14 +74,20 @@ config() {
   local powermenu=rofi/powermenu
   local moc=$HOME/.moc
 
-  mkdir -p $config/{i3,polybar,picom}
-  mkdir -p $config/{rofi}/{gameLauncher,powermenu}
-  cp -r i3 $i3
-  cp -r polybar $polybar
-  cp -r rofi $rofi
-  cp -r neofetch $neofetch
-  cp -r .moc $moc
-  cp Xsetup /usr/share/sddm/scripts/Xsetup
+  #setting default file manager 
+  xdg-mime default thunar.desktop inode/directory
+
+  #monitor settings for sddm
+  sudo cp Xsetup /usr/share/sddm/scripts/Xsetup
+
+  #monitor & keyboard settings 
+  cd xorg 
+  sudo cp * /etc/X11/xorg.conf.d/
+  cd ../
+
+  #config files 
+  cd i3-config/config
+  cp * ~/.config/
 }
 
 case "$1" in 
