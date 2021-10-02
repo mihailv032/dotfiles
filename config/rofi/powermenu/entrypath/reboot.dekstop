@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=reboot
+Exec=/home/krug/.config/rofi/powermenu/powermenu.sh
+Icon=/home/krug/.config/rofi/powermenu/reboot.jpg
+Terminal=false
+Type=Application
+Categories=powermenu;

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=sleep
+Exec=/home/krug/.config/rofi/powermenu/powermenu.sh
+Icon=/home/krug/.config/rofi/powermenu/sleep.jpg
+Terminal=false
+Type=Application
+Categories=powermenu;

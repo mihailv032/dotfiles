@@ -4,7 +4,7 @@ cd $(dirname $(realpath $0))
 
 case "$1" in
 	update) ./update.sh ;;
-    run) rofi -show drun -theme games -drun-categories SteamLibrary \
+    run) rofi -show drun -m -4 -theme ~/.config/rofi/gameLauncher/games -drun-categories SteamLibrary \
                    -cache-dir ~/.cache/rofi-game-launcher
 
               # Emulate most recently used history by resetting the count

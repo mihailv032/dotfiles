@@ -1,81 +1,91 @@
-
-/*Dracula theme based on the Purple official rofi theme*/
-
 * {
-    font: "Jetbrains Mono 12";
-    foreground: #f8f8f2;
-    background-color: #1A1D2B;
+    font: "Jetbrains Mono 18";
+    foreground: 		#f8f8f2;
+    background-color:  transparent;
+	background:		   #1A1D2B;
     active-background: #C00DD5;
     urgent-background: #ff5555;
-	s-s: #000000;
     selected-background: @active-background;
-	bordercolor: none;
+    selected-urgent-background: @urgent-background;
+    selected-active-background: @active-background;
+    separatorcolor: @active-background;
+    bordercolor: @active-background;
 }
 
 #window {
-    background-color: @background;
-    border-radius: 3;
+    background-color: #1A1D2B;
+	width:			  950px;
+	height:			  200px;
+	border-radius:	  4px;
     padding:          10;
 }
 #mainbox {
     border:  0;
-    padding: 0;
+	background-color: #1A1D2B;
+    padding: 50px 0 0 0;
 }
 #message {
-    border:       1px dash 0px 0px ;
-    border-color: @separatorcolor;
+    border:       1px solid 0px 0px ;
     padding:      10px ;
 }
 #textbox {
-    text-color: @foreground;
+    text-color: #ffffff;
 }
 #listview {
-    fixed-height: 0;
-    border:       2px dash 0px 0px ;
     border-color: @bordercolor;
+	dynamic:		true;
+	columns:		6;
+	layout:			horizontal;
     spacing:      2px ;
     scrollbar:    false;
     padding:      10px 0px 0px ;
 }
+
 #element {
     border:  0;
     padding: 10px ;
+	width:	150px;
+	height:	150px;
 }
+element-icon {
+	size:	12px;
+}
+
 #element.normal.normal {
-    background-color: @background;
-    text-color:       @foreground;
+    background-color: #1A1D2B;
+    text-color:       #ffffff;
 }
 #element.normal.urgent {
     background-color: @urgent-background;
     text-color:       @urgent-foreground;
 }
 #element.normal.active {
-    background-color: @s-s;
-    text-color:       @foreground;
+    background-color: @active-background;
+    text-color:       #ffffff;
 }
 #element.selected.normal {
     background-color: @selected-background;
-    text-color:       @foreground;
+    text-color:       #ffffff;
 }
 #element.selected.urgent {
     background-color: @selected-urgent-background;
-    text-color:       @foreground;
+    text-color:       #ffffff;
 }
 #element.selected.active {
     background-color: @selected-active-background;
-    text-color:       @foreground;
+    text-color:       #ffffff;
 }
 #element.alternate.normal {
     background-color: @background;
-    text-color:       @foreground;
+    text-color:       #ffffff;
 }
 #element.alternate.urgent {
     background-color: @urgent-background;
-    text-color:       @foreground;
+    text-color:       #ffffff;
 }
 #element.alternate.active {
-    background-color: @s-s;
-    text-color:       @foreground;
+    background-color: @active-background;
+    text-color:       #ffffff;
 }
 #scrollbar {
     width:        2px ;
@@ -89,7 +99,7 @@
 }
 #button.selected {
     background-color: @selected-background;
-    text-color:       @foreground;
+    text-color:       #ffffff;
 }
 #inputbar {
 	enabled: false;
@@ -102,20 +112,9 @@
     text-color: @foreground;
 }
 #entry {
-	enabled: false;
-	placeholder: "";
+    spacing:    0;
+    text-color: #ffffff;
 }
 #prompt {
-    spacing:    0;
-    text-color: @foreground;
+    text-color: #ffffff;
 }
-#inputbar {
-    children:   [prompt, textbox-prompt-colon, entry];
-}
-#textbox-prompt-colon {
-	enabled: false;
-    expand:     false;
-    margin:     0px 0.3em 0em 0em ;
-    text-color: @foreground;
-}
-y

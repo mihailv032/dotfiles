@@ -8,7 +8,7 @@ scriptDir=$(dirname $(realpath $0))
 
 STEAM_ROOT=$HOME/.local/share/Steam
 ENTRIES=$HOME/.local/share/applications/steam
-BANNER=./iconBanner/
+BANNER=$HOME/.config/rofi/gameLauncher/iconBanner
 
 # Fetch all Steam library folders.
 steam-libraries() {
@@ -65,9 +65,11 @@ for library in $(steam-libraries); do
 # All installed Steam games correspond with an appmanifest_<appid>.acf file
     for manifest in "$library"/steamapps/appmanifest_*.acf; do
   		appid=$(basename "$manifest" | tr -dc "[0-9]")
-
+		echo "$appid - appid"
 		./update-banner.sh -w $WIDTH -h $HEIGHT -a $appid -f
+echo "asdf"
 		./update-entries.sh -a $appid -m $manifest 
+echo "dfas"
 	done
 done
 updEntry > $HOME/.local/share/applications/steam/update.desktop

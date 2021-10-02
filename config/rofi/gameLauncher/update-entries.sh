@@ -21,9 +21,7 @@ Type=Application
 Categories=SteamLibrary;
 EOF
 }
-
 update-game-entries() {
-
     local OPTIND=1
     local quiet appid update
 
@@ -34,30 +32,32 @@ update-game-entries() {
 		    m) manifest=${OPTARG};;
             q) quiet=1;;
 			f) update=1;;
-            *)
-                echo "Usage: $0 [-a] [-m] [-q]"
-		echo "  -m manifest"
+            *)  echo "Usage: $0 [-a] [-m] [-q]"
+				echo "  -m manifest"
                 echo "  -a appid"
                 echo "  -q: Quiet; Turn off diagnostic output"
                 exit
         esac
     done
 
+echo "$appid"
     entry=$APP_PATH/${appid}.desktop
     title=$(awk -F\" '/"name"/ {print $4}' "$manifest" | tr -d "™®")
     boxart=$STEAM_ROOT/appcache/librarycache/${appid}_library_600x900.jpg	
+
+echo "posle"
     # Filter out non-game entries (e.g. Proton versions or soundtracks) by
     # checking for boxart and other criteria
     if [ ! -f "$boxart" ]; then
 	echo "$appid"
 	exit 1
     fi
+echo "dq"
     if echo "$title" | grep -qe "Soundtrack"; then
 	exit 1
     fi
-        
-    [ -z $quiet ] && echo -e "Generating $entry\t($title)"
+ echo "qwe" 
+    echo -e "Generating $entry\t($title)"
     desktop-entry "$appid" "$title" "$boxart" > "$entry"
 }
-
 update-game-entries $@

@@ -11,24 +11,24 @@ ussage() {
 }
 
 system() {
-  sudo pacman -S sudo grub grub-btrfs efibootmgr dosfstools os-prober ntfs-3g mtools networkmanager \
+  pacman -S sudo grub grub-btrfs efibootmgr dosfstools os-prober ntfs-3g mtools networkmanager \
   base-devel intel-ucode nvidia lib32-nvidia-utils nvidia-utils mesa mesa-demos xorg xmlto kmod \
   dkms inetutils bc libelf cpio perl tar xz
 }
 
 full() {
-  system
-  sudo pacman -S i3blocks imagemagick xorg-xrandr deluge deluge-gtk \
+  sudo pacman -Syu
+  sudo pacman -S i3-gaps imagemagick xorg-xrandr deluge deluge-gtk \
   steam ttf-liberation gcolor2 picom code lutris wine-staging winetricks sddm xmonad qtile openbox i3-wm \
   rofi audacity figma-linux gimp gnome-system-monitor android-file-transfer nitrogen neofetch \
-  node npm
+  nodejs node-gyp npm
   basePkg
   wine
   aur 
 }
 
 basePkg() {
-  sudo pacman -S git alacritty xterm htop moc ranger thunar tumbler feh emacs gvim flameshot \
+  sudo pacman -S xmonad alacritty xterm htop ranger thunar tumbler feh emacs gvim flameshot \
   ruby rust eom vlc pavucontrol pulseaudio lxappearance xfce4-settings chromium qutebrowser firefox \
   discord
 #  yay
@@ -54,7 +54,7 @@ vm() {
   sudo pacman -S qemu qemu-arch-extra ovmf edk2-armvirt gnome-boxes virt-manager ebtables dnsmasq \
   virtualbox  virtualbox-host-modules-arch 
   modprobe vboxdrv
-#  systemd-modules-load.service virtualbox-host-modules-arch
+# systemd-modules-load.service virtualbox-host-modules-arch
 # sudo usermod -a -G kvm USR
 # sudo suermod -a -G libvirt USR
 # systemctl enable libvirtd
@@ -62,32 +62,20 @@ vm() {
 }
 
 config() {
-  cd /tmp
-  git clone git@github.com:mishgun032/i3-config.git
-  local config=$HOME/.config
-  local i3=$config/i3
-  local polybar=$config/polybar
-  local picom=$config/picom 
-  local neofetch=$config/neofetch
-  local rofi=$config/rofi
-  local gamelauncher=rofi/gamelauncher
-  local powermenu=rofi/powermenu
-  local moc=$HOME/.moc
-
+  cd /tmp && git clone https://github.com/mishgun032/dotfiles.git && cd dotfiles
+  mkdir $HOME/prog/
   #setting default file manager 
-  xdg-mime default thunar.desktop inode/directory
+#  xdg-mime default thunar.desktop inode/directory
 
   #monitor settings for sddm
-  sudo cp Xsetup /usr/share/sddm/scripts/Xsetup
+#  sudo cp Xsetup /usr/share/sddm/scripts/Xsetup
 
   #monitor & keyboard settings 
-  cd xorg 
-  sudo cp * /etc/X11/xorg.conf.d/
-  cd ../
+#  sudo cp xorg/* /etc/X11/xorg.conf.d/
 
   #config files 
-  cd i3-config/config
-  cp * ~/.config/
+#  cp config/* $HOME/.config/
+
 }
 
 case "$1" in 

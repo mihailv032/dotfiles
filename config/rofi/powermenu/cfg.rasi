@@ -3,25 +3,31 @@
 * {
     font: "Jetbrains Mono 12";
     foreground: #f8f8f2;
-    background-color: #1A1D2B;
+    background-color:  transparent;
+	background:		   #1A1D2B;
     active-background: #C00DD5;
     urgent-background: #ff5555;
-	s-s: #000000;
     selected-background: @active-background;
-	bordercolor: none;
+    selected-urgent-background: @urgent-background;
+    selected-active-background: @active-background;
+    separatorcolor: @active-background;
+    bordercolor: @active-background;
 }
 
 #window {
-    background-color: @background;
+    background-color: #1A1D2B;
+    border:           1;
     border-radius: 3;
+    border-color: @bordercolor;	
     padding:          10;
+	width: 	800px;
 }
 #mainbox {
     border:  0;
     padding: 0;
 }
 #message {
-    border:       1px dash 0px 0px ;
+    border:       1px solid 0px 0px ;
     border-color: @separatorcolor;
     padding:      10px ;
 }
@@ -30,18 +36,19 @@
 }
 #listview {
     fixed-height: 0;
-    border:       2px dash 0px 0px ;
+    border:       2px solid 0px 0px ;
     border-color: @bordercolor;
     spacing:      2px ;
     scrollbar:    false;
     padding:      10px 0px 0px ;
+	lines:		  8;
 }
 #element {
     border:  0;
     padding: 10px ;
 }
 #element.normal.normal {
-    background-color: @background;
+    background-color: #1A1D2B;
     text-color:       @foreground;
 }
 #element.normal.urgent {
@@ -49,7 +56,7 @@
     text-color:       @urgent-foreground;
 }
 #element.normal.active {
-    background-color: @s-s;
+    background-color: @active-background;
     text-color:       @foreground;
 }
 #element.selected.normal {
@@ -73,7 +80,7 @@
     text-color:       @foreground;
 }
 #element.alternate.active {
-    background-color: @s-s;
+    background-color: @active-background;
     text-color:       @foreground;
 }
 #scrollbar {
@@ -91,7 +98,6 @@
     text-color:       @foreground;
 }
 #inputbar {
-	enabled: false;
     spacing:    0;
     text-color: @foreground;
     padding:    1px ;
@@ -101,19 +107,19 @@
     text-color: @foreground;
 }
 #entry {
-	enabled: false;
-	placeholder: "";
+    spacing:    0;
+    text-color: @foreground;
 }
 #prompt {
     spacing:    0;
     text-color: @foreground;
 }
 #inputbar {
-    children:   [prompt, textbox-prompt-colon, entry];
+    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
 }
 #textbox-prompt-colon {
-	enabled: false;
     expand:     false;
+    str:        ":";
     margin:     0px 0.3em 0em 0em ;
     text-color: @foreground;
 }
