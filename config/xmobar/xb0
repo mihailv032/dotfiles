@@ -1,0 +1,48 @@
+Config {
+	font = "xft:Canterell:weight=regular:pixelsize=13:antialias=true"
+  , additionalFonts = [
+   	  "xft:Mononoki Nerd Font:pixelsize=16:anialias=true:hinting=true"
+   	, "xft:Font Awesome 5 Free Solid:pixelsize=15"
+    ]
+  , bgColor = "#111111"
+  , fgColor = "#ff6c6b"
+  , position = Static { xpos = 1937, ypos = 0, width = 2560, height = 25 }
+  , lowerOnStart = True
+  , hideOnStart = False
+  , allDesktops = True
+  , persistent = True
+  , iconRoot = "/home/krug/.config/xmobar/icons"
+  , commands = [ 
+		Run Date "<fn=1> </fn> %H:%M " "date" 10
+	  , Run Memory ["-t", "<fn=2>\xf0aa </fn> Mem: <usedratio>%"] 60
+	  , Run Swap [] 10
+	  , Run Locks 
+	  , Run Com "date" ["+\"<fn=1> </fn> %_d %a %b %Y\""] "dt" 100
+	  , Run Com "uname" ["-r"] "kernel" 36000
+	  , Run Com ".local/bin/moc" [] "moc" 10
+	  , Run Com "echo" ["<fn=1> </fn>"] "powermenu" 60
+	  , Run DiskU [("/", "<fn=2>\xf0c7 </fn> Root: <free> free ")] [] 3600
+	  , Run Kbd [("us","ru"), ("us","ru")] 
+      , Run Uptime ["-t", " <fn=1>羽 </fn> <days>D <hours>H <minutes>M "] 10
+	  , Run Cpu ["-t", "<fn=1> </fn> CPU : <total>% "] 10
+	  , Run UnsafeStdinReader
+    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "<fc=#1FB9D5><fn=1> </fn> %kernel% </fc> \
+					\	 %UnsafeStdinReader% \
+					\}\
+					\	 <action=`alacritty -e ./.local/bin/moc`>%moc%</action> \
+					\	 <fc=#98be65>%dt%</fc> \
+                    \{   \
+					\	 <fc=#c678dd>%memory% / %swap% |</fc> \
+					\	 <fc=#ff6c6b>%cpu% |</fc> \
+					\	 <fc=#0a81f5>%disku% | </fc> \
+					\	 <fc=#ee9a00>%uptime% |</fc> \
+					\	 <action=`alacritty -e sudo pacman -Syu`><icon=pacman.xpm/> <fc=#c678dd>|</fc></action> \
+					\	 <fc=#e60053>%locks% |</fc>\
+					\	 <fc=#fafafa>%date%</fc> \
+					\	 <action=`alacritty -e rofi -modi drun,run -show drun -m -4 -show-icons -drun-categories powermenu`><fc=#e60053>%powermenu% </fc></action>"
+					
+}
+

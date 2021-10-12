@@ -7,12 +7,16 @@ import System.Exit
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import Data.Monoid
+import Data.Maybe (fromJust)
+
 
 --import XMonad.Hooks.ManageDocks --to show the workspaceo on xmobar
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks, ToggleStruts(..))
+
 
 import XMonad.Util.NamedScratchpad
 --import XMonad.Util.EZConfig
@@ -26,20 +30,28 @@ import XMonad.Layout.Spacing --gaps
 --import XMonad.Layout.MultiToggle
 --import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.ToggleLayouts --toggle fullscreen
-import XMonad.Layout.NoBorders -- ???
+import XMonad.Layout.NoBorders --full screen no borders 
+import XMonad.Layout.ShowWName
 import qualified XMonad.Layout.Magnifier as Mag
 
+windowCount :: X (Maybe String)
+windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
--- toggleStrustKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
+myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
+
+clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
+    where i = fromJust $ M.lookup ws myWorkspaceIndices
+
+
+--toggleStrustKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 myPP = xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "|" "|" }
 --mybar = "xmobar ~/.config/xmobar/xb1"
 
 main = do
-  hdmi <- spawnPipe "xmobar -x 1 ~/.config/xmobar/xb3"
-  dvi <- spawnPipe "xmobar -x 2 ~/.config/xmobar/xb3"
-  (xmonad (ewmhFullscreen (ewmh (xmobarProp (cfg)))))
-
-cfg = def {
+  xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/xb0"
+  xmproc1 <- spawnPipe "xmobar -x 1 $HOME/.config/xmobar/xmobarrc"
+  xmproc2 <- spawnPipe "xmobar -x 2 $HOME/.config/xmobar/xmobarrc"
+  xmonad $ ewmh def {
         terminal           = "alacritty",
         focusFollowsMouse  = False, -- Whether focus follows the mouse pointer.
         clickJustFocuses   = False,-- Whether clicking on a window to focus also passes the click to the window
@@ -50,18 +62,32 @@ cfg = def {
         normalBorderColor  = "#dddddd",
         focusedBorderColor = "#960a00",
 
-      -- key bindings
+      --key bindings
         keys               = myKeys,
         mouseBindings      = myMouseBindings,
 
         --hooks, layouts
-        layoutHook         = spacingRaw True (Border 3 3 5 10) True (Border 3 3 5 5) True $ reflectHoriz $ myLayout,
-        manageHook         = myManageHook <+> namedScratchpadManageHook myScratchpads,
+        layoutHook         = showWName' myShowWNameTheme $ spacingRaw True (Border 23 3 5 10) True (Border 3 3 5 5) True $ reflectHoriz $ myLayout,
+        manageHook         = myManageHook <+> manageDocks,
         handleEventHook    = myEventHook,
-        logHook            = myLogHook,
-        startupHook        = myStartupHook}
+        startupHook        = myStartupHook ,
+        logHook            = dynamicLogWithPP $ xmobarPP 
+        { ppOutput = \x -> hPutStrLn xmproc0 x                          -- xmobar on monitor 1
+                              >> hPutStrLn xmproc1 x                          -- xmobar on monitor 2
+                              >> hPutStrLn xmproc2 x                          -- xmobar on monitor 3
+              , ppCurrent = xmobarColor "#c792ea" "" . wrap "[ " " ]"         -- Current workspace
+              , ppVisible = xmobarColor "#c792ea" "" . clickable              -- Visible but not current workspace
+              , ppHidden = xmobarColor "#82AAFF" "" . wrap "<box type=Bottom width=2 mt=2 color=#82AAFF>" "</box>" . clickable -- Hidden workspaces
+--              , ppHiddenNoWindows = xmobarColor "#82AAFF" ""  . clickable     -- Hidden workspaces (no windows)
+              , ppTitle = xmobarColor "#b3afc2" "" . shorten 60               -- Title of active window
+              , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
+              , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"            -- Urgent workspace
+              , ppExtras  = [windowCount]                                     -- # of windows current workspace
+              , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]                    -- order of things in xmobar
+      }
 
-myWorkspaces    = ["Main","Ftoroi","Tretii","T2","M2","F2","6","8","9"]
+	}
+myWorkspaces    = ["Main","Ftoroi","Tretii","P","F","N","M","8","9"]
 
 ------------------------------------Key bindings--------------------------------
 
@@ -131,7 +157,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ((mod1Mask    ,xK_p       ), spawn "code"),
       ((mod1Mask    ,xK_o       ), spawn "fluent-reader"),
       ((mod1Mask    ,xK_l       ), spawn "lutris"),
-	  ((mod1Mask	,xK_q		), spawn "qutebrowser"),
+	  ((controlMask	,xK_q		), spawn "qutebrowser"),
 
       ((mod1Mask    ,xK_KP_End  ), spawn "alacritty -e htop"),
       ((mod1Mask    ,xK_KP_Down ), spawn "alacritty -e mocp"),
@@ -190,14 +216,26 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
+
+-------------------------------------------------------------------------
+myShowWNameTheme :: SWNConfig
+myShowWNameTheme = def
+    { swn_font              = "xft:Ubuntu:bold:size=60"
+    , swn_fade              = 1.0
+    , swn_bgcolor           = "#1c1f24"
+    , swn_color             = "#ffffff"
+    }
+
 --------------------------------Layouts-----------------------------------
 
 
-myLayout = toggleLayouts Full (tiled ||| Mag.magnifier (Tall 1 (3/100) (1/2)) ||| Mirror tiled ||| Full )
+myLayout = toggleLayouts full (tiled ||| Mag.magnifier (Tall 1 (3/100) (1/2)) ||| Mirror tiled ||| noBorders full )
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
-
+	
+     --
+     full = noBorders Full 	
      -- The default number of windows in the master pane
      nmaster = 1
 
@@ -235,7 +273,7 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook = return ()
+--myLogHook = return ()
 
 ------------------------------------------------------------------------
 -- Startup hook

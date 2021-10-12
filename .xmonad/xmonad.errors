@@ -1,8 +1,8 @@
 $ ghc --make xmonad.hs -i -ilib -fforce-recomp -main-is main -dynamic -v0 -outputdir /home/krug/.xmonad/build-x86_64-linux -o /home/krug/.xmonad/xmonad-x86_64-linux
 
-xmonad.hs:134:1: warning: [-Wtabs]
-    Tab character found here, and in 46 further locations.
+xmonad.hs:89:1: warning: [-Wtabs]
+    Tab character found here, and in 49 further locations.
     Please use spaces instead.
-    |
-134 |           ((mod1Mask    ,xK_q           ), spawn "qutebrowser"),
-    | ^^^^^^^^
+   |
+89 |         }
+   | ^^^^^^^^
