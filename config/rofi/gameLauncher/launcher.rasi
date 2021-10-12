@@ -7,8 +7,8 @@ window {
     anchor:                         south;
     transparency:                   "real";
     background-color:               @background-transparent;
-    border:                         5px 0px 0px 0px;
-    border-color:                   @primary;
+    border:                         0px 0px 0px 0px;
+    border-color:                   #C00DD5;
 }
 
 mainbox {
@@ -30,10 +30,10 @@ inputbar-box {
 inputbar {
     children:                       [textbox-prompt, entry];
     margin:                         12px 0px 0px 0px;
-    background-color:               @primary;
-    border:                         4px;
-    border-color:                   @primary;
-    border-radius:                  8px;
+    background-color:               #181B28;
+    border:                         0px;
+    border-color:                   #181B28;
+    border-radius:                  0px;
 }
 
 textbox-prompt {
@@ -52,10 +52,10 @@ entry {
     margin:                         -6px;
     horizontal-align:               0;
     width:                          300;
-    background-color:               @background;
+    background-color:               #181B28;
     border:                         6px;
-    border-color:                   @primary;
-    border-radius:                  8px;
+    border-color:                   #181B28;
+    border-radius:                  0px;
 }
 
 element {

@@ -1,19 +1,22 @@
 # i3 Multi monitor setup with polybar
 
-## Monitor 1 - Primary
+## Xmonad
+![xmonad.png](./xmonad.png)
+
+## i3 - Primary monitor
 ![monitor_1](./monitor_1.png)
 
-## Monitro 2
-![monitor_2](./monitor_2.png)
-
-## Monitor 3 
-![monitor_3](./monitor_3.png)
+## i3 on nd monitor 
+![i3](./i3.png)
 
 ### Lockscreen
 ![lockscreen](./lockscreen.png)
 
 ### Rofi
 ![Rofi](./rofi_scr.png)
+
+### Rofi game launcher
+![rofi game launcher](./gameLauncher.png)
 
 ### Rofi powermenu (author Aditya Shakya https://github.com/adi1090x)
 ![Rofi powermenu](./rofi_powermenu.png)
