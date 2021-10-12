@@ -4,7 +4,7 @@
 ![xmonad.png](./xmonad.png)
 
 ## i3 - Primary monitor
-![monitor_1](./monitor_1.png)
+![monitor_1](./i3_main.png)
 
 ## i3 on nd monitor 
 ![i3](./i3.png)
