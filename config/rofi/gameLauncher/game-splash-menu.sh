@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/env bash
 
 # Wrapper script to open the game splash menu for a given appid
 
@@ -34,7 +34,5 @@ handle-option() {
     esac
 }
 
-SELECTION="$(list-icons | rofi -dmenu -theme ./iconBanner/$APPID)"
+SELECTION="$(list-icons | rofi -dmenu -m -4 -theme ./iconBanner/$APPID)" 
 handle-option $SELECTION &
-#picom &
-exit 1;
