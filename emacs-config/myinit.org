@@ -1,0 +1,415 @@
+* General
+** packakge archives
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'package-archives
+		  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+   #+END_SRC
+** Dont show startup message
+   #+BEGIN_SRC emacs-lisp
+     (setq inhibit-startup-message t)
+   #+END_SRC
+** Disable the welcome screen
+   #+BEGIN_SRC emacs-lisp
+     (setq inhibit-startup-screen t)
+   #+END_SRC
+** Disable the backup files and #files
+    #+BEGIN_SRC emacs-lisp
+      (setq auto-save-default nil)
+      (setq create-lockfiles nil)
+      (setq create-backup-files nil)
+      (setq create-lockfiles nil)
+      (setq make-backup-files nil)
+   #+END_SRC
+** show warnings only if its emergency
+   #+BEGIN_SRC emacs-lisp
+     (setq warning-minimum-level :emergency)
+   #+END_SRC
+** Simplify the UI
+   #+BEGIN_SRC emacs-lisp
+     (menu-bar-mode -1)
+     (tool-bar-mode -1)
+     (scroll-bar-mode -1)
+     (tooltip-mode -1)
+     (fringe-mode 0)
+   #+END_SRC
+** Font
+   #+BEGIN_SRC emacs-lisp
+	  (defun fontify-frame (frame)
+     (set-frame-parameter frame 'font "monospace-16"))
+     
+   #+END_SRC
+** default dir
+   #+BEGIN_SRC emacs-lisp
+(cd "~/prog/js")
+   #+END_SRC
+** show brakets pair
+   #+BEGIN_SRC emacs-lisp
+     (show-paren-mode 1)
+   #+END_SRC
+** make escape = C-g
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+   #+END_SRC
+** remove the side borders
+   #+BEGIN_SRC emacs-lisp
+     (fringe-mode 0)
+   #+END_SRC
+** fontify
+   #+BEGIN_SRC emacs-lisp
+     (fontify-frame nil)
+     (push 'fontify-frame after-make-frame-functions)
+   #+END_SRC
+** Path from sheel
+   #+BEGIN_SRC emacs-lisp
+     (use-package exec-path-from-shell
+	     :ensure t
+	     :config
+	     (exec-path-from-shell-initialize))
+   #+END_SRC
+** loadpath
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+     (add-to-list 'load-path "~/emacs.d/plugins/emmet-mode")
+     (add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
+     (add-to-list 'load-path "~/.emacs.d/plugins/react-snippets.el")
+     (add-to-list 'load-path "~/.emacs.d/plugins")
+     (add-to-list 'load-path "~/.emacs.d/plugins/vendor/emacs-powerline")
+
+   #+END_SRC
+
+** misc
+   #+BEGIN_SRC emacs-lisp
+     (delete-selection-mode t)
+     (setq gc-cons-threshold 100000000)
+     (setq read-process-output-max (* 1024 1024))
+     #+END_SRC
+
+* straight 
+  #+BEGIN_SRC emacs-lisp
+    (defvar bootstrap-version)
+    (let ((bootstrap-file
+	   (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+	  (bootstrap-version 5))
+      (unless (file-exists-p bootstrap-file)
+	(with-current-buffer
+	    (url-retrieve-synchronously
+	     "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	     'silent 'inhibit-cookies)
+	  (goto-char (point-max))
+	  (eval-print-last-sexp)))
+      (load bootstrap-file nil 'nomessage))
+  #+END_SRC
+* Evil
+** Evil mode
+  #+BEGIN_SRC emacs-lisp
+    (use-package evil
+      :ensure t
+      :init
+      (setq evil-want-integration t) 
+      (setq evil-want-keybinding t)
+      :config
+      (evil-mode 1)
+      (setq evil-undo-system 'undo-fu)
+      (define-key evil-insert-state-map (kbd "C-c") 'evil-normal-state))
+  #+END_SRC
+** Evil collection
+   #+BEGIN_SRC emacs-lisp
+     (use-package evil-collection
+	:after evil
+        :ensure t 
+	:custom (evil-collection-setup-minibuffer t) 
+	:config (evil-collection-init))
+   #+END_SRC
+** redo for evil
+   #+BEGIN_SRC emacs-lisp
+	  (use-package undo-fu
+     :straight t)
+	  (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo)
+   #+END_SRC
+
+** evil multiedit
+   #+BEGIN_SRC emacs-lisp
+      (use-package evil-multiedit
+        :ensure t)
+   #+END_SRC
+* Org mode
+** org
+   #+BEGIN_SRC emacs-lisp
+     (use-package org
+	:after org
+	:hook (org-mode . misha/org-mode-setup))
+     (setq org-ellipsis " ▾"
+       org-hide-emphasis-markers t)
+   #+END_SRC
+** change the list style
+   #+BEGIN_SRC emacs-lisp
+     (font-lock-add-keywords 'org-mode
+     '(("^ *\\([-]\\) "
+     (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+   #+END_SRC
+** Org bullets
+   #+BEGIN_SRC emacs-lisp
+     (use-package org-bullets
+       :after org
+       :hook (org-mode . org-bullets-mode))
+   #+END_SRC
+
+** center the text 
+   #+BEGIN_SRC emacs-lisp
+     (require 'olivetti)
+     (setq olivetti-body-width 80)
+     (add-hook 'org-mode-hook (lambda () (olivetti-mode 1)))  
+   #+END_SRC
+   
+* UI
+** numberline 
+
+** theme    
+   #+BEGIN_SRC emacs-lisp
+     (load-theme 'dracula t)
+   #+END_SRC
+** vscode icons
+   #+BEGIN_SRC emacs-lisp
+     (use-package vscode-icon
+       :ensure t
+       :commands (vscode-icon-for-file))
+   #+END_SRC
+** sidebar   
+   #+BEGIN_SRC emacs-lisp
+     (use-package dired-sidebar
+       :bind (("C-x n" . dired-sidebar-toggle-sidebar))
+       :ensure t
+       :commands (dired-sidebar-toggle-sidebar)
+       :init
+       (add-hook 'dired-sidebar-mode-hook
+		 (lambda ()
+		   (unless (file-remote-p default-directory)
+		     (auto-revert-mode))))
+       :config
+       (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
+       (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
+     ;  (setq dired-sidebar-subtree-line-prefix "__")
+       (setq dired-sidebar-theme 'vscode)
+       (setq dired-sidebar-use-term-integration t)
+       (setq dired-sidebar-use-custom-font t))
+
+(column-number-mode)
+(dolist (mode '(org-mode-hook
+term-mode-hook
+shell-mode-hook
+eshell-mode-hook))
+(add-hook mode (lambda () (display-line-numbers-mode 0))))
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+   #+END_SRC
+
+*** sidebar cfg
+    #+BEGIN_SRC emacs-lisp
+      ;Sidebar cfg
+(use-package dired-sidebar
+  :bind (("C-x n" . dired-sidebar-toggle-sidebar))
+  :ensure t
+  :commands (dired-sidebar-toggle-sidebar)
+  :init
+  (add-hook 'dired-sidebar-mode-hook
+            (lambda ()
+              (unless (file-remote-p default-directory)
+                (auto-revert-mode))))
+  :config
+  (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
+  (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
+;  (setq dired-sidebar-subtree-line-prefix "__")
+  (setq dired-sidebar-theme 'vscode)
+  (setq dired-sidebar-use-term-integration t)
+  (setq dired-sidebar-use-custom-font t))
+    #+END_SRC
+
+** all the icons
+   #+BEGIN_SRC emacs-lisp
+     (use-package all-the-icons)
+;M-x all-the-icons-install-fonts
+   #+END_SRC
+** taskbar
+*** powerline 
+   #+BEGIN_SRC emacs-lisp
+     ; (require 'powerline)
+   #+END_SRC
+
+   
+*** doommodeline
+    #+BEGIN_SRC emacs-lisp
+      (use-package doom-modeline
+	:ensure t
+	:init (doom-modeline-mode 1))
+    #+END_SRC
+
+* Core packages 
+** lsp
+   #+BEGIN_SRC emacs-lisp
+     (setq lsp-log-io nil)
+     (setq lsp-keymap-prefix "C-c l")
+     (setq lsp-restart 'auto-restart)
+     (setq lsp-ui-sideline-show-diagnostic t)
+     (setq lsp-ui-sideline-show-hover t)
+     (setq lsp-ui-sideline-show-code-actions t)
+     (use-package lsp-mode
+       :ensure t
+       :hook (
+     (web-mode . lsp-deferred)
+     ;(lsp-mode . lsp-enabled-which-key-integration)
+     )
+       :commands lsp-deferred)
+     (use-package lsp-ui
+       :commands lsp-ui-mode)
+   #+END_SRC
+** ivy
+   #+BEGIN_SRC emacs-lisp
+     (use-package ivy
+       :diminish
+       :bind (("C-S" . swiper)
+     :map ivy-minibuffer-map
+     ("TAB" . ivy-alt-done))
+     :config
+     (ivy-mode 1)
+     )
+     (use-package counsel
+       :straight t
+       :bind (("C-x C-f" . counsel-find-file)
+     ("C-x b" . counsel-ibuffer)
+     )
+       :config (setq ivy-initial-inputs-alist nil)
+     )
+   #+END_SRC
+** magit
+   #+BEGIN_SRC emacs-lisp
+     (use-package magit
+       :ensure t
+       :custom
+       (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+       )
+   #+END_SRC
+** projectile
+   #+BEGIN_SRC emacs-lisp
+     (defun dw/switch-project-action ()
+       ;; TODO: Switch to EXWM workspace 1?
+       (persp-switch (projectile-project-name))
+       (magit-status))
+
+     (use-package projectile
+       :diminish projectile-mode
+       :config (projectile-mode)
+       :custom ((projectile-completion-system 'helm))
+       :bind-keymap
+       ("C-x p" . projectile-command-map)
+       :init
+       (when (file-directory-p "~/prog/react/")
+	 (setq projectile-project-search-path '("~/prog/react/")))
+       (setq projectile-switch-project-action #'projectile-dired))
+
+     (use-package counsel-projectile
+       :straight t
+       :config (counsel-projectile-mode))
+   #+END_SRC
+** multi cursor
+   #+BEGIN_SRC emacs-lisp
+     (use-package multiple-cursors
+       :straight t
+     )
+     (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+     (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+
+   #+END_SRC
+
+** rainbow brakets
+   #+BEGIN_SRC emacs-lisp
+     (require 'rainbow-delimiters)
+     (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+   #+END_SRC
+** expand region
+   #+BEGIN_SRC emacs-lisp
+     (use-package expand-region
+       :ensure t
+       :bind
+       ("C-a" . er/expand-region)
+       ("C-S-a" . er/contract-region)
+       )
+   #+END_SRC
+** which key
+   #+BEGIN_SRC emacs-lisp
+     (use-package which-key
+       :ensure t
+       :config
+	 (which-key-mode)
+	 (setq which-key-idle-delay 0.4))
+   #+END_SRC
+** company
+   #+BEGIN_SRC emacs-lisp
+     (setq company-minimum-prefix-length 1
+	   company-idle-delay 0.0)
+     (use-package company
+       :ensure t
+       :config (global-company-mode t))
+   #+END_SRC
+
+** vterm 
+   #+BEGIN_SRC emacs-lisp
+     (use-package vterm
+       :ensure t)
+   #+END_SRC
+* Web 
+** webmode
+   #+BEGIN_SRC emacs-lisp
+      (use-package web-mode
+	:ensure t
+	:mode (("\\.js\\'" . web-mode)
+           ("\\.jsx\\'" . web-mode)
+           ("\\.ts\\'" . web-mode)
+   	       ("\\.tsx\\'" . web-mode)
+           ("\\.html\\'" . web-mode))
+	:commands web-mode)
+   #+END_SRC
+*** web mode hook
+    #+BEGIN_SRC emacs-lisp
+	    (add-hook 'web-mode-hook  'emmet-mode)
+	    (defun web-mode-init-hook ()
+	      "Hooks for Web mode.  Adjust indent."
+	      (setq web-mode-markup-indent-offset 2)
+      (setq web-mode-code-indent-offset 2)
+      (setq web-mode-css-indent-offset 2)
+      )
+	    (add-hook 'web-mode-hook  'web-mode-init-hook)
+	    (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+    #+END_SRC
+** emmet mode
+   #+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path "~/emacs.d/emmet-mode")
+     (require 'emmet-mode)
+     (add-hook 'sgml-mode-hook 'emmet-mode)
+     (add-hook 'css-mode-hook  'emmet-mode)
+   #+END_SRC
+** jsx highlighting
+   #+BEGIN_SRC emacs-lisp
+      (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+   #+END_SRC
+** JS 
+*** react snippets 
+    #+BEGIN_SRC emacs-lisp
+      (require 'yasnippet)
+      (yas-global-mode 1)
+	    ;(yas-reload-all)
+	    ;(add-hook 'prog-mode-hook #'yas-minor-mode)
+      (require 'react-snippets)
+
+    #+END_SRC
+*** typescript 
+   #+BEGIN_SRC emacs-lisp
+      (use-package typescript-mode
+        :mode "\\.ts\\'" 
+        :hook (typescript-mode . lsp-deferred)
+        :config
+      (setq typescript-indent-level 2))
+   #+END_SRC
+
+   
+   
+   
