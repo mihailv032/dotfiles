@@ -1,63 +1,8 @@
-# i3 Multi monitor setup with polybar
+# Dotfiles 
 
 ## Xmonad
 ![xmonad.png](./xmonad.png)
 
-## i3 - Primary monitor
-![monitor_1](./i3_main.png)
-
-## i3 on nd monitor 
-![i3](./i3.png)
-
-### Lockscreen
-![lockscreen](./lockscreen.png)
-
-### Rofi
-![Rofi](./rofi_scr.png)
-
-### Rofi game launcher
-![rofi game launcher](./gameLauncher.png)
-
-### Rofi powermenu (author Aditya Shakya https://github.com/adi1090x)
-![Rofi powermenu](./rofi_powermenu.png)
-
-### Essential programs
-picom 
-
-alacritty
-
-[colorls](https://github.com/athityakumar/colorls)
-* ruby 
-
-[i3blocks](https://github.com/vivien/i3blocks)
-
-moc - music player
-
-htop
-
-ranger / mc
-
-scrot [aur](https://aur.archlinux.org/packages/scotch/)
-
-ImageMagick
-
-thunar / nautilus
-
-xorg-xrandr
-
-feh
-
-flameshot
-
-lxappearance
-
-ktorrent
-
-virtualbox 
-
-sounux
-
-[fluent reader](https://aur.archlinux.org/packages/fluent-reader/)
 
 ### Fonts 
 * [Nerd fonts](https://github.com/ryanoasis/nerd-fonts)
