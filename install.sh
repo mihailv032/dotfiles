@@ -18,7 +18,7 @@ system() {
 
 full() {
   sudo pacman -Syu
-  sudo pacman -S i3-gaps imagemagick xorg-xrandr deluge deluge-gtk \
+  sudo pacman -S i3-gaps imagemagick xorg-xrandr deluge deluge-gtk xorg-xmodmap\
   steam ttf-liberation gcolor2 picom code lutris wine-staging winetricks sddm xmonad qtile openbox i3-wm \
   rofi audacity figma-linux gimp gnome-system-monitor android-file-transfer nitrogen neofetch \
   nodejs node-gyp npm
@@ -43,7 +43,7 @@ yay() {
 }
 
 aur() {
-  yay -S scrot siji-git ttf-font-awesome polybar fluent-reader soundux rar
+  yay -S scrot siji-git ttf-font-awesome polybar fluent-reader soundux rar gdu
 }
 
 wine() {

@@ -2,20 +2,22 @@
 # ~/.bashrc
 
 #adding new path to the $PATH
-export PATH=$PATH:$HOME/.cargo/bin:$HOME/.bin/:$HOME/.local/share/gem/ruby/3.0.0/bin
+export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin/:$HOME/.local/share/gem/ruby/3.0.0/bin
 export BROWSER=/usr/bin/chromium
 export HISTCONTROL=ignoreboth 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='colorls --sd'
-alias r='ranger'
+alias la='colorls -A | lolcat'
+alias ll='colorls -l | lolcat'
+alias ls='colorls --sd | lolcat'
+alias r='ranger | lolcat'
 alias q='exit'
 alias Q='exit'
-alias la='ls -A'
 alias p='sudo pacman -S'
 alias cat='bat'
-alias time='timedatectl status'
+alias time='timedatectl status | lolcat'
+
 #ranger like aliasses
 
 #prog
@@ -31,7 +33,7 @@ alias gpb='cd ~/prog/bash'
 alias gd='cd ~/Downloads'
 alias ge='cd /etc'
 alias gu='cd /usr'
-alias gg='cd /G'
+alias gg='cd ~/games'
 alias ..='cd ../'
 
 #colorls
@@ -49,7 +51,10 @@ for pid in $(pidof -x alacritty); do
     done
 
 if [ $ALACRITTY_INSTANCES -eq 1 ]; then
-	neofetch
+	neofetch | lolcat
 fi
 
+if [[ -f ~/.bash_prompt ]]; then
+  . ~/.bash_prompt
+fi
 
