@@ -6,43 +6,50 @@ Config {
     ]
   , bgColor = "#111111"
   , fgColor = "#ff6c6b"
-  , position = Static { xpos = 1937, ypos = 0, width = 2560, height = 25 }
+  , position = Static { xpos = 1937, ypos = 0, width = 2560, height = 30 }
   , lowerOnStart = True
   , hideOnStart = False
   , allDesktops = True
   , persistent = True
-  , iconRoot = "/home/krug/.config/xmobar/icons"
+  , iconRoot = ".config/xmobar/icons"
   , commands = [ 
 		Run Date "<fn=1> </fn> %H:%M " "date" 10
-	  , Run Memory ["-t", "<fn=2>\xf0aa </fn> Mem: <usedratio>%"] 60
+	  , Run Memory ["-t", "<fn=2>\xf0aa </fn> Mem: <usedratio>%"] 10
 	  , Run Swap [] 10
 	  , Run Locks 
-	  , Run Com "date" ["+\"<fn=1> </fn> %_d %a %b %Y\""] "dt" 100
-	  , Run Com "uname" ["-r"] "kernel" 36000
-	  , Run Com ".local/bin/moc" [] "moc" 10
-	  , Run Com "echo" ["<fn=1> </fn>"] "powermenu" 60
-	  , Run DiskU [("/", "<fn=2>\xf0c7 </fn> Root: <free> free ")] [] 3600
-	  , Run Kbd [("us","ru"), ("us","ru")] 
+	  , Run DiskU [("/", "<fn=2>\xf0c7 </fn> Root: <free> free ")] [] 36000
+--	  , Run Kbd [("us","ru"), ("us","ru")] 
       , Run Uptime ["-t", " <fn=1>羽 </fn> <days>D <hours>H <minutes>M "] 10
 	  , Run Cpu ["-t", "<fn=1> </fn> CPU : <total>% "] 10
+	  , Run Com "date" ["+\"<fn=1> </fn> %_d %a %b %Y\""] "dt" 360000
+	  , Run Com "uname" ["-r"] "kernel" 360000000000 
+	  , Run Com ".config/xmobar/scr/moc" [] "moc" 20
+	  , Run Com ".config/xmobar/scr/vol" [] "showvol" 5
+	  , Run Com ".config/xmobar/scr/output.sh" [] "output" 6
+	  , Run Com "echo" ["<fn=1>墳 </fn>"] "vol"360000000000 
+	  ,	Run Com "echo" ["<fn=1> </fn>"] "plus"360000000000 
+	  , Run Com "echo" ["<fn=1> </fn>"] "minus"360000000000 
+	  , Run Com "echo" ["<fn=1> </fn>"] "powermenu"360000000000 
 	  , Run UnsafeStdinReader
+
     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "<fc=#1FB9D5><fn=1> </fn> %kernel% </fc> \
+       , template = "<fc=#51afef><fn=1> </fn> %kernel% </fc> \
 					\	 %UnsafeStdinReader% \
 					\}\
-					\	 <action=`alacritty -e ./.local/bin/moc`>%moc%</action> \
+					\	 <action=`alacritty -e ./.local/bin/mocp`>%moc%</action> \
 					\	 <fc=#98be65>%dt%</fc> \
                     \{   \
-					\	 <fc=#c678dd>%memory% / %swap% |</fc> \
-					\	 <fc=#ff6c6b>%cpu% |</fc> \
-					\	 <fc=#0a81f5>%disku% | </fc> \
-					\	 <fc=#ee9a00>%uptime% |</fc> \
-					\	 <action=`alacritty -e sudo pacman -Syu`><icon=pacman.xpm/> <fc=#c678dd>|</fc></action> \
-					\	 <fc=#e60053>%locks% |</fc>\
+					\	 <box type=Bottom width=2 mb=2 color=#111111><action=`alacritty -e htop`><fc=#c678dd>%memory% / %swap%  </fc></action></box> \
+					\	 <action=`alacritty -e htop`><fc=#ff6c6b>%cpu%  </fc></action> \
+					\	 <action=`alacritty -e `> <fc=#0a81f5>%disku%   </fc></action> \
+					\	 <fc=#ee9a00>%uptime%  </fc> \
+					\    <box type=Bottom width=2 mb=2 color=#111111><fc=#c00dd5>%output% <action=`pavucontrol`>%vol%%showvol% </action><action=`vol +5000`>%plus%</action> <action=`vol -5000`> %minus%</action></fc></box> \
+					\	 <action=`alacritty -e sudo pacman -Syu`><icon=pacman.xpm/> <fc=#c678dd> </fc></action> \
+					\	 <fc=#e60053>%locks%  </fc>\
 					\	 <fc=#fafafa>%date%</fc> \
-					\	 <action=`alacritty -e rofi -modi drun,run -show drun -m -4 -show-icons -drun-categories powermenu`><fc=#e60053>%powermenu% </fc></action>"
+					\	 <action=`rofi -modi drun,run -show drun -m -4 -theme ~/.config/rofi/powermenu/games -show-icons -drun-categories powermenu`><fc=#e60053>%powermenu% </fc></action>"
 					
 }
 

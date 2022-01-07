@@ -1,8 +1,9 @@
 
 ----------------------------------------Imports------------------------------------
-
 import XMonad
 import System.Exit
+import System.IO
+import System.Process
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -19,7 +20,7 @@ import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks, Toggl
 
 
 import XMonad.Util.NamedScratchpad
---import XMonad.Util.EZConfig
+import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Util.Ungrab
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce --for startup
@@ -34,6 +35,9 @@ import XMonad.Layout.NoBorders --full screen no borders
 import XMonad.Layout.ShowWName
 import qualified XMonad.Layout.Magnifier as Mag
 
+import XMonad.Actions.GroupNavigation
+
+
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
@@ -42,15 +46,13 @@ myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
     where i = fromJust $ M.lookup ws myWorkspaceIndices
 
-
 --toggleStrustKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
-myPP = xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "|" "|" }
---mybar = "xmobar ~/.config/xmobar/xb1"
 
+main :: IO ()
 main = do
-  xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/xb0"
-  xmproc1 <- spawnPipe "xmobar -x 1 $HOME/.config/xmobar/xmobarrc"
+  xmproc1 <- spawnPipe "xmobar -x 1 $HOME/.config/xmobar/xb3"
   xmproc2 <- spawnPipe "xmobar -x 2 $HOME/.config/xmobar/xmobarrc"
+  xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/xb0"
   xmonad $ ewmh def {
         terminal           = "alacritty",
         focusFollowsMouse  = False, -- Whether focus follows the mouse pointer.
@@ -67,17 +69,17 @@ main = do
         mouseBindings      = myMouseBindings,
 
         --hooks, layouts
-        layoutHook         = showWName' myShowWNameTheme $ spacingRaw True (Border 23 3 5 10) True (Border 3 3 5 5) True $ reflectHoriz $ myLayout,
-        manageHook         = myManageHook <+> manageDocks,
+        layoutHook         = showWName' myShowWNameTheme $ spacingRaw True (Border 33 3 5 10) True (Border 3 3 5 5) True $ reflectHoriz $ myLayout,
+        manageHook         = manageDocks <+> myManageHook,
         handleEventHook    = myEventHook,
         startupHook        = myStartupHook ,
-        logHook            = dynamicLogWithPP $ xmobarPP 
+        logHook            = dynamicLogWithPP xmobarPP 
         { ppOutput = \x -> hPutStrLn xmproc0 x                          -- xmobar on monitor 1
                               >> hPutStrLn xmproc1 x                          -- xmobar on monitor 2
                               >> hPutStrLn xmproc2 x                          -- xmobar on monitor 3
-              , ppCurrent = xmobarColor "#c792ea" "" . wrap "[ " " ]"         -- Current workspace
-              , ppVisible = xmobarColor "#c792ea" "" . clickable              -- Visible but not current workspace
-              , ppHidden = xmobarColor "#82AAFF" "" . wrap "<box type=Bottom width=2 mt=2 color=#82AAFF>" "</box>" . clickable -- Hidden workspaces
+              , ppCurrent = xmobarColor "#c792ea" "" . wrap "<box type=Bottom width=2 mt=2 color=#c792ea>[ " " ]</box>"         -- Current workspace
+              , ppVisible = xmobarColor "#c792ea" "" . wrap "[ " " ]" . clickable              -- Visible but not current workspace
+              , ppHidden = xmobarColor "#82AAFF" "" . clickable -- Hidden workspaces
 --              , ppHiddenNoWindows = xmobarColor "#82AAFF" ""  . clickable     -- Hidden workspaces (no windows)
               , ppTitle = xmobarColor "#b3afc2" "" . shorten 60               -- Title of active window
               , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
@@ -87,9 +89,12 @@ main = do
       }
 
 	}
-myWorkspaces    = ["Main","Ftoroi","Tretii","P","F","N","M","8","9"]
+
+myWorkspaces    = ["Main","Ftoroi","Tretii","P","F","N","M","Y","G5","G4","G3","G2","G1"]
 
 ------------------------------------Key bindings--------------------------------
+
+
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 -- main keys
@@ -98,11 +103,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ,((modm                  ,xK_q       ), spawn "xmonad --recompile; xmonad --restart")
     ,((modm .|. mod1Mask     ,xK_l       ), spawn "xscreensaver-command -lock")--doesnt work
 
-    ,((modm .|. controlMask  ,xK_1       ), spawn "xrandr --output HDMI-0 --off --output DVI-D-0 --off")
-    ,((modm .|. controlMask  ,xK_2       ), spawn "xrandr --output DVI-D-0 --mode 1920x1080 --pos 4497x180 --rotate normal --output HDMI-0 --mode 1920x1080 --pos 0x246 --rotate normal --output DP-0 --primary --mode 2560x1440 --pos 1937x0 --rotate normal")
+    ,((mod1Mask, xK_Tab), nextMatch History (return True))
+    ,((mod1Mask .|. shiftMask , xK_Tab), nextMatch Backward (return True))
 
-    ,((modm .|. controlMask  ,xK_KP_Up ), spawn "pacmd set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo ")
-    ,((modm .|. controlMask  ,xK_KP_Home   ), spawn "pacmd set-default-sink alsa_output.usb-Kingston_HyperX_Virtual_Surround_Sound_00000000-00.analog-stereo")
     ]
     ++
 -- focus keys
@@ -130,11 +133,21 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ,((modm .|. controlMask              ,xK_p ), sendMessage Mag.MagnifyLess)
     ]
     ++
+--media keys (xev to find keycodes)
+    [
+     ((0     , 0x1008FF12       ), spawn "amixer set Master toggle"),--mute
+     ((0     , 0x1008FF11       ), spawn "vol -1000"),
+     ((0     , 0x1008FF13       ), spawn "vol +1000"),
+     ((0     , 0x1008FF17       ), spawn "~/.xmonad/scr/monitor.sh"), --audio next
+     ((0     , 0x1008FF16       ), spawn "~/.xmonad/scr/sound.sh "), --audio prev
+     ((0     , 0x1008FF14       ), spawn "~/.xmonad/scr/picom") --pause/play
+    ]
+    ++
 -- Workspaces
     [
     --mod-shift move window to workspace N
       ((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip myWorkspaces [xK_i,xK_o,xK_u,xK_p,xK_f,xK_n,xK_m]
+        | (i, k) <- zip myWorkspaces [xK_i,xK_o,xK_u,xK_p,xK_f,xK_n,xK_m,xK_y,xK_F1,xK_F2,xK_F3,xK_F4,xK_F5]
         , (f, m) <- [(W.view, 0), (W.shift, mod1Mask)]
     ]
     ++
@@ -162,11 +175,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ((mod1Mask    ,xK_KP_End  ), spawn "alacritty -e htop"),
       ((mod1Mask    ,xK_KP_Down ), spawn "alacritty -e mocp"),
       ((mod1Mask    ,xK_KP_Left ), spawn "alacritty -e vim ~/.xmonad/xmonad.hs"),
-      ((mod1Mask    ,xK_KP_Begin), spawn "alacritty -e vim ~/.config/xmobar/xb1"),
-      ((mod1Mask    ,xK_KP_Right), spawn "alacritty -e vim ~/.config/picom/picom.conf"),
+      ((mod1Mask    ,xK_KP_Begin), spawn "alacritty -e vim ~/.config/xmobar/xb0"),
+      ((mod1Mask    ,xK_KP_Right), spawn "alacritty -e vim ~/.config/xmobar/xmobarrc"),
+      
+      ((mod4Mask .|. shiftMask   ,xK_F4), spawn "mocp -G"),
+      ((mod4Mask .|. shiftMask   ,xK_6 ), spawn "mocp -f"),
 
-      ((modm .|. shiftMask, xK_s), spawn "flameshot gui"),
-      ((mod1Mask .|. controlMask, xK_d), spawn "discord") 
+      ((modm     .|. shiftMask   ,xK_s ), spawn "flameshot gui"),
+      ((mod1Mask .|. controlMask ,xK_d ), spawn "discord") 
+--gdu
+--deluge
+--
     ]
     ++
 --Scratchpads
@@ -179,7 +198,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ((modm                       ,xK_w      ), kill)
     --rofi
      ,((modm                       ,xK_r      ), spawn"rofi -modi drun,run -show drun -m -4 -show-icons")
-     ,((controlMask .|. shiftMask  ,xK_Escape ), spawn"rofi -modi drun,run -show drun -m -4 -show-icons -drun-categories powermenu")
+     ,((controlMask                ,xK_Escape ), spawn"rofi -modi drun,run -show drun -m -4 -theme ~/.config/rofi/powermenu/games -show-icons -drun-categories powermenu")
      ,((modm .|. shiftMask         ,xK_r      ), spawn "~/.config/rofi/gameLauncher/gl-wrapper.sh run")
 
     -- Resize viewed windows to the correct size
@@ -279,8 +298,9 @@ myEventHook = mempty
 -- Startup hook
 
 myStartupHook = do
-	spawnOnce "nitrogen --restore &"
+	spawnOnce "~/.fehbg"
 	spawnOnce "picom &"
+	spawnOnce "exec /usr/bin/trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x111111 --height 22 --monitor 2 &"
 
 ------------------------------------------------------------------------
 

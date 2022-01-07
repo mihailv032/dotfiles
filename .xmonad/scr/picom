@@ -1,0 +1,7 @@
+picom="`pgrep picom`"
+echo "$picom"
+if [ -z $picom]; then
+	picom &
+else
+	pgrep picom | xargs kill
+fi

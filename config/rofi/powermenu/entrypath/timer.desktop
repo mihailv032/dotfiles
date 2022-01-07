@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=timer
-Exec=/home/krug/.config/rofi/powermenu/powermenu.sh
-Icon=/home/krug/.config/rofi/powermenu/timer.jpg
-Terminal=false
-Type=Application
-Categories=powermenu;

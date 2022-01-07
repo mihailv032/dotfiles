@@ -20,7 +20,7 @@
     border-radius: 3;
     border-color: @bordercolor;	
     padding:          10;
-	width: 	800px;
+	width: 	900px;
 }
 #mainbox {
     border:  0;

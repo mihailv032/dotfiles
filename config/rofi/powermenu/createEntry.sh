@@ -8,7 +8,7 @@ cat <<EOF
 [Desktop Entry]
 Name=$1
 Exec=$2
-Icon=$currentdir/$1.jpg
+Icon=$currentdir/$1.png
 Terminal=false
 Type=Application
 Categories=powermenu;
@@ -18,7 +18,7 @@ EOF
 entry Poweroff "systemctl poweroff" > $entrypath/poweroff.desktop
 entry Reboot "systemctl reboot" > $entrypath/reboot.desktop
 entry Sleep "systemctl suspend" > $entrypath/sleep.desktop
-entry Logout > $entrypath/logout.desktop
+entry Logout "pkill -u $USER"> $entrypath/logout.desktop
 entry Timer "shutdown -P 100" > $entrypath/timer.desktop
 entry Lock > $entrypath/lock.desktop
 

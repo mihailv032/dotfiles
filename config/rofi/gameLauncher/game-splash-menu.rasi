@@ -1,4 +1,5 @@
-@import "launcher"
+@import "colors"
+
 
 
 window {
@@ -88,7 +89,7 @@ element {
 }
 
 element selected {
-    background-color:               @primary;
+    background-color:               #c00dd5;
     border-radius:                  16px;
 }
 

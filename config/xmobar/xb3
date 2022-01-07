@@ -1,5 +1,5 @@
 Config { font            = "xft:Canerell:weight=Bold:pixelsize=12:antialias=true:hinting=true"
-       , additionalFonts = [ "xft:Mononoki Nerd Font:pixelsize=16:anialias=true:hinting=true"
+       , additionalFonts = [ "xft:Mononoki:pixelsize=14:antialias=true:hinting=true"
                            , "xft:Font Awesome 5 Free Solid:pixelsize=12"
                            , "xft:Font Awesome 5 Brands:pixelsize=12"
                            ]
@@ -13,20 +13,21 @@ Config { font            = "xft:Canerell:weight=Bold:pixelsize=12:antialias=true
        , persistent   = True
        , iconRoot     = ".config/xmobar/icons"
        , commands = [
-                      Run Com "echo" ["<fn=3>\xf17c</fn>"] "linux" 3600
+                      Run Com "echo" ["<fn=3>\xf17c</fn>"] "penguin" 3600
                     , Run Com "uname" ["-r"] "kernel" 36000
-                    , Run Com "echo" ["<fn=2>\xf0aa</fn>"] "uparrow" 3600
-					, Run Com "echo" ["<fn=1> </fn>"] "powermenu"360000000000 
+                    , Run Uptime ["-t", "uptime: <days>d <hours>h"] 360
+                    , Run Com ".local/bin/pacupdate" [] "pacupdate" 36000
                     , Run Date "<fn=1> </fn>  %b %d %Y - (%H:%M) " "date" 50
                     , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <fc=#51afef>      %linux% %kernel% </fc> \
+       , template = " <fc=#51afef> %penguin% %kernel% </fc> \
 	\} \
 	\ %UnsafeStdinReader% \
+	\ %date%\
 	\{ \
-	\ %date% \
-	\ <action=`rofi -modi drun,run -show drun -m -4 -theme ~/.config/rofi/powermenu/games -show-icons -drun-categories powermenu`><fc=#e60053>%powermenu%</fc></action> "
+	\ <fc=#98be65>%uparrow%  <action=`alacritty -e htop`>%uptime%</action></fc> \
+	\ "
 }
 

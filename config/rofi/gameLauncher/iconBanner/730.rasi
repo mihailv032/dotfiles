@@ -1,0 +1,18 @@
+@import "../launcher"
+@import "../game-splash-menu.rasi"
+window {
+	height: 360;
+	background-image: url("/home/krug/.cache/rofi-game-launcher/banners/730/2560x360.tiff");
+}
+
+icon-banner {
+    filename:                       "/home/krug/.cache/rofi-game-launcher/banners/730/2560x360.tiff";
+    expand:                         false;
+}
+icon-title {
+    expand:                         false;
+    filename:                       "/home/krug/.local/share/Steam/appcache/librarycache/730_logo.png";
+	vertical-align:					0.5;
+    size:                           600;
+}
+

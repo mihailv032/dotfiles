@@ -32,7 +32,7 @@ cat <<EOF
 @import "../launcher"
 @import "../game-splash-menu.rasi"
 window {
-	height: 460;
+	height: 360;
 	background-image: url("$1");
 }
 
@@ -92,7 +92,7 @@ get-display-width() {
 }
 
 width="$(get-display-width)"
-height=460 # This should match height in game-splash-menu.sh the rasiFile funciton description
+height=360 # This should match height in game-splash-menu.sh the rasiFile funciton description
 
 #dir where all the entries will be stored
 mkdir -p "$ENTRIES" 

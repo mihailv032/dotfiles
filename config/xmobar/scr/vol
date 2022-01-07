@@ -1,0 +1,35 @@
+#!/bin/bash
+
+function running_sinks {
+  pactl list sinks short | grep RUNNING | cut -f1
+}
+
+function default_sink {
+  name=$(pacmd stat | grep 'Default sink name:' | awk -F ': *' '{ print $2 }')
+  pactl list sinks short | fgrep "$name" | cut -f1
+}
+
+function current_volume {
+  pulsemixer --get-volume | cut -f1 -d' '
+}
+
+function change_volumes {
+  local sinks="$1"
+  for sink in $sinks; do
+    pactl set-sink-volume "$sink" $change
+  done
+}
+
+sinks=$(running_sinks)
+if [ -z "$sinks" ]; then
+  sinks=$(default_sink)
+fi
+
+change=$1
+cmd=${0##*/}
+
+if  [ $change ] ; then
+  change_volumes "$sinks"
+fi
+current_volume "$sink"
+

@@ -1,10 +1,10 @@
 @import "colors.rasi"
 
 window {
-    height:                         240;
-    width:                          100%;
-    location:                       south;
-    anchor:                         south;
+    height:                         140;
+    width:                          1000px;
+    location:                       center;
+    anchor:                         center;
 	/*background-color: @background-color*/
     transparency:                   "real";
     background-color:             	#181B28;
@@ -30,21 +30,22 @@ inputbar-box {
 
 inputbar {
     children:                       [textbox-prompt, entry];
-    margin:                         12px 0px 10px 0px;
+    margin:                         0px;
+	width: 0px;
+	height: 0px;
     background-color:               #181B28;
-    border:                         7px;
     border-color:                   #181B28;
+	color: #000000;
     border-radius:                  0px;
 }
 
 textbox-prompt {
+    margin:                         0px;
+	width: 0px;
+	height: 0px;
     font:                           "Font Awesome 18";
-    text-color:                     @background;
-    padding:                        0px 4px 0px 2px;
-    horizontal-align:               0.5;
-    vertical-align:                 0.5;
-    str:                            "";
-    expand:                         false;
+	color: #000000;
+    padding:                        0px;
 }
 
 entry {
@@ -61,7 +62,7 @@ entry {
 
 element {
     children:                       [dummy, element-box, dummy];
-    padding:                        0px;
+    padding:                        10px;
     orientation:                    horizontal;
     border:                         0;
     border-color:                   transparent;
@@ -77,7 +78,7 @@ element-icon {
     padding:                        8px;
     border:                         4px;
     border-color:                   transparent;
-    border-radius:                  8;
+    border-radius:                  10;
     size:                           96;
 }
 

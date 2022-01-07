@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=off
-Exec=/home/krug/.config/rofi/powermenu/powermenu.sh off
-Icon=/home/krug/.config/rofi/powermenu/off.jpg
-Terminal=false
-Type=Application
-Categories=powermenu;
