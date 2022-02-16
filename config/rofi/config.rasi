@@ -16,10 +16,10 @@
 
 #window {
     background-color: #1A1D2B;
-    border:           1;
-    border-radius: 3;
+    border:           0;
+    border-radius: 20;
     border-color: @bordercolor;	
-    padding:          10;
+    padding:          19px;
 	width: 	900px;
 }
 #mainbox {
@@ -40,12 +40,12 @@
     border-color: @bordercolor;
     spacing:      2px ;
     scrollbar:    false;
-    padding:      10px 0px 0px ;
+    padding:      20px 0px 0px ;
 	lines:		  8;
 }
 #element {
     border:  0;
-    padding: 10px ;
+    padding: 10px 30px 10px ;
 }
 #element.normal.normal {
     background-color: #1A1D2B;
@@ -98,6 +98,7 @@
     text-color:       @foreground;
 }
 #inputbar {
+	text-color: #000000;
     spacing:    0;
     text-color: @foreground;
     padding:    1px ;
@@ -113,6 +114,7 @@
 #prompt {
     spacing:    0;
     text-color: @foreground;
+	font-size: 30px;
 }
 #inputbar {
     children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];

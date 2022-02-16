@@ -1,42 +1,50 @@
 
 ----------------------------------------Imports------------------------------------
+
 import XMonad
 import System.Exit
 import System.IO
 import System.Process
 
-import qualified XMonad.StackSet as W
+import qualified XMonad.StackSet as W --
 import qualified Data.Map        as M
 import Data.Monoid
 import Data.Maybe (fromJust)
 
 
 --import XMonad.Hooks.ManageDocks --to show the workspaceo on xmobar
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.StatusBar
-import XMonad.Hooks.StatusBar.PP
+import XMonad.Hooks.DynamicLog 
+import XMonad.Hooks.StatusBar --xmobar
+import XMonad.Hooks.StatusBar.PP --log to xmobar
 import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks, ToggleStruts(..))
+import XMonad.Hooks.UrgencyHook --notification
+import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks, ToggleStruts(..)) --
 
 
-import XMonad.Util.NamedScratchpad
-import XMonad.Util.EZConfig(additionalKeys)
-import XMonad.Util.Ungrab
-import XMonad.Util.Run
+import XMonad.Util.NamedScratchpad --scractchpad
+import XMonad.Util.EZConfig(additionalKeys) --kb
+import XMonad.Util.Ungrab 
+import XMonad.Util.Run --notification
+import XMonad.Util.NamedWindows --notification
 import XMonad.Util.SpawnOnce --for startup
 --import XMonad.Util.ClickableWorkspaces 
 
 import XMonad.Layout.Reflect --to spawn windows on the right side 
 import XMonad.Layout.Spacing --gaps
+--import XMonad.Layout.LayoutBuilder
+--import XMonad.Layout.Tabbed
+import XMonad.Layout.Spiral
 --import XMonad.Layout.MultiToggle
 --import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.ToggleLayouts --toggle fullscreen
 import XMonad.Layout.NoBorders --full screen no borders 
-import XMonad.Layout.ShowWName
-import qualified XMonad.Layout.Magnifier as Mag
+import XMonad.Layout.ShowWName --
+import XMonad.Layout.IndependentScreens
+import qualified XMonad.Layout.Magnifier as Mag --magnifier
 
-import XMonad.Actions.GroupNavigation
-
+import XMonad.Actions.GroupNavigation --
+--import XMonad.Actions.Warp
+import XMonad.Actions.UpdatePointer --for pointer to follow focus
 
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
@@ -53,8 +61,8 @@ main = do
   xmproc1 <- spawnPipe "xmobar -x 1 $HOME/.config/xmobar/xb3"
   xmproc2 <- spawnPipe "xmobar -x 2 $HOME/.config/xmobar/xmobarrc"
   xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/xb0"
-  xmonad $ ewmh def {
-        terminal           = "alacritty",
+  xmonad $ withUrgencyHook LibNotifyUrgencyHook $ ewmh def {
+        terminal           = "alacritty -t Terminal",
         focusFollowsMouse  = False, -- Whether focus follows the mouse pointer.
         clickJustFocuses   = False,-- Whether clicking on a window to focus also passes the click to the window
         borderWidth        = 2,
@@ -74,23 +82,37 @@ main = do
         handleEventHook    = myEventHook,
         startupHook        = myStartupHook ,
         logHook            = dynamicLogWithPP xmobarPP 
-        { ppOutput = \x -> hPutStrLn xmproc0 x                          -- xmobar on monitor 1
-                              >> hPutStrLn xmproc1 x                          -- xmobar on monitor 2
-                              >> hPutStrLn xmproc2 x                          -- xmobar on monitor 3
-              , ppCurrent = xmobarColor "#c792ea" "" . wrap "<box type=Bottom width=2 mt=2 color=#c792ea>[ " " ]</box>"         -- Current workspace
-              , ppVisible = xmobarColor "#c792ea" "" . wrap "[ " " ]" . clickable              -- Visible but not current workspace
-              , ppHidden = xmobarColor "#82AAFF" "" . clickable -- Hidden workspaces
+                          { 
+                              ppOutput = \x -> hPutStrLn xmproc0 x -- xmobar on monitor 1
+                                            >> hPutStrLn xmproc1 x -- xmobar on monitor 2
+                                            >> hPutStrLn xmproc2 x -- xmobar on monitor 3
+                            , ppCurrent = xmobarColor "#c792ea" "" . wrap "<box type=Bottom width=2 mt=2 color=#c792ea>[ " " ]</box>" -- Current workspace
+                            , ppVisible = xmobarColor "#c792ea" "" . wrap "[ " " ]" . clickable              -- Visible but not current workspace
+                            , ppHidden = xmobarColor "#82AAFF" "" . clickable -- Hidden workspaces
 --              , ppHiddenNoWindows = xmobarColor "#82AAFF" ""  . clickable     -- Hidden workspaces (no windows)
-              , ppTitle = xmobarColor "#b3afc2" "" . shorten 60               -- Title of active window
-              , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
-              , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"            -- Urgent workspace
-              , ppExtras  = [windowCount]                                     -- # of windows current workspace
-              , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]                    -- order of things in xmobar
-      }
+                            , ppTitle = xmobarColor "#b3afc2" "" . shorten 60               -- Title of active window
+                            , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
+                            , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"            -- Urgent workspace
+                            , ppExtras  = [windowCount]                                     -- # of windows current workspace
+                            , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]                    -- order of things in xmobar
+                           } >> updatePointer(0.25,0.25) (0.25,0.25)
 
-	}
+    }
 
-myWorkspaces    = ["Main","Ftoroi","Tretii","P","F","N","M","Y","G5","G4","G3","G2","G1"]
+
+
+
+myWorkspaces = ["M-Main","M-Pravii","M-Levii","P-Levii","P-Main","P-Pravii","Gm-Levii","Gm-Main","Gm-Pravii","G5","G4","G3","b","G1"]
+--myWorkspaces = withScreen 2 ["M-Ftoroi","P-Ftorvoi"]
+---------------------------notificatinos-----------------------------
+data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
+
+instance UrgencyHook LibNotifyUrgencyHook where
+    urgencyHook LibNotifyUrgencyHook w = do
+        name     <- getName w
+        Just idx <- fmap (W.findTag w) $ gets windowset
+
+        safeSpawn "notify-send" [show name, "workspace " ++ idx]
 
 ------------------------------------Key bindings--------------------------------
 
@@ -108,6 +130,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     ]
     ++
+    [
+      ((modm .|. shiftMask, xK_t), spawn "lutris")
+    ]
+    ++
 -- focus keys
     [
       ((modm                             ,xK_j     ), windows W.focusUp),
@@ -123,10 +149,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 --Layouts
     [
      ((modm                              ,xK_Tab ), sendMessage NextLayout)
+    ,((modm .|. shiftMask                ,xK_Tab ), setLayout $ XMonad.layoutHook conf)
 
     ,((mod1Mask .|. controlMask          ,xK_f), sendMessage (Toggle "Full"))
 
-    ,((modm .|. shiftMask                ,xK_Tab ), setLayout $ XMonad.layoutHook conf)
     ,((modm .|. mod1Mask                 ,xK_t ), withFocused $ windows . W.sink)
 
     ,((modm .|. controlMask              ,xK_bracketleft ), sendMessage Mag.MagnifyMore)
@@ -145,15 +171,15 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ++
 -- Workspaces
     [
-    --mod-shift move window to workspace N
-      ((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip myWorkspaces [xK_i,xK_o,xK_u,xK_p,xK_f,xK_n,xK_m,xK_y,xK_F1,xK_F2,xK_F3,xK_F4,xK_F5]
+      ((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+        | (key, sc) <- zip [xK_a, xK_s, xK_d] [2,0,1]
         , (f, m) <- [(W.view, 0), (W.shift, mod1Mask)]
     ]
     ++
     [
-      ((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_s, xK_d, xK_a] [0..]
+    --mod-shift move window to workspace N
+      ((m .|. modm, k), windows $ f i)
+        | (i, k) <- zip myWorkspaces [xK_i,xK_o,xK_u,xK_b,xK_n,xK_m,xK_z,xK_x,xK_c,xK_F1,xK_F2,xK_F3,xK_f,xK_p]
         , (f, m) <- [(W.view, 0), (W.shift, mod1Mask)]
     ]
     ++
@@ -170,7 +196,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ((mod1Mask    ,xK_p       ), spawn "code"),
       ((mod1Mask    ,xK_o       ), spawn "fluent-reader"),
       ((mod1Mask    ,xK_l       ), spawn "lutris"),
-	  ((controlMask	,xK_q		), spawn "qutebrowser"),
+      ((controlMask ,xK_q       ), spawn "qutebrowser"),
 
       ((mod1Mask    ,xK_KP_End  ), spawn "alacritty -e htop"),
       ((mod1Mask    ,xK_KP_Down ), spawn "alacritty -e mocp"),
@@ -190,7 +216,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ++
 --Scratchpads
     [
-      ((modm .|. mod1Mask, xK_x), namedScratchpadAction myScratchpads "terminal")
+      ((modm .|. mod1Mask, xK_x), namedScratchpadAction myScratchpads "moc")
     ]
     ++
 --misc
@@ -239,16 +265,17 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -------------------------------------------------------------------------
 myShowWNameTheme :: SWNConfig
 myShowWNameTheme = def
-    { swn_font              = "xft:Ubuntu:bold:size=60"
-    , swn_fade              = 1.0
+    { swn_font              = "xft:Ubuntu:bold:size=50"
+    , swn_fade              = 0.5
     , swn_bgcolor           = "#1c1f24"
     , swn_color             = "#ffffff"
     }
 
 --------------------------------Layouts-----------------------------------
 
+myLayout = toggleLayouts full (tiled ||| spiral(6/7) ||| Mag.magnifier (Tall 1 (3/100) (1/2)) ||| Mirror tiled ||| noBorders full )
 
-myLayout = toggleLayouts full (tiled ||| Mag.magnifier (Tall 1 (3/100) (1/2)) ||| Mirror tiled ||| noBorders full )
+
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -292,13 +319,15 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
---myLogHook = return ()
+--myLogHook =
+
 
 ------------------------------------------------------------------------
 -- Startup hook
 
 myStartupHook = do
-	spawnOnce "~/.fehbg"
+	spawnOnce "~/.xmonad/.fehbg"
+	spawnOnce "dunst &"
 	spawnOnce "picom &"
 	spawnOnce "exec /usr/bin/trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x111111 --height 22 --monitor 2 &"
 

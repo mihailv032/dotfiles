@@ -2,14 +2,17 @@
 # ~/.bashrc
 
 #adding new path to the $PATH
-export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin/:$HOME/.local/share/gem/ruby/3.0.0/bin
+export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin/:$HOME/.local/share/gem/ruby/3.0.0/bin:/home/krug/Android/Sdk/platform-tools:/etc/profile
+export ANDROID_SDK=/home/krug/Android/Sdk
+export REACT_EDITOR=emacs
 export BROWSER=/usr/bin/chromium
 export HISTCONTROL=ignoreboth 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias la='colorls -A | lolcat'
-alias ll='colorls -l | lolcat'
+alias la='colorls -A  | lolcat'
+alias ll='colorls -l  | lolcat'
+alias lal='colorls -la | lolcat'
 alias ls='colorls --sd | lolcat'
 alias r='ranger | lolcat'
 alias q='exit'
@@ -27,7 +30,7 @@ alias gpr='cd ~/prog/react'
 alias gpj='cd ~/prog/js'
 alias gpp='cd ~/prog/pas'
 alias gpv='cd ~/prog/verstka'
-alias gpb='cd ~/prog/bash'
+alias gpa='cd ~/prog/assembly'
 
 #main dirs 
 alias gd='cd ~/Downloads'

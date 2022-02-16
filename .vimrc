@@ -3,8 +3,6 @@ set history=1000
 " makes tab to be 4 spaces 
 set ts=4 sw=4
 
-
-
 " general 
 set number             " line numbers
 set ruler              " show the cursor position all the time

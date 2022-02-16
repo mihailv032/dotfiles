@@ -62,8 +62,29 @@ vm() {
 }
 
 config() {
-  cd /tmp && git clone https://github.com/mishgun032/dotfiles.git && cd dotfiles
-  mkdir $HOME/prog/
+	cd $(dirname $(realpath $0))
+	dir=$(dirname $(realpath $0))
+#	ln -sf $dir/.bashrc ~/.bashrc
+#	ln -sf $dir/.vimrc ~/.vimrc
+#	ln -sf $dir/.bash_prompt ~/.bash_prompt
+#	ln -sf $dir/.xmonad/xmonad.hs ~/.xmonad/xmonad.hs
+#	ln -sf $dir/config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+#	ln -sf $dir/config/picom/picom.conf ~/.config/picom/picom.conf
+#	ln -sf $dir/config/neofetch/config.conf ~/.config/neofetch/config.conf
+#	ln -sf $dir/config/rofi/config.rasi ~/.config/rofi/config.rasi
+#	ln -sf $dir/config/xmobar/xb0 ~/.config/xmobar/xb0
+#	ln -sf $dir/config/xmobar/xmobarrc ~/.config/xmobar/xmobarrc
+#	ln -sf $dir/config/xmobar/xb3 ~/.config/xmobar/xb3
+
+	ln -nsf $dir/.xmonad/scr/ ~/.xmonad/scr/
+#	ln -nsf $dir/config/colorls ~/.config/colorls
+#	ln -nsf $dir/config/polybar ~/.config/polybar
+#	ln -nsf $dir/config/ranger ~/.config/ranger
+#	ln -nsf $dir/config/xmobar/scr ~/.config/xmobar/scr
+#	ln -nsf $dir/config/rofi/powermenu ~/.config/rofi/powermenu
+#	ln -nsf $dir/config/rofi/gameLauncher ~/.config/rofi/gameLauncher
+#	ln -nsf $dir/config/i3 ~/.config/i3
+		
   #setting default file manager 
 #  xdg-mime default thunar.desktop inode/directory
 
