@@ -12,39 +12,34 @@ import Data.Monoid
 import Data.Maybe (fromJust)
 import Data.Semigroup
 
-
-import XMonad.Hooks.ManageDocks 
-import XMonad.Hooks.DynamicLog 
+import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks, docks )
+import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
 import XMonad.Hooks.DynamicProperty
 import XMonad.Hooks.StatusBar --xmobar
 import XMonad.Hooks.StatusBar.PP --log to xmobar
-import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.EwmhDesktops --
 import XMonad.Hooks.UrgencyHook --notification
-import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks, ToggleStruts(..)) --
-
 
 import XMonad.Util.NamedScratchpad --scractchpad
-import XMonad.Util.EZConfig
-import XMonad.Util.Ungrab 
-import XMonad.Util.Run --notification
+import XMonad.Util.EZConfig (additionalKeysP)
+import XMonad.Util.Run (safeSpawn, spawnPipe) -- runProcessWithInput
 import XMonad.Util.NamedWindows --notification
 import XMonad.Util.SpawnOnce --for startup
 --import XMonad.Util.ClickableWorkspaces 
 
-
 import XMonad.Layout.Reflect --to spawn windows on the right side 
-import XMonad.Layout.Spacing --gaps
+import XMonad.Layout.Spacing --(spacingRaw,Spacing,Border,SpacingModifier,SpacingModifier,spacing) --gaps
+import XMonad.Layout.Gaps
 --import XMonad.Layout.LayoutBuilder
 --import XMonad.Layout.Tabbed
 import XMonad.Layout.Spiral
 --import XMonad.Layout.MultiToggle
 --import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.ToggleLayouts --toggle fullscreen
-import XMonad.Layout.NoBorders --full screen no borders 
+import XMonad.Layout.NoBorders (noBorders) --full screen no borders 
 import XMonad.Layout.ShowWName --
 --import XMonad.Layout.IndependentScreens
 import qualified XMonad.Layout.Magnifier as Mag --magnifier
-
 
 import XMonad.Actions.DynamicWorkspaceGroups
 --import XMonad.Actions.Warp
@@ -63,7 +58,17 @@ clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
 --toggleStrustKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
 
-myWorkspaces = ["M-Main","P-Main","L-Main","L-Programming","M-Programming","P-Programming","L-Gayming","M-Gayming","P-Gayming","G5","G4","G3","Filimi","Y","Procee"]
+myWorkspaces = [
+                 "M-Main","P-Main","L-Main",
+                 "L-Programming","M-Programming","P-Programming",
+                 "L-Gayming","M-Gayming","P-Gayming",
+                 "M-G5","M-G4","M-G3",
+                 "Filimi",
+                 "Y",
+                 "Procee",
+                 "P-G3","L-G3",
+                 "P-G4","L-G4",
+                 "P-G5","L-G5" ]
 
 
 ------------------------------------Key bindings--------------------------------
@@ -85,8 +90,15 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
     ++
     [
+     ((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+        | (key, sc) <- zip [xK_F4, xK_F1, xK_F2] [2,0,1]
+        , (f, m) <- [(W.greedyView, 0), (W.shift, mod1Mask)]
+
+    ]
+    ++
+    [
       ((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip myWorkspaces [xK_i,xK_u,xK_o,xK_b,xK_n,xK_m,xK_z,xK_x,xK_c,xK_F1,xK_F2,xK_F3,xK_f,xK_y,xK_p]
+        | (i, k) <- zip myWorkspaces [xK_i,xK_o,xK_u,xK_b,xK_n,xK_m,xK_z,xK_x,xK_c,xK_F5,xK_F4,xK_F6,xK_f,xK_y,xK_p]
         , (f, m) <- [(W.greedyView, 0), (W.shift, mod1Mask)]
     ]
     ++
@@ -94,7 +106,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [
       ((modm    ,xK_1), viewWSGroup "Main"),
       ((modm    ,xK_2), viewWSGroup "Prog"),
-      ((modm    ,xK_3), viewWSGroup "Games")
+      ((modm    ,xK_3), viewWSGroup "Games"),
+      ((modm    ,xK_F3), viewWSGroup "G3"),
+      ((modm    ,xK_F2), viewWSGroup "G4"),
+      ((modm    ,xK_F1), viewWSGroup "G5")
     ]
     ++
 --media keys (xev to find keycodes)
@@ -218,7 +233,7 @@ myShowWNameTheme = def
     , swn_color             = "#ffffff"
     }
 
----------------------------notificatinos-----------------------------
+--------------------------- notificatinos -----------------------------
 
 data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
 
@@ -231,25 +246,15 @@ instance UrgencyHook LibNotifyUrgencyHook where
 
 --------------------------------Layouts-----------------------------------
 
-myLayout = toggleLayouts full (tiled ||| spiral(6/7) ||| Mag.magnifier (Tall 1 (3/100) (1/2)) ||| Mirror tiled ||| noBorders full )
-
-
+myLayout = reflectHoriz $ toggleLayouts monocle $ avoidStruts $ spir ||| tiled ||| magnifier ||| Mirror tiled ||| full ||| monocle
   where
-     -- default tiling algorithm partitions the screen into two panes
-     tiled   = Tall nmaster delta ratio
-
-     --
-     full = noBorders Full
-     -- The default number of windows in the master pane
-     nmaster = 1
-
-     -- Default proportion of screen occupied by master pane
-     ratio   = 4/7
-
-     -- Percent of screen to increment by when resizing panes
-     delta   = 3/100
-
----------------------------------Window rules-----------------------------
+     tiled     = gaps [(U,7),(R,10),(L,15),(D,5) ] $ Tall 1 (3/100) (4/7) 
+     full      = noBorders Full
+     monocle   = gaps [(U,30),(R,0),(L,0),(D,0) ] $ noBorders Full
+     magnifier = Mag.magnifier ( Tall 1 (3/100) (1/2) )
+     spir      = gaps [(U,7),(R,17),(L,10),(D,5) ] $ spiral (5/7) 
+     
+--------------------------------- Window rules -----------------------------
 
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
@@ -258,19 +263,22 @@ myManageHook = composeAll
     , resource  =? "desktop_window" --> doIgnore 
     , resource  =? "kdesktop"       --> doIgnore ]
 
------------------------------------Startup hook-------------------------
+----------------------------------- Startup hook ------------------------
 
 myEventHook :: Event -> X All
 myEventHook = dynamicPropertyChange "WM_NAME" (title =? "alacritty" --> floating)
         where floating = customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)
 
-------------------------------------------------------------------------
+-------------------------------------------------------------------------
 
 myStartupHook :: X ()
 myStartupHook = do
-    addRawWSGroup "Main"  [ (S 2,"L-Main"),          (S 1,"P-Main"),          (S 0, "M-Main"  )      ]
-    addRawWSGroup "Prog"  [ (S 2, "L-Programming" ), (S 1,"P-Programming"),   (S 0,"M-Programming")  ] 
-    addRawWSGroup "Games" [ (S 2, "L-Gayming"),      (S 1,"P-Gayming"),       (S 0,"M-Gayming")      ] 
+    addRawWSGroup "Main"  [ (S 2, "L-Main"        ), (S 1,"P-Main"        ), (S 0, "M-Main"  )      ]
+    addRawWSGroup "Prog"  [ (S 2, "L-Programming" ), (S 1,"P-Programming" ), (S 0,"M-Programming")  ] 
+    addRawWSGroup "Games" [ (S 2, "L-Gayming"     ), (S 1,"P-Gayming"     ), (S 0,"M-Gayming")      ] 
+    addRawWSGroup "G3"    [ (S 2, "L-G3"          ), (S 1,"P-G3"          ), (S 0,"M-G3")           ] 
+    addRawWSGroup "G4"    [ (S 2, "L-G4"          ), (S 1,"P-G4"          ), (S 0,"M-G4")           ] 
+    addRawWSGroup "G5"    [ (S 2, "L-G5"          ), (S 1,"P-G5"          ), (S 0,"M-G5")           ] 
     spawnOnce "dunst &"
     spawnOnce "~/.xmonad/.fehbg"
     spawnOnce "picom &"
@@ -293,7 +301,7 @@ xpconfig = def
 
 myScratchpads = [
         NS "terminal" execTerm findTerm manageTerm
-	   ,NS "moc"	  execMoc  findMoc manageMoc
+       ,NS "moc"      execMoc  findMoc manageMoc
 	]
   where
   execTerm = "st" ++ " -n scratchpad" 
@@ -308,18 +316,18 @@ myScratchpads = [
 		t = 0.0
 		l = 0.25
 
---------------------------------------Main-------------------------------
+-------------------------------------- Main -------------------------------
 
 main :: IO ()
 main = do
   xmproc1 <- spawnPipe "xmobar -x 1 $HOME/.config/xmobar/xb3"
   xmproc2 <- spawnPipe "xmobar -x 2 $HOME/.config/xmobar/xmobarrc"
   xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/xb0"
-  xmonad $ docks $ withUrgencyHook LibNotifyUrgencyHook $ ewmh def {
+  xmonad $ docks $ ewmhFullscreen . ewmh $ withUrgencyHook LibNotifyUrgencyHook $ ewmh def {
         terminal           = "alacritty -t Terminal",
         focusFollowsMouse  = False, -- Whether focus follows the mouse pointer.
         clickJustFocuses   = False,-- Whether clicking on a window to focus also passes the click to the window
-        borderWidth        = 2,
+        borderWidth        = 0,
         modMask            = mod4Mask,
         workspaces         = myWorkspaces,
         normalBorderColor  = "#dddddd",
@@ -330,10 +338,10 @@ main = do
         mouseBindings      = myMouseBindings,
 
         --hooks, layouts
-        layoutHook         = showWName' myShowWNameTheme $ spacingRaw True (Border 33 3 5 10) True (Border 3 3 5 5) True $ reflectHoriz $ myLayout,
+        layoutHook         = showWName' myShowWNameTheme $ spacingRaw True (Border 0 0 0 0) True (Border 5 5 5 5) True $ myLayout,
         manageHook         = manageDocks <+> myManageHook,
         handleEventHook    = myEventHook,
-        startupHook        = myStartupHook ,
+        startupHook        = myStartupHook,
         logHook            = dynamicLogWithPP xmobarPP 
                           { 
                               ppOutput = \x -> hPutStrLn xmproc0 x -- xmobar on monitor 1
