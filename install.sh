@@ -18,8 +18,8 @@ system() {
 
 full() {
   sudo pacman -Syu
-  sudo pacman -S i3-gaps imagemagick xorg-xrandr deluge deluge-gtk xorg-xmodmap\
-  steam ttf-liberation gcolor2 picom code lutris wine-staging winetricks sddm xmonad qtile openbox i3-wm \
+  sudo pacman -S imagemagick xorg-xrandr deluge deluge-gtk xorg-xmodmap\
+  steam ttf-liberation terminus-font ttf-dejavu gcolor2 picom code lutris wine-staging winetricks sddm xmonad openbox  \
   rofi audacity figma-linux gimp gnome-system-monitor android-file-transfer nitrogen neofetch \
   nodejs node-gyp npm
   basePkg

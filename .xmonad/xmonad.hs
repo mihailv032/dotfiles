@@ -114,8 +114,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ++
 --media keys (xev to find keycodes)
     [
-      ((0     , 0x1008FF11       ), spawn "vol -1000"),
-      ((0     , 0x1008FF13       ), spawn "vol +1000"),
+      ((0     , 0x1008FF11       ), spawn "pactl set-sink-volume @DEFAULT_SINK@ -1.5%"),
+      ((0     , 0x1008FF13       ), spawn "pactl set-sink-volume @DEFAULT_SINK@ +1.5%"),
       ((0     , 0x1008FF12       ), spawn "amixer set Master toggle"),--mute
       ((0     , 0x1008FF17       ), spawn "~/.xmonad/scr/monitor.sh"),--audio next
       ((0     , 0x1008FF16       ), spawn "~/.xmonad/scr/sound.sh "), --audio prev
@@ -279,6 +279,7 @@ myStartupHook = do
     addRawWSGroup "G3"    [ (S 2, "L-G3"          ), (S 1,"P-G3"          ), (S 0,"M-G3")           ] 
     addRawWSGroup "G4"    [ (S 2, "L-G4"          ), (S 1,"P-G4"          ), (S 0,"M-G4")           ] 
     addRawWSGroup "G5"    [ (S 2, "L-G5"          ), (S 1,"P-G5"          ), (S 0,"M-G5")           ] 
+    spawnOnce "copyq &"
     spawnOnce "dunst &"
     spawnOnce "~/.xmonad/.fehbg"
     spawnOnce "picom &"

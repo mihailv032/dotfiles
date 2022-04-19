@@ -17,7 +17,7 @@ Config {
 	  , Run Memory ["-t", "<fn=2>\xf0aa </fn> Mem: <usedratio>%"] 10
 	  , Run Swap [] 10
 	  , Run Locks 
-	  , Run DiskU [("/", "<fn=2>\xf0c7 </fn> Root: <free> free ")] [] 36000
+	  , Run DiskU [("/", "<fn=1> </fn> Root: <free> free ")] [] 36000
 --	  , Run Kbd [("us","ru"), ("us","ru")] 
       , Run Uptime ["-t", " <fn=1>羽 </fn> <days>D <hours>H <minutes>M "] 10
 	  , Run Cpu ["-t", "<fn=1> </fn> CPU : <total>% "] 10
