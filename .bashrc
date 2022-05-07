@@ -2,8 +2,8 @@
 # ~/.bashrc
 
 #adding new path to the $PATH
-export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin/:$HOME/.local/share/gem/ruby/3.0.0/bin:/home/krug/Android/Sdk/platform-tools:/etc/profile
-export ANDROID_SDK=/home/krug/Android/Sdk
+export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin/:$HOME/.local/share/gem/ruby/3.0.0/bin:$HOME/Android/Sdk/platform-tools:$HOME/Android/Sdk/emulator:/etc/profile
+export ANDROID_SDK=$HOME/Android/Sdk
 export REACT_EDITOR=emacs
 export BROWSER=/usr/bin/chromium
 export HISTCONTROL=ignoreboth 
@@ -50,7 +50,7 @@ source $(dirname $(gem which colorls))/tab_complete.sh
 
 #changing the default prompt
 #syntax: \[\e[#;#m\]
-PS1="\[\e[2;31m\]\u \[\e[0;1;31m\]\W\[\e[0;32m\] \[\e[0;] "
+PS1="\[\e[2;31m\]\u \[\e[0;1;31m\] \W\[\e[0;32m\]  \[\e[0;]"
 #starship prompt
 # 
 

@@ -48,7 +48,7 @@ yayInstall() {
 }
 
 aur() {
-  yay -S scrot siji-git ttf-font-awesome polybar fluent-reader soundux rar gdu c-lolcat 
+  yay -S scrot siji-git android-studio ttf-font-awesome polybar fluent-reader soundux rar gdu c-lolcat 
 }
 
 wine() {
@@ -113,8 +113,8 @@ config() {
 
   #monitor & keyboard settings 
 #  sudo cp xorg/* /etc/X11/xorg.conf.d/
-  sudo ln -nsf $dir/xorg/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf
-  sudo ln -nsf $dir/xorg/10-monitor.conf /etc/X11/xorg.conf.d/10-monitor.conf
+  sudo cp xorg/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf
+  sudo cp xorg/10-monitor.conf /etc/X11/xorg.conf.d/10-monitor.conf
 
   #config files 
 #  cp -r config/* $HOME/.config/
