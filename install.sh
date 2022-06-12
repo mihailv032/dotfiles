@@ -94,6 +94,7 @@ config() {
 	ln -sf $dir/config/xmobar/xmobarrc ~/.config/xmobar/xmobarrc
 	ln -sf $dir/config/xmobar/xb3 ~/.config/xmobar/xb3
 
+	ln -nsf $dir/config/dunst ~/.config/dunst
 	ln -nsf $dir/.xmonad/scr ~/.xmonad/
 	ln -nsf $dir/config/colorls ~/.config/colorls
 	ln -nsf $dir/config/polybar ~/.config/polybar
