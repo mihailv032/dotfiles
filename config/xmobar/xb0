@@ -6,7 +6,7 @@ Config {
     ]
   , bgColor = "#111111"
   , fgColor = "#ff6c6b"
-  , position = Static { xpos = 1920, ypos = 0, width = 2560, height = 30 }
+  , position = Static { xpos = 1937, ypos = 0, width = 2560, height = 30 }
   , lowerOnStart = True
   , hideOnStart = False
   , allDesktops = True
@@ -36,20 +36,20 @@ Config {
        , sepChar = "%"
        , alignSep = "}{"
        , template = "<fc=#51afef><fn=1> </fn> %kernel% </fc> \
-					\	 %UnsafeStdinReader% \
+					\%UnsafeStdinReader% \
 					\}\
-					\	 <action=`alacritty -e ./.local/bin/mocp`>%moc%</action> \
-					\	 <fc=#98be65>%dt%</fc> \
+					\<action=`alacritty -e ./.local/bin/mocp`>%moc%</action> \
+					\<fc=#98be65>%dt%</fc> \
                     \{   \
-					\	 <box type=Bottom width=2 mb=2 color=#111111><action=`alacritty -e htop`><fc=#c678dd>%memory% / %swap%  </fc></action></box> \
-					\	 <action=`alacritty -e htop`><fc=#ff6c6b>%cpu%  </fc></action> \
-					\	 <action=`alacritty -e `> <fc=#0a81f5>%disku%   </fc></action> \
-					\	 <fc=#ee9a00>%uptime%  </fc> \
-					\    <box type=Bottom width=2 mb=2 color=#111111><fc=#c00dd5>%output% <action=`pavucontrol`>%vol%%showvol% </action><action=`vol +5000`>%plus%</action> <action=`vol -5000`> %minus%</action></fc></box> \
-					\	 <action=`alacritty -e sudo pacman -Syu`><icon=pacman.xpm/> <fc=#c678dd> </fc></action> \
-					\	 <fc=#e60053>%locks%  </fc>\
-					\	 <fc=#fafafa>%date%</fc> \
-					\	 <action=`rofi -modi drun,run -show drun -m -4 -theme ~/.config/rofi/powermenu/games -show-icons -drun-categories powermenu`><fc=#e60053>%powermenu% </fc></action>"
+					\<box type=Bottom width=2 mb=2 color=#111111><action=`alacritty -e htop`><fc=#c678dd>%memory% / %swap%  </fc></action></box> \
+					\<action=`alacritty -e htop`><fc=#ff6c6b>%cpu%  </fc></action> \
+					\<action=`alacritty -e `> <fc=#0a81f5>%disku%   </fc></action> \
+					\<fc=#ee9a00>%uptime%  </fc> \
+					\<box type=Bottom width=2 mb=2 color=#111111><fc=#c00dd5>%output% <action=`pavucontrol`>%vol%%showvol% </action><action=`vol +5000`>%plus%</action> <action=`vol -5000`> %minus%</action></fc></box> \
+					\<action=`alacritty -e sudo pacman -Syu`><icon=pacman.xpm/> <fc=#c678dd> </fc></action> \
+					\<fc=#e60053>%locks%  </fc>\
+					\<fc=#fafafa>%date%</fc> \
+					\<action=`rofi -modi drun,run -show drun -m -4 -theme ~/.config/rofi/powermenu/games -show-icons -drun-categories powermenu`><fc=#e60053>%powermenu% </fc></action>"
 					
 }
 

@@ -107,7 +107,7 @@ font:
   # Normal (roman) font face
   normal:
     # Font family
-   family: Comic Sans MS #Terminus #DejaVu Sans Mono 
+   family: Comic mono #Comic Sans MS #Terminus #DejaVu Sans Mono 
    style: Regular 
     #
     # Default:

@@ -7,7 +7,7 @@ configuration {
 @import "launcher"
 
 window {
-    height:                         360;
+    height:                         380;
 }
 
 listview {

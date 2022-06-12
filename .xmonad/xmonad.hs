@@ -155,10 +155,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 -- Launching apps
     [
       ((modm        ,xK_Return  ), spawn $ XMonad.terminal conf),
-      ((modm        ,xK_t       ), spawn "steam"),
       ((modm        ,xK_4       ), spawn "chromium"),
       ((modm        ,xK_e       ), spawn "thunar"),
 
+      ((mod1Mask    ,xK_t       ), spawn "steam"),
       ((mod1Mask    ,xK_g       ), spawn "pavucontrol"),
       ((mod1Mask    ,xK_c       ), spawn "gcolor2"),
       ((mod1Mask    ,xK_e       ), spawn "emacs"),
@@ -325,7 +325,7 @@ main = do
   xmproc2 <- spawnPipe "xmobar -x 2 $HOME/.config/xmobar/xmobarrc"
   xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/xb0"
   xmonad $ docks $ ewmhFullscreen . ewmh $ withUrgencyHook LibNotifyUrgencyHook $ ewmh def {
-        terminal           = "alacritty -t Terminal",
+        terminal           = "alacritty -t Terminal -e fish",
         focusFollowsMouse  = False, -- Whether focus follows the mouse pointer.
         clickJustFocuses   = False,-- Whether clicking on a window to focus also passes the click to the window
         borderWidth        = 0,

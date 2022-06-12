@@ -80,8 +80,6 @@ config() {
 	mkdir -p ~/.xmonad
 	mkdir -p ~/.config/picom
 	mkdir -p ~/.config/neofetch
-	mkdir -p ~/.config/rofi/powermenu
-	mkdir -p ~/.config/rofi/gameLauncher
 	mkdir -p ~/.config/xmobar
 	
 	ln -sf $dir/.bashrc ~/.bashrc
@@ -101,8 +99,8 @@ config() {
 	ln -nsf $dir/config/polybar ~/.config/polybar
 	ln -nsf $dir/config/ranger ~/.config/ranger
 	ln -nsf $dir/config/xmobar/scr ~/.config/xmobar/scr
-	ln -nsf $dir/config/rofi/powermenu ~/.config/rofi/powermenu
-	ln -nsf $dir/config/rofi/gameLauncher ~/.config/rofi/gameLauncher
+	ln -nsf $dir/config/rofi/powermenu ~/.config/rofi
+	ln -nsf $dir/config/rofi/gameLauncher ~/.config/rofi
 	ln -nsf $dir/config/i3 ~/.config/i3
 		
   #setting default file manager 
@@ -113,8 +111,8 @@ config() {
 
   #monitor & keyboard settings 
 #  sudo cp xorg/* /etc/X11/xorg.conf.d/
-  sudo cp xorg/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf
-  sudo cp xorg/10-monitor.conf /etc/X11/xorg.conf.d/10-monitor.conf
+#  sudo cp xorg/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf
+#  sudo cp xorg/10-monitor.conf /etc/X11/xorg.conf.d/10-monitor.conf
 
   #config files 
 #  cp -r config/* $HOME/.config/
