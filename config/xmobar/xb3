@@ -6,7 +6,7 @@ Config { font            = "xft:Canerell:weight=Bold:pixelsize=12:antialias=true
        , bgColor      = "#111111"
        , fgColor      = "#ff6c6b"
 
-       , position       = TopSize L 100 30
+       , position       = TopSize L 90 30
        , lowerOnStart = True
        , hideOnStart  = False
        , allDesktops  = True
@@ -17,17 +17,17 @@ Config { font            = "xft:Canerell:weight=Bold:pixelsize=12:antialias=true
                     , Run Com "uname" ["-r"] "kernel" 36000
                     , Run Uptime ["-t", "uptime: <days>d <hours>h"] 360
                     , Run Com ".local/bin/pacupdate" [] "pacupdate" 36000
-                    , Run Date "<fn=1> </fn>  %b %d %Y - (%H:%M) " "date" 50
+                    , Run Date "<fn=1></fn>  %b %d %Y - (%H:%M) " "date" 50
                     , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
        , template = " <fc=#51afef> %penguin% %kernel% </fc> \
-	\} \
-	\ %UnsafeStdinReader% \
-	\ %date%\
-	\{ \
-	\ <fc=#98be65>%uparrow%  <action=`alacritty -e htop`>%uptime%</action></fc> \
-	\ "
+	\}\
+	\%UnsafeStdinReader%\
+	\%date%\
+	\{\
+	\<fc=#98be65>%uparrow%<action=`alacritty -e htop`>%uptime%</action></fc> \
+	\"
 }
 

@@ -98,7 +98,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ++
     [
       ((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip myWorkspaces [xK_i,xK_o,xK_u,xK_b,xK_n,xK_m,xK_z,xK_x,xK_c,xK_F5,xK_F4,xK_F6,xK_f,xK_y,xK_p]
+        | (i, k) <- zip myWorkspaces [xK_i,xK_o,xK_u,xK_b,xK_n,xK_m,xK_z,xK_x,xK_c,xK_F5,xK_F4,xK_F3,xK_f,xK_y,xK_p]
         , (f, m) <- [(W.greedyView, 0), (W.shift, mod1Mask)]
     ]
     ++
@@ -154,30 +154,35 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ++
 -- Launching apps
     [
-      ((modm        ,xK_Return  ), spawn $ XMonad.terminal conf),
-      ((modm        ,xK_4       ), spawn "chromium"),
-      ((modm        ,xK_e       ), spawn "thunar"),
+      ((modm        ,xK_Return          ), spawn $ XMonad.terminal conf                                   ),
+      ((modm        ,xK_4               ), spawn "chromium"                                               ),
+      ((modm        ,xK_e               ), spawn "thunar"                                                 ),
+                                          
+      ((mod1Mask    ,xK_t               ), spawn "steam"                                                  ),
+      ((mod1Mask    ,xK_g               ), spawn "pavucontrol"                                            ),
+      ((mod1Mask    ,xK_c               ), spawn "gcolor2"                                                ),
+      ((mod1Mask    ,xK_e               ), spawn "emacsclient -c -a 'emacs'"                              ),
+      ((mod1Mask    ,xK_p               ), spawn "code"                                                   ),
+      ((mod1Mask    ,xK_o               ), spawn "fluent-reader"                                          ),
+      ((mod1Mask    ,xK_l               ), spawn "lutris"                                                 ),
+      ((mod1Mask    ,xK_q               ), spawn "qutebrowser"                                            ),
+--      ((mod1Mask    ,xK_x               ), spawn "copyq show"                                             ),
 
-      ((mod1Mask    ,xK_t       ), spawn "steam"),
-      ((mod1Mask    ,xK_g       ), spawn "pavucontrol"),
-      ((mod1Mask    ,xK_c       ), spawn "gcolor2"),
-      ((mod1Mask    ,xK_e       ), spawn "emacs"),
-      ((mod1Mask    ,xK_p       ), spawn "code"),
-      ((mod1Mask    ,xK_o       ), spawn "fluent-reader"),
-      ((mod1Mask    ,xK_l       ), spawn "lutris"),
-      ((mod1Mask    ,xK_q       ), spawn "qutebrowser"),
+      ((mod1Mask    ,xK_KP_End          ), spawn "alacritty -e htop"                                      ),
+      ((mod1Mask    ,xK_KP_Down         ), spawn "alacritty -e mocp"                                      ),
+      ((mod1Mask    ,xK_KP_Page_Down    ), spawn "emacsclient -c -a 'emacs' ~/Documents/l.org"            ),
+      ((mod1Mask    ,xK_KP_Left         ), spawn "emacsclient -c -a 'emacs' ~/.xmonad/xmonad.hs"          ),
+      ((mod1Mask    ,xK_KP_Begin        ), spawn "emacsclient -c -a 'emacs' ~/.config/xmobar/xb0"         ),
+      ((mod1Mask    ,xK_KP_Right        ), spawn "emacsclient -c -a 'emacs' ~/.config/xmobar/xmobarrc"    ),
+                                        
+      ((mod4Mask .|. shiftMask   ,xK_F4 ), spawn "mocp -G"                                                ),
+      ((mod4Mask .|. shiftMask   ,xK_6  ), spawn "mocp -f"                                                ),
 
-      ((mod1Mask    ,xK_KP_End  ), spawn "alacritty -e htop"),
-      ((mod1Mask    ,xK_KP_Down ), spawn "alacritty -e mocp"),
-      ((mod1Mask    ,xK_KP_Left ), spawn "alacritty -e vim ~/.xmonad/xmonad.hs"),
-      ((mod1Mask    ,xK_KP_Begin), spawn "alacritty -e vim ~/.config/xmobar/xb0"),
-      ((mod1Mask    ,xK_KP_Right), spawn "alacritty -e vim ~/.config/xmobar/xmobarrc"),
-      
-      ((mod4Mask .|. shiftMask   ,xK_F4), spawn "mocp -G"),
-      ((mod4Mask .|. shiftMask   ,xK_6 ), spawn "mocp -f"),
+      ((mod1Mask .|. controlMask ,xK_e  ), spawn "emacsclient -e '(client-save-kill-emacs)'"              ),
+      ((modm     .|. shiftMask   ,xK_s  ), spawn "flameshot gui"                                          ),
+      ((mod1Mask .|. controlMask ,xK_d  ), spawn "discord"                                                ) 
 
-      ((modm     .|. shiftMask   ,xK_s ), spawn "flameshot gui"),
-      ((mod1Mask .|. controlMask ,xK_d ), spawn "discord"      ) 
+-- /usr/include/X11/keysymdef.h all the binds
 --gdu
 --deluge
 --
@@ -280,10 +285,11 @@ myStartupHook = do
     addRawWSGroup "G4"    [ (S 2, "L-G4"          ), (S 1,"P-G4"          ), (S 0,"M-G4")           ] 
     addRawWSGroup "G5"    [ (S 2, "L-G5"          ), (S 1,"P-G5"          ), (S 0,"M-G5")           ] 
     spawnOnce "copyq &"
+    spawnOnce "emacs --daemon"
     spawnOnce "dunst &"
     spawnOnce "~/.xmonad/.fehbg"
     spawnOnce "picom &"
-    spawnOnce "exec /usr/bin/trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x111111 --height 22 --monitor 2 &"
+    spawnOnce "exec /usr/bin/trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --height 30 --transparent true --alpha 0 --tint 0x111111 --monitor 2 &"
 
 -------------------------------Prompt Config-----------------------------
 
