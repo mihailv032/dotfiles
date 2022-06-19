@@ -1,16 +1,18 @@
 * General
+** startuptime
+#+BEGIN_SRC  emacs-lisp
+  (defun efs/display-startup-time ()
+    (message "Emacs loaded in %s with %d garbage collections."
+    (format "%.2f seconds"
+      (float-time
+      (time-subtract after-init-time before-init-time)))
+  gcs-done))
+  (add-hook 'emacs-startup-hook #'efs/display-startup-time)
+#+END_SRC
 ** packakge archives
    #+BEGIN_SRC emacs-lisp
      (add-to-list 'package-archives
 		  '("melpa" . "http://melpa.milkbox.net/packages/") t)
-   #+END_SRC
-** Dont show startup message
-   #+BEGIN_SRC emacs-lisp
-     (setq inhibit-startup-message t)
-   #+END_SRC
-** Disable the welcome screen
-   #+BEGIN_SRC emacs-lisp
-     (setq inhibit-startup-screen t)
    #+END_SRC
 ** Disable the backup files and #files
     #+BEGIN_SRC emacs-lisp
@@ -20,27 +22,22 @@
       (setq create-lockfiles nil)
       (setq make-backup-files nil)
    #+END_SRC
-** show warnings only if its emergency
-   #+BEGIN_SRC emacs-lisp
-     (setq warning-minimum-level :emergency)
-   #+END_SRC
-** Simplify the UI
-   #+BEGIN_SRC emacs-lisp
-     (menu-bar-mode -1)
-     (tool-bar-mode -1)
-     (scroll-bar-mode -1)
-     (tooltip-mode -1)
-     (fringe-mode 0)
-   #+END_SRC
 ** Font
    #+BEGIN_SRC emacs-lisp
-	  (defun fontify-frame (frame)
-     (set-frame-parameter frame 'font "monospace-16"))
+     (defun fontify-frame (frame)
+       (set-frame-parameter frame 'font "monospace-16"))
      
    #+END_SRC
-** default dir
+** Recent Opened files
    #+BEGIN_SRC emacs-lisp
-(cd "~/prog/js")
+     (recentf-mode 1)
+     (setq recentf-max-menu-items 25)
+     (setq recentf-max-saved-items 25)
+     (global-set-key "\C-x\ \C-r" 'recentf-open-files)
+   #+END_SRC
+** default working directory
+   #+BEGIN_SRC emacs-lisp
+     ;     (cd "~/prog/js")
    #+END_SRC
 ** show brakets pair
    #+BEGIN_SRC emacs-lisp
@@ -49,10 +46,6 @@
 ** make escape = C-g
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-   #+END_SRC
-** remove the side borders
-   #+BEGIN_SRC emacs-lisp
-     (fringe-mode 0)
    #+END_SRC
 ** fontify
    #+BEGIN_SRC emacs-lisp
@@ -77,6 +70,10 @@
 
    #+END_SRC
 
+** follow symbolic link default to yes
+#+BEGIN_SRC emacs-lisp
+  (setq vc-follow-symlinks t)
+#+END_SRC
 ** misc
    #+BEGIN_SRC emacs-lisp
      (delete-selection-mode t)
@@ -132,6 +129,14 @@
       (use-package evil-multiedit
         :ensure t)
    #+END_SRC
+* Haskell Mode
+#+BEGIN_SRC emacs-lisp
+;  (use-package haskell-mode
+;    :ensure t
+;    :mode (("\\.hs\\'" . haskell-mode) )
+;    :commands haskell-mode
+;  )
+#+END_SRC
 * Org mode
 ** org
    #+BEGIN_SRC emacs-lisp
@@ -161,12 +166,63 @@
      (add-hook 'org-mode-hook (lambda () (olivetti-mode 1)))  
    #+END_SRC
    
+** make the list not collapse when open *doesnt work  
+  #+BEGIN_SRC emacs-lisp
+   (setq org-cycle-include-plain-lists 'children)
+  #+END_SRC
 * UI
+** remove the side borders
+   #+BEGIN_SRC emacs-lisp
+     (fringe-mode 0)
+   #+END_SRC
+** Simplify the UI
+   #+BEGIN_SRC emacs-lisp
+     (menu-bar-mode -1)
+     (tool-bar-mode -1)
+     (scroll-bar-mode -1)
+     (tooltip-mode -1)
+     (fringe-mode 0)
+   #+END_SRC
+** show warnings only if its emergency
+   #+BEGIN_SRC emacs-lisp
+     (setq warning-minimum-level :emergency)
+   #+END_SRC
+** Dont show startup message
+   #+BEGIN_SRC emacs-lisp
+     (setq byte-compile-warnings '(cl-functions))
+     (setq inhibit-startup-message t)
+   #+END_SRC
+** Disable the welcome screen
+   #+BEGIN_SRC emacs-lisp
+     (setq inhibit-startup-screen t)
+   #+END_SRC
 ** numberline 
 
 ** theme    
+*** Doom themes
+#+BEGIN_SRC emacs-lisp
+  (use-package doom-themes
+    :ensure t
+    :config
+    ;; Global settings (defaults)
+    (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+	  doom-themes-enable-italic t) ; if nil, italics is universally disabled
+    
+
+    ;; Enable flashing mode-line on errors
+    (doom-themes-visual-bell-config)
+    ;; Enable custom neotree theme (all-the-icons must be installed!)
+    (doom-themes-neotree-config)
+    ;; or for treemacs users
+    (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+    (doom-themes-treemacs-config)
+    ;; Corrects (and improves) org-mode's native fontification.
+    (doom-themes-org-config))
+#+END_SRC
+*** Load
    #+BEGIN_SRC emacs-lisp
-     (load-theme 'dracula t)
+     (load-theme 'doom-one t)
+     ;(load-theme 'dracula t)
    #+END_SRC
 ** vscode icons
    #+BEGIN_SRC emacs-lisp
@@ -226,7 +282,8 @@ eshell-mode-hook))
 
 ** all the icons
    #+BEGIN_SRC emacs-lisp
-     (use-package all-the-icons)
+     (use-package all-the-icons
+       :ensure t)
 ;M-x all-the-icons-install-fonts
    #+END_SRC
 ** taskbar
@@ -243,6 +300,15 @@ eshell-mode-hook))
 	:init (doom-modeline-mode 1))
     #+END_SRC
 
+** Minimap
+#+BEGIN_SRC emacs-lisp
+  (use-package demap
+    :bind (("C-x C-m m" . demap-toggle))
+    :ensure t
+  )
+  (add-hook 'prog-mode-hook 'demap-open)
+(add-hook 'org-mode-hook 'demap-close)
+#+END_SRC
 * Core packages 
 ** lsp
    #+BEGIN_SRC emacs-lisp
@@ -283,6 +349,7 @@ eshell-mode-hook))
 ** magit
    #+BEGIN_SRC emacs-lisp
      (use-package magit
+;       :bind (("
        :ensure t
        :custom
        (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
@@ -413,3 +480,4 @@ eshell-mode-hook))
    
    
    
+
