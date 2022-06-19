@@ -11,7 +11,7 @@ ussage() {
 
 system() {
   pacman -S sudo grub efibootmgr dosfstools os-prober ntfs-3g mtools networkmanager \
-  base-devel intel-ucode nvidia lib32-nvidia-utils nvidia-utils mesa mesa-demos xorg xmlto kmod \
+  base-devel intel-ucode nvidia lib32-nvidia-utils nvidia-utils mesa mesa-demos xorg xmlto kmod vulkan-tools vulkan-headers  vulkan-validation-layers  vulkan-tools  vulkan-icd-loader lib32-vulkan-icd-loader \
   dkms inetutils bc libelf cpio perl tar xz
 }
 
@@ -20,7 +20,7 @@ full() {
   
   system
 
-  sudo pacman -S imagemagick xorg-xrandr deluge deluge-gtk xorg-xmodmap\
+  sudo pacman -S imagemagick dunst mpv xorg-xrandr deluge deluge-gtk xorg-xmodmap\
   steam ttf-liberation terminus-font ttf-dejavu gcolor2 picom code lutris wine-staging winetricks sddm xmonad openbox  \
   rofi audacity gimp gnome-system-monitor android-file-transfer nitrogen neofetch \
   nodejs node-gyp npm
@@ -74,7 +74,8 @@ config() {
 	sudo cp -r /usr/bin/lolcat ~/.local/bin/lolcat-c
 
 	mkdir -p ~/.emacs.d/
-	cp -r $dir/emacs-config/* ~/.emacs.d
+	cp -r $dir/emacs-config/themes ~/.emacs.d
+	cp -r $dir/emacs-config/plugins ~/.emacs.d
 
 	mkdir -p ~/.config/alacritty
 	mkdir -p ~/.xmonad
@@ -82,6 +83,8 @@ config() {
 	mkdir -p ~/.config/neofetch
 	mkdir -p ~/.config/xmobar
 	
+	ln -sf $dir/emacs-config/init.el ~/.emacs.d/init.el
+	ln -sf $dir/emacs-config/myinit.org ~/.emacs.d/myinit.org
 	ln -sf $dir/.bashrc ~/.bashrc
 	ln -sf $dir/.vimrc ~/.vimrc
 	ln -sf $dir/.bash_prompt ~/.bash_prompt
