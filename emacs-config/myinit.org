@@ -76,6 +76,7 @@
 #+END_SRC
 ** misc
    #+BEGIN_SRC emacs-lisp
+     (require 'bind-key)
      (delete-selection-mode t)
      (setq gc-cons-threshold 100000000)
      (setq read-process-output-max (* 1024 1024))
@@ -131,11 +132,11 @@
    #+END_SRC
 * Haskell Mode
 #+BEGIN_SRC emacs-lisp
-;  (use-package haskell-mode
-;    :ensure t
-;    :mode (("\\.hs\\'" . haskell-mode) )
-;    :commands haskell-mode
-;  )
+  (use-package haskell-mode
+    :ensure t
+    :mode (("\\.hs\\'" . haskell-mode) )
+    :commands haskell-mode
+  )
 #+END_SRC
 * Org mode
 ** org
@@ -170,6 +171,19 @@
   #+BEGIN_SRC emacs-lisp
    (setq org-cycle-include-plain-lists 'children)
   #+END_SRC
+* Dired
+#+BEGIN_SRC emacs-lisp
+  (use-package dired
+    :ensure nil
+    :comands (dired dired-jump)
+    :config (evil-collection-define-key 'normal 'dired-mode-map
+    "h" 'dired-single-up-directory
+    "l" 'dired-single-buffer))
+  
+  ;https://github.com/jwiegley/use-package/blob/master/bind-key.el
+  (bind-key [remap dired] 'dired-jump)
+#+END_SRC
+
 * UI
 ** remove the side borders
    #+BEGIN_SRC emacs-lisp
@@ -197,7 +211,6 @@
      (setq inhibit-startup-screen t)
    #+END_SRC
 ** numberline 
-
 ** theme    
 *** Doom themes
 #+BEGIN_SRC emacs-lisp
@@ -219,10 +232,24 @@
     ;; Corrects (and improves) org-mode's native fontification.
     (doom-themes-org-config))
 #+END_SRC
+*** inkPot
+#+BEGIN_SRC emacs-lisp
+  (use-package inkpot-theme
+  :ensure t
+  )
+#+END_SRC
+*** Ubuntu Terminal
+#+BEGIN_SRC emacs-lisp
+  (use-package ubuntu-theme
+    :ensure t
+  )
+#+END_SRC
 *** Load
    #+BEGIN_SRC emacs-lisp
-     (load-theme 'doom-one t)
+     ;(load-theme 'doom-one t)
      ;(load-theme 'dracula t)
+     ;(load-theme 'inkpot t)
+     (load-theme 'ubuntu t)
    #+END_SRC
 ** vscode icons
    #+BEGIN_SRC emacs-lisp
@@ -302,12 +329,12 @@ eshell-mode-hook))
 
 ** Minimap
 #+BEGIN_SRC emacs-lisp
-  (use-package demap
-    :bind (("C-x C-m m" . demap-toggle))
-    :ensure t
-  )
-  (add-hook 'prog-mode-hook 'demap-open)
-(add-hook 'org-mode-hook 'demap-close)
+      (use-package demap
+	:bind (("C-x C-m t" . demap-toggle))
+	:ensure t
+      )
+      (add-hook 'prog-mode-hook 'demap-open)
+      (add-hook 'org-mode-hook 'demap-close)
 #+END_SRC
 * Core packages 
 ** lsp
@@ -358,7 +385,6 @@ eshell-mode-hook))
 ** projectile
    #+BEGIN_SRC emacs-lisp
      (defun dw/switch-project-action ()
-       ;; TODO: Switch to EXWM workspace 1?
        (persp-switch (projectile-project-name))
        (magit-status))
 
@@ -408,6 +434,7 @@ eshell-mode-hook))
        :config
 	 (which-key-mode)
 	 (setq which-key-idle-delay 0.4))
+         (setq which-key-add-column-padding 10)
    #+END_SRC
 ** company
    #+BEGIN_SRC emacs-lisp
