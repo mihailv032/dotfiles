@@ -91,7 +91,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ++
     [
      ((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_F4, xK_F1, xK_F2] [2,0,1]
+        | (key, sc) <- zip [xK_F4, xK_F9, xK_F2] [2,0,1]
         , (f, m) <- [(W.greedyView, 0), (W.shift, mod1Mask)]
 
     ]
@@ -109,7 +109,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ((modm    ,xK_3), viewWSGroup "Games"),
       ((modm    ,xK_F3), viewWSGroup "G3"),
       ((modm    ,xK_F2), viewWSGroup "G4"),
-      ((modm    ,xK_F1), viewWSGroup "G5")
+      ((modm    ,xK_F9), viewWSGroup "G5")
     ]
     ++
 --media keys (xev to find keycodes)
@@ -156,7 +156,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [
       ((modm        ,xK_Return          ), spawn $ XMonad.terminal conf                                   ),
       ((modm        ,xK_4               ), spawn "chromium"                                               ),
-      ((modm        ,xK_e               ), spawn "thunar"                                                 ),
+      ((modm        ,xK_e               ), spawn "nemo"                                                 ),
                                           
       ((mod1Mask    ,xK_t               ), spawn "steam"                                                  ),
       ((mod1Mask    ,xK_g               ), spawn "pavucontrol"                                            ),
@@ -332,8 +332,9 @@ main = do
   xmproc0 <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/xb0"
   xmonad $ docks $ ewmhFullscreen . ewmh $ withUrgencyHook LibNotifyUrgencyHook $ ewmh def {
         terminal           = "alacritty -t Terminal -e fish",
-        focusFollowsMouse  = False, -- Whether focus follows the mouse pointer.
-        clickJustFocuses   = False,-- Whether clicking on a window to focus also passes the click to the window
+        focusFollowsMouse  = True,
+        clickJustFocuses   = False,
+
         borderWidth        = 0,
         modMask            = mod4Mask,
         workspaces         = myWorkspaces,

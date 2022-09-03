@@ -1,0 +1,2 @@
+emacsclient -e '(client-save-kill-emacs)'
+emacs --daemon
