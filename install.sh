@@ -114,9 +114,9 @@ config() {
   sudo cp Xsetup /usr/share/sddm/scripts/Xsetup
 
   #monitor & keyboard settings 
-#  sudo cp xorg/* /etc/X11/xorg.conf.d/
-#  sudo cp xorg/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf
-#  sudo cp xorg/10-monitor.conf /etc/X11/xorg.conf.d/10-monitor.conf
+  sudo cp xorg/* /etc/X11/xorg.conf.d/
+  sudo cp xorg/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf
+  sudo cp xorg/10-monitor.conf /etc/X11/xorg.conf.d/10-monitor.conf
 
   #config files 
 #  cp -r config/* $HOME/.config/
