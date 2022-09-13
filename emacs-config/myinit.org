@@ -247,9 +247,9 @@
 *** Load
    #+BEGIN_SRC emacs-lisp
      ;(load-theme 'doom-one t)
-     ;(load-theme 'dracula t)
+     (load-theme 'dracula t)
      ;(load-theme 'inkpot t)
-     (load-theme 'ubuntu t)
+     ;(load-theme 'ubuntu t)
    #+END_SRC
 ** vscode icons
    #+BEGIN_SRC emacs-lisp

@@ -170,11 +170,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
       ((mod1Mask    ,xK_KP_End          ), spawn "alacritty -e htop"                                      ),
       ((mod1Mask    ,xK_KP_Down         ), spawn "alacritty -e mocp"                                      ),
-      ((mod1Mask    ,xK_KP_Page_Down    ), spawn "emacsclient -c -a 'emacs' ~/Documents/l.org"            ),
+      ((mod1Mask    ,xK_KP_Page_Down    ), spawn "emacsclient -c -a 'emacs' ~/Documents/org/l.org"            ),
       ((mod1Mask    ,xK_KP_Left         ), spawn "emacsclient -c -a 'emacs' ~/.xmonad/xmonad.hs"          ),
       ((mod1Mask    ,xK_KP_Begin        ), spawn "emacsclient -c -a 'emacs' ~/.config/xmobar/xb0"         ),
       ((mod1Mask    ,xK_KP_Right        ), spawn "emacsclient -c -a 'emacs' ~/.config/xmobar/xmobarrc"    ),
-                                        
+      ((mod1Mask    ,xK_KP_Home         ), spawn "emacsclient -c -a 'emacs' ~/Documents/org/plan.org"    ),
+
       ((mod4Mask .|. shiftMask   ,xK_F4 ), spawn "mocp -G"                                                ),
       ((mod4Mask .|. shiftMask   ,xK_6  ), spawn "mocp -f"                                                ),
 
