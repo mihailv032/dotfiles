@@ -206,6 +206,11 @@
    #+BEGIN_SRC emacs-lisp
      (setq warning-minimum-level :emergency)
    #+END_SRC
+** beacon (show where the cursor is)
+#+BEGIN_SRC emacs-lisp
+;  require('beacon)
+  (beacon-mode 1)
+#+END_SRC
 ** Dont show startup message
    #+BEGIN_SRC emacs-lisp
      (setq byte-compile-warnings '(cl-functions))
@@ -238,6 +243,27 @@
    #+BEGIN_SRC emacs-lisp
      (setq inhibit-startup-screen t)
    #+END_SRC
+** dashboard
+#+BEGIN_SRC emacs-lisp
+  (use-package dashboard
+  :ensure t
+  :init 
+  (progn
+  (setq dashboard-startup-banner "~/.emacs.d/emacs.png")
+  (setq dashboard-banner-logo-title "Welcome to the superior text editor")
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-set-heading-icons t)
+  ;(dashboard-modify-heading-icons '((projects . "")))
+  (setq dashboard-items '((recents . 7)
+  (agenda . 5)
+  (projects . 5)
+  (bookmarks . 5)))
+  )
+  :config
+  (dashboard-setup-startup-hook))
+  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+
+#+END_SRC
 ** numberline 
 ** theme    
 *** Doom themes
@@ -480,8 +506,6 @@ By default, this is only a different background color."
        :bind-keymap
        ("C-x p" . projectile-command-map)
        :init
-       (when (file-directory-p "~/prog/react/")
-	 (setq projectile-project-search-path '("~/prog/react/")))
        (setq projectile-switch-project-action #'projectile-dired))
 
      (use-package counsel-projectile

@@ -85,6 +85,7 @@ config() {
 	
 	ln -sf $dir/emacs-config/init.el ~/.emacs.d/init.el
 	ln -sf $dir/emacs-config/myinit.org ~/.emacs.d/myinit.org
+	ln -sf $dir/emacs-config/emacs.png ~/.emacs.d/emacs.png
 	ln -sf $dir/.bashrc ~/.bashrc
 	ln -sf $dir/.vimrc ~/.vimrc
 	ln -sf $dir/.bash_prompt ~/.bash_prompt
