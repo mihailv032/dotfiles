@@ -28,6 +28,11 @@
        (set-frame-parameter frame 'font "monospace-16"))
      
    #+END_SRC
+** add node modules path
+#+BEGIN_SRC emacs-lisp
+  (use-package add-node-modules-path
+  :ensure t)
+#+END_SRC
 ** Recent Opened files
    #+BEGIN_SRC emacs-lisp
      (recentf-mode 1)
@@ -329,12 +334,54 @@ eshell-mode-hook))
 
 ** Minimap
 #+BEGIN_SRC emacs-lisp
-      (use-package demap
-	:bind (("C-x C-m t" . demap-toggle))
-	:ensure t
-      )
-      (add-hook 'prog-mode-hook 'demap-open)
-      (add-hook 'org-mode-hook 'demap-close)
+  (use-package demap
+    :bind (("C-x C-m t" . demap-toggle))
+    :ensure t
+  )
+  (add-hook 'prog-mode-hook 'demap-open)
+  (add-hook 'org-mode-hook 'demap-close)
+#+END_SRC
+* JS 
+** react snippets 
+    #+BEGIN_SRC emacs-lisp
+      (require 'yasnippet)
+      (yas-global-mode 1)
+	    ;(yas-reload-all)
+	    ;(add-hook 'prog-mode-hook #'yas-minor-mode)
+      (require 'react-snippets)
+
+    #+END_SRC
+** typescript 
+   #+BEGIN_SRC emacs-lisp
+     (use-package typescript-mode
+       :mode "\\.tsx\\'" 
+       :hook (typescript-mode . lsp-deferred)
+       :config
+     (setq typescript-indent-level 2))
+   #+END_SRC
+** rjsx 
+#+BEGIN_SRC  emacs-lisp
+  (use-package rjsx-mode
+  :ensure t
+  :mode (("\\.js\\'" . rjsx-mode)
+	("\\.jsx\\'" . rjsx-mode)
+	("\\.ts\\'" . rjsx-mode)
+	("\\.tsx\\'" . rjsx-mode))
+  )
+#+END_SRC
+** tide 
+#+BEGIN_SRC emacs-lisp
+  (defun setup-tide-mode()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (tide-hl-identifier-mode +1)
+  (company-mode +1))
+
+  (use-package tide
+  :ensure t
+  :after (rjsx-mode company flycheck)
+  :hook (rjsx-mode . setup-tide-mode))
 #+END_SRC
 * Core packages 
 ** lsp
@@ -349,11 +396,13 @@ eshell-mode-hook))
        :ensure t
        :hook (
      (web-mode . lsp-deferred)
-     ;(lsp-mode . lsp-enabled-which-key-integration)
+     (lsp-mode . lsp-enable-which-key-integration)
      )
        :commands lsp-deferred)
      (use-package lsp-ui
+     :ensure t
        :commands lsp-ui-mode)
+
    #+END_SRC
 ** ivy
    #+BEGIN_SRC emacs-lisp
@@ -403,6 +452,13 @@ eshell-mode-hook))
        :straight t
        :config (counsel-projectile-mode))
    #+END_SRC
+** flycheck
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+  :ensure t
+  :init
+  (global-flycheck-mode))
+#+END_SRC
 ** multi cursor
    #+BEGIN_SRC emacs-lisp
      (use-package multiple-cursors
@@ -427,6 +483,11 @@ eshell-mode-hook))
        ("C-S-a" . er/contract-region)
        )
    #+END_SRC
+** json mode
+#+BEGIN_SRC emacs-lisp
+  (use-package json-mode
+  :ensure t)
+#+END_SRC
 ** which key
    #+BEGIN_SRC emacs-lisp
      (use-package which-key
@@ -453,14 +514,14 @@ eshell-mode-hook))
 * Web 
 ** webmode
    #+BEGIN_SRC emacs-lisp
-      (use-package web-mode
-	:ensure t
-	:mode (("\\.js\\'" . web-mode)
-           ("\\.jsx\\'" . web-mode)
-           ("\\.ts\\'" . web-mode)
-   	       ("\\.tsx\\'" . web-mode)
-           ("\\.html\\'" . web-mode))
-	:commands web-mode)
+     (use-package web-mode
+       :ensure t
+       :mode (("\\.js\\'" . web-mode)
+	  ("\\.jsx\\'" . web-mode)
+	  ("\\.ts\\'" . web-mode)
+	      ("\\.tsx\\'" . web-mode)
+	  ("\\.html\\'" . web-mode))
+       :commands web-mode)
    #+END_SRC
 *** web mode hook
     #+BEGIN_SRC emacs-lisp
@@ -476,35 +537,12 @@ eshell-mode-hook))
     #+END_SRC
 ** emmet mode
    #+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path "~/emacs.d/emmet-mode")
-     (require 'emmet-mode)
-     (add-hook 'sgml-mode-hook 'emmet-mode)
-     (add-hook 'css-mode-hook  'emmet-mode)
+     (add-to-list 'load-path "~/emacs.d/emmet-mode")
+	  (require 'emmet-mode)
+	  (add-hook 'sgml-mode-hook 'emmet-mode)
+	  (add-hook 'css-mode-hook  'emmet-mode)
    #+END_SRC
 ** jsx highlighting
    #+BEGIN_SRC emacs-lisp
       (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
    #+END_SRC
-** JS 
-*** react snippets 
-    #+BEGIN_SRC emacs-lisp
-      (require 'yasnippet)
-      (yas-global-mode 1)
-	    ;(yas-reload-all)
-	    ;(add-hook 'prog-mode-hook #'yas-minor-mode)
-      (require 'react-snippets)
-
-    #+END_SRC
-*** typescript 
-   #+BEGIN_SRC emacs-lisp
-      (use-package typescript-mode
-        :mode "\\.ts\\'" 
-        :hook (typescript-mode . lsp-deferred)
-        :config
-      (setq typescript-indent-level 2))
-   #+END_SRC
-
-   
-   
-   
-
