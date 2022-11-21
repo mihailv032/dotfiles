@@ -131,10 +131,20 @@
    #+END_SRC
 
 ** evil multiedit
-   #+BEGIN_SRC emacs-lisp
-      (use-package evil-multiedit
-        :ensure t)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-multiedit
+  :after evil
+  :ensure t
+  :config 
+   (evil-multiedit-default-keybinds)
+   (define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
+   (define-key evil-visual-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
+   (define-key evil-insert-state-map (kbd "M-d") 'evil-multiedit-toggle-marker-here)
+   (define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+
+  )
+  ;  (define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+#+END_SRC
 * Haskell Mode
 #+BEGIN_SRC emacs-lisp
   (use-package haskell-mode
@@ -180,7 +190,7 @@
 #+BEGIN_SRC emacs-lisp
   (use-package dired
     :ensure nil
-    :comands (dired dired-jump)
+    :commands (dired dired-jump)
     :config (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-single-up-directory
     "l" 'dired-single-buffer))
@@ -385,19 +395,23 @@ eshell-mode-hook))
 #+BEGIN_SRC emacs-lisp
   (use-package minimap
   :ensure t
+  :bind (("C-x m" . minimap-create))
   :config
   (setq minimap-window-location 'right))
-  (add-hook 'web-mode-hook 'minimap-create)
+  ;;(add-hook 'web-mode-hook 'minimap-create)
   ;; changing colors
   (custom-set-faces
   '(minimap-active-region-background
     ((((background dark)) (:background "#2A2A2A222222"))
       (t (:background "#D3D3D3222222")))
-    "Face for the active region in the minimap.
-By default, this is only a different background color."
     :group 'minimap))
   #+END_SRC
 * JS 
+** debugger
+#+BEGIN_SRC emacs-lisp
+  (use-package dap-mode)
+
+  #+END_SRC
 ** react snippets 
     #+BEGIN_SRC emacs-lisp
       (require 'yasnippet)
@@ -410,10 +424,12 @@ By default, this is only a different background color."
 ** typescript 
    #+BEGIN_SRC emacs-lisp
      (use-package typescript-mode
-     :mode (("\\.tsx\\'")
-     ("\\.ts\\'"))
+     :mode (("\\.tsx\\'" . typescript-mode)
+     ("\\.ts\\'" . typescript-mode))
      :hook (typescript-mode . lsp-deferred)
      :config
+     (require 'dap-node)
+     (dap-node-setup)
      (setq typescript-indent-level 2))
    #+END_SRC
 ** rjsx 
@@ -581,6 +597,8 @@ By default, this is only a different background color."
 	  ("\\.ts\\'" . web-mode)
 	      ("\\.tsx\\'" . web-mode)
 	  ("\\.html\\'" . web-mode))
+       :config
+       (flycheck-add-mode 'javascript-eslint 'web-mode)
        :commands web-mode)
    #+END_SRC
 *** web mode hook
