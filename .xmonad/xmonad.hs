@@ -14,7 +14,7 @@ import Data.Semigroup
 
 import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks, docks )
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
-import XMonad.Hooks.DynamicProperty
+import XMonad.Hooks.OnPropertyChange
 import XMonad.Hooks.StatusBar --xmobar
 import XMonad.Hooks.StatusBar.PP --log to xmobar
 import XMonad.Hooks.EwmhDesktops --
@@ -272,7 +272,7 @@ myManageHook = composeAll
 ----------------------------------- Startup hook ------------------------
 
 myEventHook :: Event -> X All
-myEventHook = dynamicPropertyChange "WM_NAME" (title =? "alacritty" --> floating)
+myEventHook = onXPropertyChange "WM_NAME" (title =? "alacritty" --> floating)
         where floating = customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)
 
 -------------------------------------------------------------------------
@@ -310,19 +310,19 @@ xpconfig = def
 myScratchpads = [
         NS "terminal" execTerm findTerm manageTerm
        ,NS "moc"      execMoc  findMoc manageMoc
-	]
+        ]
   where
-  execTerm = "st" ++ " -n scratchpad" 
-  findTerm	= resource =? "scratchpad"
+  execTerm   = "st" ++ " -n scratchpad" 
+  findTerm   = resource =? "scratchpad"
   manageTerm = customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)
-  execMoc = "st" ++ " -n mocp"
-  findMoc	= resource =? "scratchpad"
-  manageMoc = customFloating $ W.RationalRect l t w h
-		where
-		h = 0.5
-		w = 0.5
-		t = 0.0
-		l = 0.25
+  execMoc    = "st" ++ " -n mocp"
+  findMoc    = resource =? "scratchpad"
+  manageMoc  = customFloating $ W.RationalRect l t w h
+                where
+                h = 0.5
+                w = 0.5
+                t = 0.0
+                l = 0.25
 
 -------------------------------------- Main -------------------------------
 
