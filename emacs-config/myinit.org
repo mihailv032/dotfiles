@@ -70,6 +70,7 @@
      (add-to-list 'load-path "~/emacs.d/plugins/emmet-mode")
      (add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
      (add-to-list 'load-path "~/.emacs.d/plugins/react-snippets.el")
+     (add-to-list 'load-path "~/.emacs.d/plugins/emacs-prisma-mode")
      (add-to-list 'load-path "~/.emacs.d/plugins")
      (add-to-list 'load-path "~/.emacs.d/plugins/vendor/emacs-powerline")
 
@@ -528,6 +529,10 @@ eshell-mode-hook))
        :straight t
        :config (counsel-projectile-mode))
    #+END_SRC
+** prisma mode
+#+BEGIN_SRC emacs-lisp
+  (require 'prisma-mode)
+#+END_SRC
 ** flycheck
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
