@@ -220,7 +220,7 @@
 ** beacon (show where the cursor is)
 #+BEGIN_SRC emacs-lisp
 ;  require('beacon)
-  (beacon-mode 1)
+;  (beacon-mode 1)
 #+END_SRC
 ** Dont show startup message
    #+BEGIN_SRC emacs-lisp
@@ -504,7 +504,7 @@ eshell-mode-hook))
 ** magit
    #+BEGIN_SRC emacs-lisp
      (use-package magit
-;       :bind (("
+       :bind ("C-x g" . magit-status)
        :ensure t
        :custom
        (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
