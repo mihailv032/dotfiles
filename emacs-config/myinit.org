@@ -219,8 +219,9 @@
    #+END_SRC
 ** beacon (show where the cursor is)
 #+BEGIN_SRC emacs-lisp
-;  require('beacon)
-;  (beacon-mode 1)
+  ;  require('beacon)
+    (beacon-mode 1)
+; M-x package-install beacon
 #+END_SRC
 ** Dont show startup message
    #+BEGIN_SRC emacs-lisp
@@ -231,6 +232,7 @@
 #+BEGIN_SRC emacs-lisp
   (use-package centaur-tabs
   :demand
+  :ensure t
   :config 
   (centaur-tabs-mode t)
   (setq centaur-tabs-set-bar 'over)
@@ -311,8 +313,8 @@
 #+END_SRC
 *** Load
    #+BEGIN_SRC emacs-lisp
-     ;(load-theme 'doom-one t)
-     (load-theme 'dracula t)
+     (load-theme 'doom-one t)
+     ;(load-theme 'dracula t)
      ;(load-theme 'inkpot t)
      ;(load-theme 'ubuntu t)
    #+END_SRC
@@ -350,7 +352,6 @@ eshell-mode-hook))
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
    #+END_SRC
-
 *** sidebar cfg
     #+BEGIN_SRC emacs-lisp
       ;Sidebar cfg
@@ -371,7 +372,6 @@ eshell-mode-hook))
   (setq dired-sidebar-use-term-integration t)
   (setq dired-sidebar-use-custom-font t))
     #+END_SRC
-
 ** all the icons
    #+BEGIN_SRC emacs-lisp
      (use-package all-the-icons
@@ -381,16 +381,15 @@ eshell-mode-hook))
 ** taskbar
 *** powerline 
    #+BEGIN_SRC emacs-lisp
-     ; (require 'powerline)
+   ;   (require 'powerline)
    #+END_SRC
 
-   
 *** doommodeline
-    #+BEGIN_SRC emacs-lisp
-      (use-package doom-modeline
-	:ensure t
-	:init (doom-modeline-mode 1))
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+;(use-package doom-modeline
+;  :ensure t
+;  :hook (after-init . doom-modeline-mode))
+#+END_SRC
 
 ** Minimap
 #+BEGIN_SRC emacs-lisp
