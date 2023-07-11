@@ -219,7 +219,6 @@
    #+END_SRC
 ** beacon (show where the cursor is)
 #+BEGIN_SRC emacs-lisp
-  ;  require('beacon)
     (beacon-mode 1)
 ; M-x package-install beacon
 #+END_SRC
@@ -314,6 +313,8 @@
 *** Load
    #+BEGIN_SRC emacs-lisp
      (load-theme 'doom-one t)
+     ;doom-moonlight
+     ;doom-horizon
      ;(load-theme 'dracula t)
      ;(load-theme 'inkpot t)
      ;(load-theme 'ubuntu t)
@@ -386,9 +387,9 @@ eshell-mode-hook))
 
 *** doommodeline
 #+BEGIN_SRC emacs-lisp
-;(use-package doom-modeline
-;  :ensure t
-;  :hook (after-init . doom-modeline-mode))
+  (use-package doom-modeline
+    :ensure t
+    :hook (after-init . doom-modeline-mode))
 #+END_SRC
 
 ** Minimap
