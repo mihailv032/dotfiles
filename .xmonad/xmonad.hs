@@ -85,13 +85,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 -- Workspaces
     [
       ((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_a, xK_s, xK_d] [2,0,1]
+        | (key, sc) <- zip [xK_a, xK_s, xK_d] [1,0,2]
         , (f, m) <- [(W.view, 0), (W.shift, mod1Mask)]
     ]
     ++
     [
      ((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_F4, xK_F9, xK_F2] [2,0,1]
+        | (key, sc) <- zip [xK_F4, xK_F9, xK_F2] [1,0,2]
         , (f, m) <- [(W.greedyView, 0), (W.shift, mod1Mask)]
 
     ]
@@ -156,7 +156,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [
       ((modm        ,xK_Return          ), spawn $ XMonad.terminal conf                                   ),
       ((modm        ,xK_4               ), spawn "chromium"                                               ),
-      ((modm        ,xK_e               ), spawn "nemo"                                                 ),
+      ((modm        ,xK_e               ), spawn "thunar"                                                 ),
                                           
       ((mod1Mask    ,xK_t               ), spawn "steam"                                                  ),
       ((mod1Mask    ,xK_g               ), spawn "pavucontrol"                                            ),
