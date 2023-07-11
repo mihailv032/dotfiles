@@ -13,3 +13,6 @@
 [submodule "emacs-config/plugins/react-snippets.el"]
 	path = emacs-config/plugins/react-snippets.el
 	url = git@github.com:johnmastro/react-snippets.el.git
+[submodule "emacs-config/plugins/powerline"]
+	path = emacs-config/plugins/powerline
+	url = git@github.com:milkypostman/powerline.git

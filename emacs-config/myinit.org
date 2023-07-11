@@ -66,13 +66,14 @@
    #+END_SRC
 ** loadpath
    #+BEGIN_SRC emacs-lisp
-     (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-     (add-to-list 'load-path "~/emacs.d/plugins/emmet-mode")
-     (add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
-     (add-to-list 'load-path "~/.emacs.d/plugins/react-snippets.el")
-     (add-to-list 'load-path "~/.emacs.d/plugins/emacs-prisma-mode")
-     (add-to-list 'load-path "~/.emacs.d/plugins")
-     (add-to-list 'load-path "~/.emacs.d/plugins/vendor/emacs-powerline")
+ (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+ (add-to-list 'load-path "~/.emacs.d/plugins/emmet-mode")
+ (add-to-list 'load-path "~/.emacs.d/plugins/powerline")
+ (add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
+ (add-to-list 'load-path "~/.emacs.d/plugins/react-snippets.el")
+ (add-to-list 'load-path "~/.emacs.d/plugins/emacs-prisma-mode")
+ (add-to-list 'load-path "~/.emacs.d/plugins")
+ (add-to-list 'load-path "~/.emacs.d/plugins/vendor/emacs-powerline")
 
    #+END_SRC
 
@@ -381,15 +382,16 @@ eshell-mode-hook))
    #+END_SRC
 ** taskbar
 *** powerline 
-   #+BEGIN_SRC emacs-lisp
-   ;   (require 'powerline)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (require 'powerline)
+  (powerline-center-theme)
+#+END_SRC
 
 *** doommodeline
 #+BEGIN_SRC emacs-lisp
-  (use-package doom-modeline
-    :ensure t
-    :hook (after-init . doom-modeline-mode))
+;  (use-package doom-modeline
+;    :ensure t
+;    :hook (after-init . doom-modeline-mode))
 #+END_SRC
 
 ** Minimap
