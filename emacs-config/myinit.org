@@ -383,15 +383,15 @@ eshell-mode-hook))
 ** taskbar
 *** powerline 
 #+BEGIN_SRC emacs-lisp
-  (require 'powerline)
-  (powerline-center-theme)
+;  (require 'powerline)
+;  (powerline-center-theme)
 #+END_SRC
 
 *** doommodeline
 #+BEGIN_SRC emacs-lisp
-;  (use-package doom-modeline
-;    :ensure t
-;    :hook (after-init . doom-modeline-mode))
+  (use-package doom-modeline
+    :ensure t
+    :hook (after-init . doom-modeline-mode))
 #+END_SRC
 
 ** Minimap
