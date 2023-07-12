@@ -380,6 +380,10 @@ eshell-mode-hook))
        :ensure t)
 ;M-x all-the-icons-install-fonts
    #+END_SRC
+** nerd fonts
+#+BEGIN_SRC emacs-lisp
+  (use-package nerd-icons)
+#+END_SRC
 ** taskbar
 *** powerline 
 #+BEGIN_SRC emacs-lisp
