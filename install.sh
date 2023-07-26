@@ -107,7 +107,9 @@ config() {
 	ln -nsf $dir/config/rofi/powermenu ~/.config/rofi
 	ln -nsf $dir/config/rofi/gameLauncher ~/.config/rofi
 	ln -nsf $dir/config/i3 ~/.config/i3
-		
+	ln -nsf $dir/fish ~/.config/fish
+
+	
   #setting default file manager 
   xdg-mime default thunar.desktop inode/directory
 
