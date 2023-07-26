@@ -27,16 +27,18 @@ alias time='timedatectl status | lolcat'
 #ranger like aliasses
 
 #prog
-alias gpk='cd ~/prog/kirill'
 alias gp='cd ~/prog/'
 alias gpr='cd ~/prog/js/react/react-projects'
 alias gpn='cd ~/prog/js/react/nextjs'
 alias gprn='cd ~/prog/js/react/react-native'
 alias gpj='cd ~/prog/js/node'
 alias gpp='cd ~/prog/pas'
-alias gpv='cd ~/prog/verstka'
 alias gpa='cd ~/prog/assembly'
 alias gprb='cd ~/prog/ruby'
+alias gpc='cd ~/prog/c'
+alias gpcpp='cd ~/prog/cpp'
+alias gps='cd ~/prog/svelte'
+alias gpsk='cd ~/prog/svelekit'
 
 #main dirs 
 alias gd='cd ~/Downloads'
