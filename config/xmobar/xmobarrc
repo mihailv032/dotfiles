@@ -22,11 +22,9 @@ Config { font            = "xft:Canerell:weight=Bold:pixelsize=12:antialias=true
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <fc=#51afef>      %linux% %kernel% </fc> \
+       , template = " %UnsafeStdinReader% \
 	\} \
-	\ %UnsafeStdinReader% \
 	\{ \
-	\ %date% \
-	\ <action=`rofi -modi drun,run -show drun -m -4 -theme ~/.config/rofi/powermenu/games -show-icons -drun-categories powermenu`><fc=#e60053>%powermenu%</fc></action> "
+	\ "
 }
 

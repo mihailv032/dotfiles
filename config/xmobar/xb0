@@ -18,8 +18,8 @@ Config {
 	  , Run Swap [] 10
 	  , Run Locks 
 	  , Run DiskU [("/", "<fn=1> </fn> Root: <free> free ")] [] 50
---	  , Run Kbd [("us","ru"), ("us","ru")] 
-      , Run Uptime ["-t", " <fn=1>羽 </fn> <days>D <hours>H <minutes>M "] 10
+	  , Run Kbd [("us","ru"), ("us","ru")] 
+          , Run Uptime ["-t", " <fn=1>羽 </fn> <days>D <hours>H <minutes>M "] 10
 	  , Run Cpu ["-t", "<fn=1> </fn> CPU : <total>% "] 10
 	  , Run Com "date" ["+\"<fn=1> </fn> %_d %a %b %Y\""] "dt" 360000
 	  , Run Com "uname" ["-r"] "kernel" 360000000000 
@@ -27,7 +27,7 @@ Config {
 	  , Run Com ".config/xmobar/scr/vol" [] "showvol" 5
 	  , Run Com ".config/xmobar/scr/output" [] "output" 5
 	  , Run Com "echo" ["<fn=1>墳 </fn>"] "vol"360000000000 
-	  ,	Run Com "echo" ["<fn=1> </fn>"] "plus"360000000000 
+	  , Run Com "echo" ["<fn=1> </fn>"] "plus"360000000000 
 	  , Run Com "echo" ["<fn=1> </fn>"] "minus"360000000000 
 	  , Run Com "echo" ["<fn=1> </fn>"] "powermenu"360000000000 
 	  , Run UnsafeStdinReader
