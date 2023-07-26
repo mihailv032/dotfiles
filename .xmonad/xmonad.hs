@@ -290,7 +290,7 @@ myStartupHook = do
     spawnOnce "dunst &"
     spawnOnce "~/.xmonad/.fehbg"
     spawnOnce "picom &"
-    spawnOnce "exec /usr/bin/trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --height 30 --transparent true --alpha 0 --tint 0x111111 --monitor 1 &"
+    spawnOnce "exec /usr/bin/trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --height 30 --transparent true --alpha 0 --tint 0x111111 --monitor 2 &"
 
 -------------------------------Prompt Config-----------------------------
 
