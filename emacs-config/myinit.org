@@ -235,21 +235,36 @@
   :ensure t
   :config 
   (centaur-tabs-mode t)
-  (setq centaur-tabs-set-bar 'over)
+  (setq centaur-tabs-style "rounded")
+  (setq centaur-tabs-height 32)
   (setq centaur-tabs-set-icons t)
   (setq centaur-tabs-gray-out-icons 'buffer)
+
+  (setq centaur-tabs-set-bar 'over)
+  (setq x-underline-at-descent-line t)
+  (setq centaur-tabs-active-bar-face "#520f46")
+
+  (setq centaur-tabs-cycle-scope 'tabs)
+
   (setq centaur-tabs-set-modified-marker t)
   (setq centaur-tabs-modified-marker "")
   (setq centaur-tabs-enable-key-bindings t)
+
+  (setq centaur-tabs-group-by-projectile-project t)
+  (setq centaur-tabs-ace-jump t)
+  (setq centaur-tabs-show-count t)
   :bind
    ("C-<iso-lefttab>" . centaur-tabs-backward)
    ("C-<tab>" . centaur-tabs-forward)
+   ("C-`" . centaur-tabs-select-beg-tab)
+   ("C-~" . centaur-tabs-select-end-tab)
+
   :hook
    (dashboard-mode . centaur-tabs-local-mode)
    (term-mode . centaur-tabs-local-mode)
    (calendar-mode . centaur-tabs-local-mode)
    (org-agenda-mode . centaur-tabs-local-mode)
-
+   (org-mode . centaur-tabs-local-mode)
   )
 #+END_SRC
 ** Disable the welcome screen
