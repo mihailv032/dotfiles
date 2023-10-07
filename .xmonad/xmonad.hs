@@ -117,7 +117,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ((0     , 0x1008FF11       ), spawn "pactl set-sink-volume @DEFAULT_SINK@ -1.5%"),
       ((0     , 0x1008FF13       ), spawn "pactl set-sink-volume @DEFAULT_SINK@ +1.5%"),
       ((0     , 0x1008FF12       ), spawn "amixer set Master toggle"),--mute
-      ((0     , 0x1008FF17       ), spawn "~/.xmonad/scr/monitor.sh"),--audio next
+--      ((0     , 0x1008FF17       ), spawn "~/.xmonad/scr/monitor.sh"),--audio next
       ((0     , 0x1008FF16       ), spawn "~/.xmonad/scr/sound.sh "), --audio prev
       ((0     , 0x1008FF14       ), spawn "~/.xmonad/scr/picom")      --pause/play
     ]
