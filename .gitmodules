@@ -16,3 +16,6 @@
 [submodule "emacs-config/plugins/powerline"]
 	path = emacs-config/plugins/powerline
 	url = git@github.com:milkypostman/powerline.git
+[submodule "emacs-config/plugins/centaur-tabs"]
+	path = emacs-config/plugins/centaur-tabs
+	url = git@github.com:ema2159/centaur-tabs.git
