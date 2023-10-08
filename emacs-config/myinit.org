@@ -241,7 +241,7 @@
   (setq centaur-tabs-set-icons t)
   (setq centaur-tabs-gray-out-icons 'buffer)
 
-  (setq centaur-tabs-set-bar 'over)
+  (setq centaur-tabs-set-bar 'under)
   (setq x-underline-at-descent-line t)
   (setq centaur-tabs-active-bar-face "#520f46")
 
@@ -254,12 +254,21 @@
   (setq centaur-tabs-group-by-projectile-project t)
   (setq centaur-tabs-ace-jump t)
   (setq centaur-tabs-show-count t)
+
+  (setq centaur-tabs-adjust-buffer-order t)
+  (setq centaur-tabs-adjust-buffer-order 'right)
+
+  (centaur-tabs-counsel-switch-group)
+  (centaur-tabs-group-by-projectile-project)
+
   :bind
    ("C-<iso-lefttab>" . centaur-tabs-backward)
    ("C-<tab>" . centaur-tabs-forward)
-   ("C-`" . centaur-tabs-select-beg-tab)
-   ("C-~" . centaur-tabs-select-end-tab)
-
+   ("C-`" . centaur-tabs-select-end-tab)
+   ("C-~" . centaur-tabs-select-beg-tab)
+   ("C-_". centaur-tabs-kill-all-buffers-in-current-group)
+   ("C--" . centaur-tabs-kill-other-buffers-in-current-group)
+   ("C-=" . centaur-tabs-kill-unmodified-buffers-in-current-group)
   :hook
    (dashboard-mode . centaur-tabs-local-mode)
    (term-mode . centaur-tabs-local-mode)
@@ -329,7 +338,8 @@
 #+END_SRC
 *** Load
    #+BEGIN_SRC emacs-lisp
-     (load-theme 'doom-one t)
+     (load-theme 'doom-horizon t)
+     ;doom-one
      ;doom-moonlight
      ;doom-horizon
      ;(load-theme 'dracula t)
@@ -409,9 +419,11 @@ eshell-mode-hook))
 
 *** doommodeline
 #+BEGIN_SRC emacs-lisp
-  (use-package doom-modeline
-    :ensure t
-    :hook (after-init . doom-modeline-mode))
+;;  (use-package doom-modeline
+;;    :ensure t
+;;    :config
+;;  (setq auto-revert-check-vc-info t)
+;;    :hook (after-init . doom-modeline-mode))
 #+END_SRC
 
 ** Minimap
