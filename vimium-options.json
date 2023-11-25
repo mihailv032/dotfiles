@@ -1,0 +1,34 @@
+{
+  "keyMappings": "# Insert your preferred key mappings here.\n\nmap J nextTab\nmap K previousTab\nmap d removeTab\nmap u restoreTab",
+  "settingsVersion": "2.0.5",
+  "exclusionRules": [
+    {
+      "passKeys": "",
+      "pattern": "https?://mail.google.com/*"
+    },
+    {
+      "passKeys": "d",
+      "pattern": "https?://localhost:3000/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://localhost:3000/*"
+    },
+    {
+      "passKeys": "t",
+      "pattern": "https?://monkeytype.com/*"
+    },
+    {
+      "passKeys": "p",
+      "pattern": "https?://monkeytype.com/*"
+    },
+    {
+      "passKeys": "d",
+      "pattern": "https?://monkeytype.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://monkeytype.com/*"
+    }
+  ]
+}
