@@ -83,6 +83,7 @@ config() {
 	mkdir -p ~/.config/neofetch
 	mkdir -p ~/.config/xmobar
 	
+	ln -sf $dir/pacman.conf /etc/pacman.conf
 	ln -sf $dir/emacs-config/init.el ~/.emacs.d/init.el
 	ln -sf $dir/emacs-config/myinit.org ~/.emacs.d/myinit.org
 	ln -sf $dir/emacs-config/emacs.png ~/.emacs.d/emacs.png
