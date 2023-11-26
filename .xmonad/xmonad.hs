@@ -364,7 +364,7 @@ main = do
                             , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
                             , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"            -- Urgent workspace
                             , ppExtras  = [windowCount]                                     -- # of windows current workspace
-                            , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]                    -- order of things in xmobar
+                            , ppOrder  = \(ws:l:t:ex) -> [ws]++ex++[t]                    -- order of things in xmobar
                            } >> updatePointer(0.25,0.25) (0.25,0.25)
 
     }
