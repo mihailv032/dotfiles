@@ -10,7 +10,20 @@ function default_sink {
 }
 
 function current_volume {
-  pulsemixer --get-volume | cut -f1 -d' '
+	declare -i volume="$(pulsemixer --get-volume | cut -f1 -d' ')"
+
+	if (($volume > 80)) then
+		echo -n "  "
+	elif (($volume > 30)) then
+		echo -n "󰕾  "
+	elif (($volume > 10)) then
+		echo -n "󰖀 "
+	elif (($volume > 0)) then
+		echo -n "  "
+	elif (($volume < 1)) then
+		echo -n "󰝟  "
+	fi
+	echo "$volume%"
 }
 
 function change_volumes {
@@ -31,5 +44,5 @@ cmd=${0##*/}
 if  [ $change ] ; then
   change_volumes "$sinks"
 fi
-current_volume "$sink"
 
+current_volume "$sink"
