@@ -91,7 +91,7 @@ config() {
 	ln -sf $dir/.vimrc ~/.vimrc
 	ln -sf $dir/.bash_prompt ~/.bash_prompt
 	ln -sf $dir/.xmonad/xmonad.hs ~/.xmonad/xmonad.hs
-	ln -sf $dir/config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+	ln -sf $dir/config/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
 	ln -sf $dir/config/picom/picom.conf ~/.config/picom/picom.conf
 	ln -sf $dir/config/neofetch/config.conf ~/.config/neofetch/config.conf
 	ln -sf $dir/config/rofi/config.rasi ~/.config/rofi/config.rasi
