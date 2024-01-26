@@ -13,15 +13,15 @@ Config {
   , persistent = True
   , iconRoot = ".config/xmobar/icons"
   , commands = [ 
-		Run Date "<fn=1> </fn> %H:%M " "date" 10
-	  , Run Memory ["-t", "<fn=2>\xf0aa </fn> Mem: <usedratio>%"] 10
+    	    Run Date "  %H:%M  %_d %a %b %Y" "time" 10
+	  , Run Memory ["-t", "<fn=2>\xf0aa </fn> RAM: <usedratio>%"] 10
 	  , Run Swap [] 10
 	  , Run Locks 
 	  , Run DiskU [("/", "<fn=1> </fn> Root: <free> free ")] [] 50
 	  , Run Kbd [("us","ru"), ("us","ru")] 
           , Run Uptime ["-t", " <fn=1>羽 </fn> <days>D <hours>H <minutes>M "] 10
 	  , Run Cpu ["-t", "<fn=1> </fn> CPU : <total>% "] 10
-	  , Run Com "date" ["+\"<fn=1> </fn> %_d %a %b %Y\""] "dt" 360000
+	  , Run Com "date" ["+\" %_d %a %b %Y\""] "date" 360000
 	  , Run Com "uname" ["-r"] "kernel" 360000000000 
 	  , Run Com ".config/xmobar/scr/moc" [] "moc" 20
 	  , Run Com ".config/xmobar/scr/vol" [] "showvol" 5
