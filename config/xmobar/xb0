@@ -26,7 +26,6 @@ Config {
 	  , Run Com ".config/xmobar/scr/moc" [] "moc" 20
 	  , Run Com ".config/xmobar/scr/vol" [] "showvol" 5
 	  , Run Com ".config/xmobar/scr/output" [] "output" 5
-	  , Run Com "echo" ["<fn=1>墳 </fn>"] "vol"360000000000 
 	  , Run Com "echo" ["<fn=1> </fn>"] "plus"360000000000 
 	  , Run Com "echo" ["<fn=1> </fn>"] "minus"360000000000 
 	  , Run Com "echo" ["<fn=1> </fn>"] "powermenu"360000000000 
@@ -45,7 +44,7 @@ Config {
 					\<action=`alacritty -e htop`><fc=#ff6c6b>%cpu%  </fc></action> \
 					\<action=`alacritty -e `> <fc=#0a81f5>%disku%   </fc></action> \
 					\<fc=#ee9a00>%uptime%  </fc> \
-					\<box type=Bottom width=2 mb=2 color=#111111><fc=#c00dd5>%output% <action=`pavucontrol`>%vol%%showvol% </action><action=`vol +5000`>%plus%</action> <action=`vol -5000`> %minus%</action></fc></box> \
+					\<box type=Bottom width=2 mb=2 color=#111111><fc=#c00dd5>%output% <action=`pavucontrol`>%showvol% </action><action=`vol +5000`>%plus%</action> <action=`vol -5000`> %minus%</action></fc></box> \
 					\<action=`alacritty -e sudo pacman -Syu`><icon=pacman.xpm/> <fc=#c678dd> </fc></action> \
 					\<fc=#e60053>%locks%  </fc>\
 					\<fc=#fafafa>%date%</fc> \
