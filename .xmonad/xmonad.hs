@@ -98,7 +98,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ++
     [
       ((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip myWorkspaces [xK_i,xK_o,xK_u,xK_b,xK_n,xK_m,xK_z,xK_x,xK_c,xK_F5,xK_F4,xK_F3,xK_f,xK_y,xK_p]
+        | (i, k) <- zip myWorkspaces [xK_i,xK_u,xK_o,xK_m,xK_n,xK_b,xK_c,xK_x,xK_z,xK_F5,xK_F4,xK_F3,xK_f,xK_y,xK_p]
         , (f, m) <- [(W.greedyView, 0), (W.shift, mod1Mask)]
     ]
     ++
