@@ -12,7 +12,7 @@ ussage() {
 system() {
   pacman -S sudo grub efibootmgr dosfstools os-prober ntfs-3g mtools networkmanager \
   base-devel intel-ucode nvidia lib32-nvidia-utils nvidia-utils mesa mesa-demos xorg xmlto kmod vulkan-tools vulkan-headers  vulkan-validation-layers  vulkan-tools  vulkan-icd-loader lib32-vulkan-icd-loader \
-  dkms inetutils bc libelf cpio perl tar xz
+  dkms inetutils bc libelf cpio perl tar xz x11-ssh-askpass
 }
 
 full() {
