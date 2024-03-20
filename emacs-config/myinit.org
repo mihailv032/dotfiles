@@ -104,103 +104,133 @@
 	  (eval-print-last-sexp)))
       (load bootstrap-file nil 'nomessage))
   #+END_SRC
-* Evil
-** Evil mode
-  #+BEGIN_SRC emacs-lisp
-    (use-package evil
+* Core packages 
+** lsp
+   #+BEGIN_SRC emacs-lisp
+     (setq lsp-log-io nil)
+     (setq lsp-keymap-prefix "C-c l")
+     (setq lsp-restart 'auto-restart)
+     (setq lsp-ui-sideline-show-diagnostic t)
+     (setq lsp-ui-sideline-show-hover t)
+     (setq lsp-ui-sideline-show-code-actions t)
+     (use-package lsp-mode
+	:ensure t
+	:hook (
+	(web-mode . lsp-deferred)
+	(lsp-mode . lsp-enable-which-key-integration)
+	)
+	:commands lsp-deferred)
+
+      (use-package lsp-ui
       :ensure t
-      :init
-      (setq evil-want-integration t) 
-      (setq evil-want-keybinding t)
-      :config
-      (evil-mode 1)
-      (setq evil-undo-system 'undo-fu)
-      (define-key evil-insert-state-map (kbd "C-c") 'evil-normal-state))
-  #+END_SRC
-** Evil collection
-   #+BEGIN_SRC emacs-lisp
-     (use-package evil-collection
-	:after evil
-        :ensure t 
-	:custom (evil-collection-setup-minibuffer t) 
-	:config (evil-collection-init))
-   #+END_SRC
-** redo for evil
-   #+BEGIN_SRC emacs-lisp
-	  (use-package undo-fu
-     :straight t)
-	  (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo)
-   #+END_SRC
+      :commands lsp-ui-mode)
 
-** evil multiedit
+   #+END_SRC
+** ivy
+   #+BEGIN_SRC emacs-lisp
+     (use-package ivy
+       :diminish
+       :bind (("C-S" . swiper)
+     :map ivy-minibuffer-map
+     ("TAB" . ivy-alt-done))
+     :config
+     (ivy-mode 1)
+     )
+     (use-package counsel
+       :straight t
+       :bind (("C-x C-f" . counsel-find-file)
+     ("C-x b" . counsel-ibuffer)
+     )
+       :config (setq ivy-initial-inputs-alist nil)
+     )
+   #+END_SRC
+** magit
+   #+BEGIN_SRC emacs-lisp
+     (use-package magit
+       :bind ("C-x g" . magit-status)
+       :ensure t
+       :custom
+       (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+       )
+   #+END_SRC
+** projectile
 #+BEGIN_SRC emacs-lisp
-  (use-package evil-multiedit
-  :after evil
+  (defun dw/switch-project-action ()
+  (persp-switch (projectile-project-name))
+  (magit-status))
+
+  (use-package projectile
+    :diminish projectile-mode
+    :config (projectile-mode)
+    :custom ((projectile-completion-system 'ivy))
+    :bind-keymap
+      ("C-x p" . projectile-command-map)
+    :init
+      (setq projectile-switch-project-action #'projectile-dired))
+
+  (use-package counsel-projectile
+  :straight t
+  :config (counsel-projectile-mode))
+#+END_SRC
+** flycheck
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
   :ensure t
-  :config 
-   (evil-multiedit-default-keybinds)
-   (define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
-   (define-key evil-visual-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
-   (define-key evil-insert-state-map (kbd "M-d") 'evil-multiedit-toggle-marker-here)
-   (define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
-
-  )
-  ;  (define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+  :init
+  (global-flycheck-mode))
 #+END_SRC
-* Haskell Mode
+** multi cursor
+   #+BEGIN_SRC emacs-lisp
+     (use-package multiple-cursors
+       :straight t
+     )
+     (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+     (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+
+   #+END_SRC
+
+** rainbow brakets
+   #+BEGIN_SRC emacs-lisp
+     (require 'rainbow-delimiters)
+     (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+   #+END_SRC
+** expand region
+   #+BEGIN_SRC emacs-lisp
+     (use-package expand-region
+       :ensure t
+       :bind
+       ("C-a" . er/expand-region)
+       ("C-S-a" . er/contract-region)
+       )
+   #+END_SRC
+** json mode
 #+BEGIN_SRC emacs-lisp
-  (use-package haskell-mode
-    :ensure t
-    :mode (("\\.hs\\'" . haskell-mode) )
-    :commands haskell-mode
-  )
+  (use-package json-mode
+  :ensure t)
 #+END_SRC
-* Org mode
-** org
+** which key
    #+BEGIN_SRC emacs-lisp
-     (use-package org
-	:after org
-	:hook (org-mode . misha/org-mode-setup))
-     (setq org-ellipsis " ▾"
-       org-hide-emphasis-markers t)
+     (use-package which-key
+       :ensure t
+       :config
+	 (which-key-mode)
+	 (setq which-key-idle-delay 0.4))
+         (setq which-key-add-column-padding 10)
    #+END_SRC
-** change the list style
+** company
    #+BEGIN_SRC emacs-lisp
-     (font-lock-add-keywords 'org-mode
-     '(("^ *\\([-]\\) "
-     (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-   #+END_SRC
-** Org bullets
-   #+BEGIN_SRC emacs-lisp
-     (use-package org-bullets
-       :after org
-       :hook (org-mode . org-bullets-mode))
+     (setq company-minimum-prefix-length 1
+	   company-idle-delay 0.0)
+     (use-package company
+       :ensure t
+       :config (global-company-mode t))
    #+END_SRC
 
-** center the text 
+** vterm 
    #+BEGIN_SRC emacs-lisp
-     (require 'olivetti)
-     (setq olivetti-body-width 80)
-     (add-hook 'org-mode-hook (lambda () (olivetti-mode 1)))  
+     (use-package vterm
+       :ensure t)
    #+END_SRC
-   
-** make the list not collapse when open *doesnt work  
-  #+BEGIN_SRC emacs-lisp
-   (setq org-cycle-include-plain-lists 'children)
-  #+END_SRC
-* Dired
-#+BEGIN_SRC emacs-lisp
-  (use-package dired
-    :ensure nil
-    :commands (dired dired-jump)
-    :config (evil-collection-define-key 'normal 'dired-mode-map
-    "h" 'dired-single-up-directory
-    "l" 'dired-single-buffer))
-  
-  ;https://github.com/jwiegley/use-package/blob/master/bind-key.el
-  (bind-key [remap dired] 'dired-jump)
-#+END_SRC
-
 * UI
 ** remove the side borders
    #+BEGIN_SRC emacs-lisp
@@ -215,9 +245,9 @@
      (fringe-mode 0)
    #+END_SRC
 ** show warnings only if its emergency
-   #+BEGIN_SRC emacs-lisp
-     (setq warning-minimum-level :emergency)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq warning-minimum-level :emergency)
+#+END_SRC
 ** beacon (show where the cursor is)
 #+BEGIN_SRC emacs-lisp
     (require 'beacon)
@@ -231,56 +261,57 @@
    #+END_SRC
 ** tabs 
 #+BEGIN_SRC emacs-lisp
-  (use-package centaur-tabs
-  :demand
-  :ensure t
-  :config 
-  (centaur-tabs-mode t)
-  (setq centaur-tabs-style "rounded")
-  (setq centaur-tabs-height 32)
-  (setq centaur-tabs-set-icons t)
-  (setq centaur-tabs-gray-out-icons 'buffer)
+    (use-package centaur-tabs
+    :demand
+    :ensure t
+    :config 
+    (centaur-tabs-mode t)
+    (setq centaur-tabs-style "rounded")
+    (setq centaur-tabs-height 32)
+    (setq centaur-tabs-set-icons t)
+    (setq centaur-tabs-gray-out-icons 'buffer)
 
-  (setq centaur-tabs-set-bar 'under)
-  (setq x-underline-at-descent-line t)
-  (setq centaur-tabs-active-bar-face "#520f46")
+    (setq centaur-tabs-set-bar 'under)
+  ;;  (setq centaur-tabs-active-bar-face "#520f46")
 
-  (setq centaur-tabs-cycle-scope 'tabs)
+    (setq centaur-tabs-cycle-scope 'tabs)
 
-  (setq centaur-tabs-set-modified-marker t)
-  (setq centaur-tabs-modified-marker "")
-  (setq centaur-tabs-enable-key-bindings t)
+    (setq centaur-tabs-set-modified-marker t)
+    (setq centaur-tabs-modified-marker "")
+    (setq centaur-tabs-enable-key-bindings t)
 
-  (setq centaur-tabs-group-by-projectile-project t)
-  (setq centaur-tabs-ace-jump t)
-  (setq centaur-tabs-show-count t)
+    (setq centaur-tabs-group-by-projectile-project t)
+    (setq centaur-tabs-ace-jump t)
+    (setq centaur-tabs-show-count t)
 
-  (setq centaur-tabs-adjust-buffer-order t)
-  (setq centaur-tabs-adjust-buffer-order 'right)
+    (setq centaur-tabs-adjust-buffer-order t)
+    (setq centaur-tabs-adjust-buffer-order 'right)
 
-  (centaur-tabs-counsel-switch-group)
-  (centaur-tabs-group-by-projectile-project)
+    (centaur-tabs-counsel-switch-group)
+    (centaur-tabs-group-by-projectile-project)
 
-  :bind
-   ("C-<iso-lefttab>" . centaur-tabs-backward)
-   ("C-<tab>" . centaur-tabs-forward)
-   ("C-`" . centaur-tabs-select-end-tab)
-   ("C-~" . centaur-tabs-select-beg-tab)
-   ("C-_". centaur-tabs-kill-all-buffers-in-current-group)
-   ("C--" . centaur-tabs-kill-other-buffers-in-current-group)
-   ("C-=" . centaur-tabs-kill-unmodified-buffers-in-current-group)
-  :hook
-   (dashboard-mode . centaur-tabs-local-mode)
-   (term-mode . centaur-tabs-local-mode)
-   (calendar-mode . centaur-tabs-local-mode)
-   (org-agenda-mode . centaur-tabs-local-mode)
-   (org-mode . centaur-tabs-local-mode)
-  )
+    :bind (
+     ("C-<iso-lefttab>" . centaur-tabs-backward)
+     ("C-<tab>" . centaur-tabs-forward)
+     ("C-`" . centaur-tabs-select-end-tab)
+     ("C-~" . centaur-tabs-select-beg-tab)
+     ("C-_". centaur-tabs-kill-all-buffers-in-current-group)
+     ("C--" . centaur-tabs-kill-other-buffers-in-current-group)
+     ("C-=" . centaur-tabs-kill-unmodified-buffers-in-current-group)
+    )
+    :hook (
+     (org-mode . centaur-tabs-local-mode)
+     (dashboard-mode . centaur-tabs-local-mode)
+     (term-mode . centaur-tabs-local-mode)
+     (calendar-mode . centaur-tabs-local-mode)
+     (org-agenda-mode . centaur-tabs-local-mode)
+    )
+    )
 #+END_SRC
 ** Disable the welcome screen
-   #+BEGIN_SRC emacs-lisp
-     (setq inhibit-startup-screen t)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq inhibit-startup-screen t)
+#+END_SRC
 ** dashboard
 #+BEGIN_SRC emacs-lisp
   (use-package dashboard
@@ -419,11 +450,11 @@ eshell-mode-hook))
 
 *** doommodeline
 #+BEGIN_SRC emacs-lisp
-;;  (use-package doom-modeline
-;;    :ensure t
-;;    :config
-;;  (setq auto-revert-check-vc-info t)
-;;    :hook (after-init . doom-modeline-mode))
+;  (use-package doom-modeline
+;    :ensure t
+;    :config
+;  (setq auto-revert-check-vc-info t)
+;    :hook (after-init . doom-modeline-mode))
 #+END_SRC
 
 ** Minimap
@@ -441,6 +472,92 @@ eshell-mode-hook))
       (t (:background "#D3D3D3222222")))
     :group 'minimap))
   #+END_SRC
+* Org mode
+** org
+   #+BEGIN_SRC emacs-lisp
+     (defun misha/org-mode-setup ()
+     (org-indent-mode)
+     (visual-line-mode 1)
+     (setq evil-auto-indent nil))
+
+     (use-package org
+	:hook (org-mode . misha/org-mode-setup))
+     (setq org-ellipsis " ▾"
+       org-hide-emphasis-markers t)
+   #+END_SRC
+** change the list style
+   #+BEGIN_SRC emacs-lisp
+     (font-lock-add-keywords 'org-mode
+     '(("^ *\\([-]\\) "
+     (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+   #+END_SRC
+** Org bullets
+   #+BEGIN_SRC emacs-lisp
+     (use-package org-bullets
+       :after org
+       :hook (org-mode . org-bullets-mode))
+   #+END_SRC
+
+** center the text 
+   #+BEGIN_SRC emacs-lisp
+     (require 'olivetti)
+     (setq olivetti-body-width 80)
+     (add-hook 'org-mode-hook (lambda () (olivetti-mode 1)))  
+   #+END_SRC
+   
+** make the list not collapse when open *doesnt work  
+  #+BEGIN_SRC emacs-lisp
+   (setq org-cycle-include-plain-lists 'children)
+  #+END_SRC
+* Evil
+** Evil mode
+  #+BEGIN_SRC emacs-lisp
+    (use-package evil
+      :ensure t
+      :init
+      (setq evil-want-integration t) 
+      (setq evil-want-keybinding t)
+      :config
+      (evil-mode 1)
+      (setq evil-undo-system 'undo-fu)
+      (define-key evil-insert-state-map (kbd "C-c") 'evil-normal-state))
+  #+END_SRC
+** Evil collection
+   #+BEGIN_SRC emacs-lisp
+     (use-package evil-collection
+        :init
+         (setq evil-want-integration t) 
+         (setq evil-want-keybinding t)
+	:after evil
+	:ensure t 
+	:custom (evil-collection-setup-minibuffer t) 
+	:config (evil-collection-init))
+   #+END_SRC
+** redo for evil
+   #+BEGIN_SRC emacs-lisp
+	  (use-package undo-fu
+     :straight t)
+	  (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo)
+   #+END_SRC
+
+** evil multiedit
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-multiedit
+  :after evil
+  :init
+    (setq evil-want-integration t) 
+    (setq evil-want-keybinding t)
+  :ensure t
+  :config 
+   (evil-multiedit-default-keybinds)
+   (define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
+   (define-key evil-visual-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
+   (define-key evil-insert-state-map (kbd "M-d") 'evil-multiedit-toggle-marker-here)
+   (define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+
+  )
+  ;  (define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+#+END_SRC
 * JS 
 ** debugger
 #+BEGIN_SRC emacs-lisp
@@ -495,137 +612,11 @@ eshell-mode-hook))
   :after (rjsx-mode company flycheck)
   :hook (rjsx-mode . setup-tide-mode))
 #+END_SRC
-* Core packages 
-** lsp
-   #+BEGIN_SRC emacs-lisp
-     (setq lsp-log-io nil)
-     (setq lsp-keymap-prefix "C-c l")
-     (setq lsp-restart 'auto-restart)
-     (setq lsp-ui-sideline-show-diagnostic t)
-     (setq lsp-ui-sideline-show-hover t)
-     (setq lsp-ui-sideline-show-code-actions t)
-     (use-package lsp-mode
-	:ensure t
-	:hook (
-	(web-mode . lsp-deferred)
-	(lsp-mode . lsp-enable-which-key-integration)
-	)
-	:commands lsp-deferred)
-
-      (use-package lsp-ui
-      :ensure t
-      :commands lsp-ui-mode)
-
-   #+END_SRC
-** ivy
-   #+BEGIN_SRC emacs-lisp
-     (use-package ivy
-       :diminish
-       :bind (("C-S" . swiper)
-     :map ivy-minibuffer-map
-     ("TAB" . ivy-alt-done))
-     :config
-     (ivy-mode 1)
-     )
-     (use-package counsel
-       :straight t
-       :bind (("C-x C-f" . counsel-find-file)
-     ("C-x b" . counsel-ibuffer)
-     )
-       :config (setq ivy-initial-inputs-alist nil)
-     )
-   #+END_SRC
-** magit
-   #+BEGIN_SRC emacs-lisp
-     (use-package magit
-       :bind ("C-x g" . magit-status)
-       :ensure t
-       :custom
-       (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
-       )
-   #+END_SRC
-** projectile
-   #+BEGIN_SRC emacs-lisp
-     (defun dw/switch-project-action ()
-       (persp-switch (projectile-project-name))
-       (magit-status))
-
-     (use-package projectile
-       :diminish projectile-mode
-       :config (projectile-mode)
-       :custom ((projectile-completion-system 'ivy))
-       :bind-keymap
-       ("C-x p" . projectile-command-map)
-       :init
-       (setq projectile-switch-project-action #'projectile-dired))
-
-     (use-package counsel-projectile
-       :straight t
-       :config (counsel-projectile-mode))
-   #+END_SRC
 ** prisma mode
 #+BEGIN_SRC emacs-lisp
   (require 'prisma-mode)
 #+END_SRC
-** flycheck
-#+BEGIN_SRC emacs-lisp
-  (use-package flycheck
-  :ensure t
-  :init
-  (global-flycheck-mode))
-#+END_SRC
-** multi cursor
-   #+BEGIN_SRC emacs-lisp
-     (use-package multiple-cursors
-       :straight t
-     )
-     (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-     (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 
-   #+END_SRC
-
-** rainbow brakets
-   #+BEGIN_SRC emacs-lisp
-     (require 'rainbow-delimiters)
-     (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-   #+END_SRC
-** expand region
-   #+BEGIN_SRC emacs-lisp
-     (use-package expand-region
-       :ensure t
-       :bind
-       ("C-a" . er/expand-region)
-       ("C-S-a" . er/contract-region)
-       )
-   #+END_SRC
-** json mode
-#+BEGIN_SRC emacs-lisp
-  (use-package json-mode
-  :ensure t)
-#+END_SRC
-** which key
-   #+BEGIN_SRC emacs-lisp
-     (use-package which-key
-       :ensure t
-       :config
-	 (which-key-mode)
-	 (setq which-key-idle-delay 0.4))
-         (setq which-key-add-column-padding 10)
-   #+END_SRC
-** company
-   #+BEGIN_SRC emacs-lisp
-     (setq company-minimum-prefix-length 1
-	   company-idle-delay 0.0)
-     (use-package company
-       :ensure t
-       :config (global-company-mode t))
-   #+END_SRC
-
-** vterm 
-   #+BEGIN_SRC emacs-lisp
-     (use-package vterm
-       :ensure t)
-   #+END_SRC
 * Web 
 ** webmode
    #+BEGIN_SRC emacs-lisp
@@ -641,17 +632,26 @@ eshell-mode-hook))
        :commands web-mode)
    #+END_SRC
 *** web mode hook
-    #+BEGIN_SRC emacs-lisp
-	    (add-hook 'web-mode-hook  'emmet-mode)
-	    (defun web-mode-init-hook ()
-	      "Hooks for Web mode.  Adjust indent."
-	      (setq web-mode-markup-indent-offset 2)
-      (setq web-mode-code-indent-offset 2)
-      (setq web-mode-css-indent-offset 2)
-      )
-	    (add-hook 'web-mode-hook  'web-mode-init-hook)
-	    (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'web-mode-hook  'emmet-mode)
+  (defun web-mode-init-hook ()
+  "Hooks for Web mode.  Adjust indent."
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  )
+  (add-hook 'web-mode-hook  'web-mode-init-hook)
+  (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+#+END_SRC
+
+** tailwind
+#+BEGIN_SRC emacs-lisp
+  (use-package lsp-tailwindcss
+  :init
+  (setq lsp-tailwindcss-add-on-mode t))
+
+#+END_SRC
+
 ** emmet mode
    #+BEGIN_SRC emacs-lisp
      (require 'emmet-mode)
