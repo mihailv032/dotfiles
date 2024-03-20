@@ -82,7 +82,8 @@ config() {
 	mkdir -p ~/.config/picom
 	mkdir -p ~/.config/neofetch
 	mkdir -p ~/.config/xmobar
-	
+	mkdir -p ~/.local/bin
+
 	ln -sf $dir/pacman.conf /etc/pacman.conf
 	ln -sf $dir/emacs-config/init.el ~/.emacs.d/init.el
 	ln -sf $dir/emacs-config/myinit.org ~/.emacs.d/myinit.org
@@ -98,6 +99,8 @@ config() {
 	ln -sf $dir/config/xmobar/xb0 ~/.config/xmobar/xb0
 	ln -sf $dir/config/xmobar/xmobarrc ~/.config/xmobar/xmobarrc
 	ln -sf $dir/config/xmobar/xb3 ~/.config/xmobar/xb3
+	ln -sf $dir/local/battery_notify.sh ~/.local/bin/battery_notify.sh
+	ln -sf $dir/local/critical_bat_lvl.sh ~/.local/bin/critical_bat_lvl.sh
 
 	ln -nsf $dir/config/dunst ~/.config/dunst
 	ln -nsf $dir/.xmonad/scr ~/.xmonad/
