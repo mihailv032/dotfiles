@@ -24,6 +24,7 @@ alias r='ranger | lolcat'
 alias q='exit'
 alias Q='exit'
 alias p='sudo pacman -S'
+alias update='echo y | sudo  pacman -Syyu && echo \13\13 | yay -S xmonad-git xmonad-contrib-git && xmonad --recompile'
 alias cat='bat'
 #alias time='timedatectl status | lolcat'
 
