@@ -126,22 +126,32 @@
       :commands lsp-ui-mode)
 
    #+END_SRC
+** debugger
+#+BEGIN_SRC emacs-lisp
+  (use-package dap-mode
+:ensure t
+)
+
+  #+END_SRC
+
 ** ivy
    #+BEGIN_SRC emacs-lisp
      (use-package ivy
+       :ensure t
        :diminish
        :bind (("C-S" . swiper)
-     :map ivy-minibuffer-map
-     ("TAB" . ivy-alt-done))
-     :config
-     (ivy-mode 1)
+       :map ivy-minibuffer-map
+       ("TAB" . ivy-alt-done))
+       :config
+       (ivy-mode 1)
      )
      (use-package counsel
-       :straight t
-       :bind (("C-x C-f" . counsel-find-file)
+     :ensure t
+     :straight t
+     :bind (("C-x C-f" . counsel-find-file)
      ("C-x b" . counsel-ibuffer)
      )
-       :config (setq ivy-initial-inputs-alist nil)
+     :config (setq ivy-initial-inputs-alist nil)
      )
    #+END_SRC
 ** magit
@@ -161,6 +171,7 @@
 
   (use-package projectile
     :diminish projectile-mode
+    :ensure t
     :config (projectile-mode)
     :custom ((projectile-completion-system 'ivy))
     :bind-keymap
@@ -169,6 +180,7 @@
       (setq projectile-switch-project-action #'projectile-dired))
 
   (use-package counsel-projectile
+  :ensure t
   :straight t
   :config (counsel-projectile-mode))
 #+END_SRC
@@ -182,6 +194,7 @@
 ** multi cursor
    #+BEGIN_SRC emacs-lisp
      (use-package multiple-cursors
+       :ensure t
        :straight t
      )
      (global-set-key (kbd "C->") 'mc/mark-next-like-this)
@@ -439,7 +452,9 @@ eshell-mode-hook))
    #+END_SRC
 ** nerd fonts
 #+BEGIN_SRC emacs-lisp
-  (use-package nerd-icons)
+  (use-package nerd-icons
+    :ensure t
+  )
 #+END_SRC
 ** taskbar
 *** powerline 
@@ -450,11 +465,10 @@ eshell-mode-hook))
 
 *** doommodeline
 #+BEGIN_SRC emacs-lisp
-;  (use-package doom-modeline
-;    :ensure t
-;    :config
-;  (setq auto-revert-check-vc-info t)
-;    :hook (after-init . doom-modeline-mode))
+;;(use-package doom-modeline
+;;  :ensure t
+;;  :init (doom-modeline-mode 1))
+
 #+END_SRC
 
 ** Minimap
@@ -481,7 +495,8 @@ eshell-mode-hook))
      (setq evil-auto-indent nil))
 
      (use-package org
-	:hook (org-mode . misha/org-mode-setup))
+       :ensure t
+	   :hook (org-mode . misha/org-mode-setup))
      (setq org-ellipsis " ▾"
        org-hide-emphasis-markers t)
    #+END_SRC
@@ -528,17 +543,18 @@ eshell-mode-hook))
         :init
          (setq evil-want-integration t) 
          (setq evil-want-keybinding t)
-	:after evil
-	:ensure t 
-	:custom (evil-collection-setup-minibuffer t) 
-	:config (evil-collection-init))
+        :after evil
+        :ensure t 
+        :custom (evil-collection-setup-minibuffer t) 
+        :config (evil-collection-init))
    #+END_SRC
 ** redo for evil
-   #+BEGIN_SRC emacs-lisp
-	  (use-package undo-fu
-     :straight t)
-	  (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package undo-fu
+  :ensure t
+  :straight t)
+  (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo)
+#+END_SRC
 
 ** evil multiedit
 #+BEGIN_SRC emacs-lisp
@@ -559,11 +575,6 @@ eshell-mode-hook))
   ;  (define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
 #+END_SRC
 * JS 
-** debugger
-#+BEGIN_SRC emacs-lisp
-  (use-package dap-mode)
-
-  #+END_SRC
 ** react snippets 
     #+BEGIN_SRC emacs-lisp
       (require 'yasnippet)
@@ -576,6 +587,7 @@ eshell-mode-hook))
 ** typescript 
    #+BEGIN_SRC emacs-lisp
      (use-package typescript-mode
+     :ensure t
      :mode (("\\.tsx\\'" . typescript-mode)
      ("\\.ts\\'" . typescript-mode))
      :hook (typescript-mode . lsp-deferred)
@@ -647,6 +659,7 @@ eshell-mode-hook))
 ** tailwind
 #+BEGIN_SRC emacs-lisp
   (use-package lsp-tailwindcss
+  :ensure t
   :init
   (setq lsp-tailwindcss-add-on-mode t))
 
