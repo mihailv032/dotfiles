@@ -574,8 +574,16 @@ eshell-mode-hook))
   )
   ;  (define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
 #+END_SRC
-* JS 
-** react snippets 
+* Language integration
+** haskell
+#+BEGIN_SRC emacs-lisp
+  (use-package haskell-mode
+  :ensure t
+  )
+
+#+END_SRC
+** JS 
+*** react snippets 
     #+BEGIN_SRC emacs-lisp
       (require 'yasnippet)
       (yas-global-mode 1)
@@ -584,7 +592,7 @@ eshell-mode-hook))
       (require 'react-snippets)
 
     #+END_SRC
-** typescript 
+*** typescript 
    #+BEGIN_SRC emacs-lisp
      (use-package typescript-mode
      :ensure t
@@ -596,7 +604,7 @@ eshell-mode-hook))
      (dap-node-setup)
      (setq typescript-indent-level 2))
    #+END_SRC
-** rjsx 
+*** rjsx 
 #+BEGIN_SRC  emacs-lisp
   (use-package rjsx-mode
   :ensure t
@@ -606,7 +614,7 @@ eshell-mode-hook))
 	("\\.tsx\\'" . rjsx-mode))
   )
 #+END_SRC
-** tide 
+*** tide 
 #+BEGIN_SRC emacs-lisp
   (defun setup-tide-mode()
   (interactive)
@@ -624,7 +632,7 @@ eshell-mode-hook))
   :after (rjsx-mode company flycheck)
   :hook (rjsx-mode . setup-tide-mode))
 #+END_SRC
-** prisma mode
+*** prisma mode
 #+BEGIN_SRC emacs-lisp
   (require 'prisma-mode)
 #+END_SRC
