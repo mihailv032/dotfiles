@@ -9,7 +9,7 @@ for pid in $(pidof -x alacritty) #doesnt work
     set alacrittyInstances (math $alacrittyInstances + 1)
 end    
 
-if [ $alacrittyInstances = 1 ]
+if [ $alacrittyInstances < 1 ]
    neofetch | lolcat
 end
 
@@ -24,7 +24,7 @@ alias r='ranger | lolcat'
 alias q='exit'
 alias Q='exit'
 alias p='sudo pacman -S'
-alias update='echo y | sudo  pacman -Syyu && echo \13\13 | yay -S xmonad-git xmonad-contrib-git && xmonad --recompile'
+alias update='sudo  pacman -Syyu && yay -S xmonad-git xmonad-contrib-git && xmonad --recompile'
 alias cat='bat'
 #alias time='timedatectl status | lolcat'
 
@@ -34,7 +34,8 @@ alias gpr='cd ~/prog/js/react/react-projects'
 alias gpn='cd ~/prog/js/react/nextjs'
 alias gprn='cd ~/prog/js/react/react-native'
 alias gpj='cd ~/prog/js/node'
-alias gpp='cd ~/prog/pas'
+alias gpp='cd ~/prog/php'
+alias gpg='cd ~/prog/go'
 alias gpb='cd ~/prog/bash'
 alias gpa='cd ~/prog/assembly'
 alias gprb='cd ~/prog/ruby'
