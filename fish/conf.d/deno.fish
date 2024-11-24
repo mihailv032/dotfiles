@@ -1,0 +1,1 @@
+source "/home/krug/.deno/env.fish"
