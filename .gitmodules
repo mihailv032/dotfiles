@@ -19,3 +19,6 @@
 [submodule "emacs-config/plugins/centaur-tabs"]
 	path = emacs-config/plugins/centaur-tabs
 	url = git@github.com:ema2159/centaur-tabs.git
+[submodule "emacs-config/plugins/php-mode"]
+	path = emacs-config/plugins/php-mode
+	url = git@github.com:emacs-php/php-mode.git

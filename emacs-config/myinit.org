@@ -524,6 +524,15 @@ eshell-mode-hook))
   #+BEGIN_SRC emacs-lisp
    (setq org-cycle-include-plain-lists 'children)
   #+END_SRC
+* php
+** phpmode
+#+BEGIN_SRC emacs-lisp
+(use-package php-mode
+  :ensure t
+  :config 
+  (lsp-mode t))
+
+#+END_SRC
 * Evil
 ** Evil mode
   #+BEGIN_SRC emacs-lisp
