@@ -2,9 +2,14 @@
 # ~/.bashrc
 
 #adding new path to the $PATH
-export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin/:$HOME/.local/share/gem/ruby/3.0.0/bin:$HOME/Android/Sdk/platform-tools:$HOME/Android/Sdk/emulator:/etc/profile
+export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin/:$HOME/.local/share/gem/ruby/3.0.0/bin:$HOME/Android/Sdk/platform-tools:$HOME/Android/Sdk/emulator:/etc/profile::$(go env GOBIN):$(go env GOPATH)/bin
 export ANDROID_SDK=$HOME/Android/Sdk
 export REACT_EDITOR=emacs
+export GOPATH=/home/krug/prog/go
+export NVM_DIR="$HOME/prog/js/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 export BROWSER=/usr/bin/chromium
 export HISTCONTROL=ignoreboth 
 export WINEPREFIX=/home/krug/games/Games/wineprefix
@@ -70,3 +75,5 @@ if [[ -f ~/.bash_prompt ]]; then
   . ~/.bash_prompt
 fi
 
+. "/home/krug/.deno/env"export PATH="/home/krug/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/home/krug/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
