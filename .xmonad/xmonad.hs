@@ -42,6 +42,9 @@ import XMonad.Layout.ShowWName --
 import qualified XMonad.Layout.Magnifier as Mag --magnifier
 
 import XMonad.Actions.DynamicWorkspaceGroups
+
+import Graphics.X11.Xinerama (getScreenInfo)
+
 --import XMonad.Actions.Warp
 import XMonad.Actions.UpdatePointer --for pointer to follow focus
 
@@ -50,6 +53,8 @@ import XMonad.Prompt
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
+isLaptop = False
+
 myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
@@ -57,9 +62,10 @@ clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
 
 --toggleStrustKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
-
+n = "kurwa" :: [Char] 
+  
 myWorkspaces = [
-                 "M-Main","P-Main","L-Main",
+                 n,"P-Main","L-Main",
                  "L-Programming","M-Programming","P-Programming",
                  "L-Gayming","M-Gayming","P-Gayming",
                  "M-G5","M-G4","M-G3",
@@ -85,20 +91,20 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 -- Workspaces
     [
       ((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_a, xK_s, xK_d] [1,0,2]
+        | (key, sc) <- zip [xK_a, xK_s, xK_d] [2,0,1]
         , (f, m) <- [(W.view, 0), (W.shift, mod1Mask)]
     ]
     ++
     [
      ((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_F4, xK_F9, xK_F2] [1,0,2]
+        | (key, sc) <- zip [xK_F4, xK_F9, xK_F2] [1,0,3]
         , (f, m) <- [(W.greedyView, 0), (W.shift, mod1Mask)]
 
     ]
     ++
     [
       ((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip myWorkspaces [xK_i,xK_u,xK_o,xK_m,xK_n,xK_b,xK_c,xK_x,xK_z,xK_F5,xK_F4,xK_F3,xK_f,xK_y,xK_p]
+        | (i, k) <- zip myWorkspaces [xK_i,xK_u,xK_o,xK_m,xK_n,xK_b,xK_c,xK_x,xK_z,xK_F5,xK_F4,xK_F3,xK_f,xK_y,xK_KP_Page_Up]
         , (f, m) <- [(W.greedyView, 0), (W.shift, mod1Mask)]
     ]
     ++
@@ -119,7 +125,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       ((0     , 0x1008FF12       ), spawn "amixer set Master toggle"),--mute
 --      ((0     , 0x1008FF17       ), spawn "~/.xmonad/scr/monitor.sh"),--audio next
       ((0     , 0x1008FF16       ), spawn "~/.xmonad/scr/sound.sh "), --audio prev
-      ((0     , 0x1008FF14       ), spawn "~/.xmonad/scr/picom")      --pause/play
+    ((0     , 0x1008FF14       ), spawn "~/.xmonad/scr/picom")      --pause/play
     ]
     ++
 --focus keys
@@ -360,7 +366,7 @@ main = do
                             , ppVisible = xmobarColor "#c792ea" "" . wrap "[ " " ]" . clickable              -- Visible but not current workspace
                             , ppHidden = xmobarColor "#82AAFF" "" . clickable -- Hidden workspaces
 --              , ppHiddenNoWindows = xmobarColor "#82AAFF" ""  . clickable     -- Hidden workspaces (no windows)
-                            , ppTitle = xmobarColor "#b3afc2" "" . shorten 60               -- Title of active window
+                            , ppTitle = xmobarColor "#b3afc2" "" . shorten 20               -- Title of active window
                             , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
                             , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"            -- Urgent workspace
                             , ppExtras  = [windowCount]                                     -- # of windows current workspace
