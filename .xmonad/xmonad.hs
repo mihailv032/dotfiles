@@ -62,10 +62,8 @@ clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
 
 --toggleStrustKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
-n = "kurwa" :: [Char] 
-  
 myWorkspaces = [
-                 n,"P-Main","L-Main",
+                 "M-Main","P-Main","L-Main",
                  "L-Programming","M-Programming","P-Programming",
                  "L-Gayming","M-Gayming","P-Gayming",
                  "M-G5","M-G4","M-G3",
