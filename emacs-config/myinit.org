@@ -48,6 +48,11 @@
    #+BEGIN_SRC emacs-lisp
      (show-paren-mode 1)
    #+END_SRC
+** jump to definition
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<M-return>") 'xref-find-definitions)
+
+#+END_SRC
 ** make escape = C-g
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -106,24 +111,43 @@
   #+END_SRC
 * Core packages 
 ** lsp
-   #+BEGIN_SRC emacs-lisp
-     (setq lsp-log-io nil)
-     (setq lsp-keymap-prefix "C-c l")
-     (setq lsp-restart 'auto-restart)
-     (setq lsp-ui-sideline-show-diagnostic t)
-     (setq lsp-ui-sideline-show-hover t)
-     (setq lsp-ui-sideline-show-code-actions t)
-     (use-package lsp-mode
-	:ensure t
-	:hook (
-	(web-mode . lsp-deferred)
-	(lsp-mode . lsp-enable-which-key-integration)
-	)
-	:commands lsp-deferred)
+#+BEGIN_SRC emacs-lisp
+  (setq lsp-log-io nil)
+  (setq lsp-keymap-prefix "C-c l")
+  (setq lsp-restart 'auto-restart)
+  (setq lsp-ui-sideline-show-diagnostic t)
+  (setq lsp-ui-sideline-show-hover t)
+  (setq lsp-ui-sideline-show-code-actions t)
 
-      (use-package lsp-ui
-      :ensure t
-      :commands lsp-ui-mode)
+  (use-package lsp-mode
+    :ensure t
+    :commands (lsp lsp-deferred)
+    :hook (
+      (web-mode . lsp-deferred)
+      (lsp-mode . lsp-enable-which-key-integration)
+      (typescript-tsx-mode . lsp-deferred)
+      (js2-mode . lsp-deferred)
+      )
+    :init
+    (setq lsp-enable-file-watchers nil)  ;; Optional: can improve performance
+    :config
+    ;; Configure for TypeScript project
+    (setq lsp-typescript-tsdk "/home/krug/prog/js/react/nextjs/bullion-website/server/node_modules/typescript/lib")
+    (setq lsp-typescript-tsserver-path "/home/krug/prog/js/react/nextjs/bullion-website/server/node_modules/.bin/tsserver")
+
+    ;; Enable project-wide jump-to-definition
+    (setq lsp-enable-project-linking t)
+    (setq lsp-enable-xref t)
+
+  ;; For TypeScript path aliases
+    (setq lsp-enable-imenu t)
+    (setq lsp-typescript-preferences-import-module-specifier "relative")
+
+  )
+
+  (use-package lsp-ui
+    :ensure t
+    :commands lsp-ui-mode)
 
    #+END_SRC
 ** debugger
@@ -705,12 +729,12 @@ eshell-mode-hook))
    (use-package jsonrpc
    :ensure t)
 
-  (use-package copilot
-  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
-  :ensure t)
-  (add-hook 'prog-mode-hook 'copilot-mode)
-  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
-  
+;  (use-package copilot
+;  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
+;  :ensure t)
+;  (add-hook 'prog-mode-hook 'copilot-mode)
+;  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+;  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+;  
 #+END_SRC
   
