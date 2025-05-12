@@ -15,11 +15,11 @@ end
 
 set fish_greeting 
 
+alias sl='ls'
 alias la='colorls -A  | lolcat'
 alias ll='colorls -l  | lolcat'
 alias lal='colorls -la | lolcat'
-alias ls='colorls --sd | lolcat'
-alias sl='ls'
+#alias ls='colorls --sd | lolcat'
 alias r='ranger | lolcat'
 alias q='exit'
 alias Q='exit'
@@ -32,6 +32,7 @@ alias cat='bat'
 alias gp='cd ~/prog/'
 alias gpr='cd ~/prog/js/react/react-projects'
 alias gpn='cd ~/prog/js/react/nextjs'
+alias gpe='cd ~/prog/js/electron'
 alias gprn='cd ~/prog/js/react/react-native'
 alias gpj='cd ~/prog/js/node'
 alias gpp='cd ~/prog/php'
