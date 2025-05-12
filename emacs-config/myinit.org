@@ -510,6 +510,12 @@ eshell-mode-hook))
       (t (:background "#D3D3D3222222")))
     :group 'minimap))
   #+END_SRC
+* php
+** phpmode
+#+BEGIN_SRC emacs-lisp
+  (use-package php-mode
+:ensure t)
+#+END_SRC
 * Org mode
 ** org
    #+BEGIN_SRC emacs-lisp
@@ -617,6 +623,17 @@ eshell-mode-hook))
 #+END_SRC
 ** JS 
 *** react snippets 
+* JS 
+** js mode
+#+BEGIN_SRC emacs-lisp
+  (use-package js2-mode
+  :ensure t
+  :mode (("\\.mjs\\'" . js2-mode)
+  ("\\.js\\'" . js2-mode)
+  ("\\.jsx\\'" . js2-mode))
+  )
+#+END_SRC
+** react snippets 
     #+BEGIN_SRC emacs-lisp
       (require 'yasnippet)
       (yas-global-mode 1)
@@ -648,6 +665,31 @@ eshell-mode-hook))
   )
 #+END_SRC
 *** tide 
+** prettier 
+#+BEGIN_SRC emacs-lisp
+
+  (use-package prettier-js
+  :ensure t)
+
+  (setq prettier-js-args '(
+  "--trailing-comma" "all"
+  "--bracket-spacing" "false"
+  ))
+
+  (defun enable-minor-mode (my-pair)
+  "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
+  (if (buffer-file-name)
+      (if (string-match (car my-pair) buffer-file-name)
+      (funcall (cdr my-pair)))))
+
+  (add-hook 'web-mode-hook #'(lambda ()
+                            (enable-minor-mode
+                             '("\\.tsx?\\'" . prettier-js-mode))))
+
+
+
+#+END_SRC
+** tide 
 #+BEGIN_SRC emacs-lisp
   (defun setup-tide-mode()
   (interactive)
