@@ -307,9 +307,7 @@
     (setq centaur-tabs-height 32)
     (setq centaur-tabs-set-icons t)
     (setq centaur-tabs-gray-out-icons 'buffer)
-
-    (setq centaur-tabs-set-bar 'under)
-  ;;  (setq centaur-tabs-active-bar-face "#520f46")
+    (setq centaur-tabs-icon-type 'all-the-icons)
 
     (setq centaur-tabs-cycle-scope 'tabs)
 
@@ -318,14 +316,11 @@
     (setq centaur-tabs-enable-key-bindings t)
 
     (setq centaur-tabs-group-by-projectile-project t)
-    (setq centaur-tabs-ace-jump t)
     (setq centaur-tabs-show-count t)
 
-    (setq centaur-tabs-adjust-buffer-order t)
-    (setq centaur-tabs-adjust-buffer-order 'right)
-
-    (centaur-tabs-counsel-switch-group)
-    (centaur-tabs-group-by-projectile-project)
+;;    (centaur-tabs-counsel-switch-group)
+;;    (centaur-tabs-group-by-projectile-project)
+    (centaur-tabs-headline-match)
 
     :bind (
      ("C-<iso-lefttab>" . centaur-tabs-backward)
@@ -771,12 +766,12 @@ eshell-mode-hook))
    (use-package jsonrpc
    :ensure t)
 
-;  (use-package copilot
-;  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
-;  :ensure t)
-;  (add-hook 'prog-mode-hook 'copilot-mode)
-;  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-;  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
-;  
+  (use-package copilot
+  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
+  :ensure t)
+  (add-hook 'prog-mode-hook 'copilot-mode)
+  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+  
 #+END_SRC
   
