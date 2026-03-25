@@ -11,8 +11,8 @@ ussage() {
 
 system() {
   pacman -S sudo grub efibootmgr dosfstools os-prober ntfs-3g mtools networkmanager \
-  base-devel intel-ucode nvidia lib32-nvidia-utils nvidia-utils mesa mesa-demos xorg xmlto kmod vulkan-tools vulkan-headers  vulkan-validation-layers  vulkan-tools  vulkan-icd-loader lib32-vulkan-icd-loader \
-  dkms inetutils bc libelf cpio perl tar xz x11-ssh-askpass
+  base-devel amd-ucode lib32-nvidia-utils nvidia-utils mesa mesa-demos xmlto kmod vulkan-tools vulkan-headers vulkan-validation-layers  vulkan-tools  vulkan-icd-loader lib32-vulkan-icd-loader \
+  dkms inetutils bc libelf cpio perl tar xz 
 }
 
 full() {
@@ -31,13 +31,11 @@ full() {
 }
 
 basePkg() {
-  sudo pacman -S trayer xmobar alacritty xterm htop ranger thunar tumbler feh emacs gvim flameshot \
-  ruby rust eom vlc pavucontrol pulseaudio lxappearance xfce4-settings chromium qutebrowser firefox \
+  sudo pacman -S alacritty xterm htop ranger thunar tumbler emacs gvim \
+  ruby rust eom vlc pavucontrol pulseaudio chromium qutebrowser firefox \
   discord
 
 #  yayInstall
-	cargo install bat 
-	gem install colorls
 }
 
 yayInstall() {
@@ -48,7 +46,7 @@ yayInstall() {
 }
 
 aur() {
-  yay -S scrot siji-git android-studio ttf-font-awesome polybar fluent-reader soundux rar gdu c-lolcat 
+  yay -S android-studio ttf-font-awesome fluent-reader rar gdu c-lolcat 
 }
 
 wine() {
@@ -119,11 +117,6 @@ config() {
 
   #monitor settings for sddm
   sudo cp Xsetup /usr/share/sddm/scripts/Xsetup
-
-  #monitor & keyboard settings 
-  sudo cp xorg/* /etc/X11/xorg.conf.d/
-  sudo cp xorg/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf
-  sudo cp xorg/10-monitor.conf /etc/X11/xorg.conf.d/10-monitor.conf
 
   #config files 
 #  cp -r config/* $HOME/.config/
