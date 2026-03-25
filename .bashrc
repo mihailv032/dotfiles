@@ -1,7 +1,7 @@
 #!/bin/bash
 # ~/.bashrc
 
-export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin/:$HOME/.local/share/gem/ruby/3.0.0/bin:$HOME/Android/Sdk/platform-tools:$HOME/Android/Sdk/emulator:/etc/profile::$(go env GOBIN):$(go env GOPATH)/bin:$(gem env user_gemhome)/bin
+export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin/:$HOME/.local/share/gem/ruby/3.0.0/bin:$HOME/Android/Sdk/platform-tools:$HOME/Android/Sdk/emulator:/etc/profile::$(go env GOBIN):$(go env GOPATH)/bin:$(gem env user_gemhome)/bin:/home/krug/apps/eww/target/release
 export ANDROID_SDK=$HOME/Android/Sdk
 export REACT_EDITOR=emacs
 export GOPATH=/home/krug/prog/go
@@ -74,7 +74,7 @@ if [[ -f ~/.bash_prompt ]]; then
   . ~/.bash_prompt
 fi
 
-. "/home/krug/.deno/env"export PATH="/home/krug/.config/herd-lite/bin:$PATH"
+export PATH="/home/krug/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="/home/krug/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.

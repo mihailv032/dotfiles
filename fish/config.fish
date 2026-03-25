@@ -15,6 +15,7 @@ end
 
 set fish_greeting 
 
+alias ls='colorls --sd | lolcat'
 alias sl='ls'
 alias la='colorls -A  | lolcat'
 alias ll='colorls -l  | lolcat'
