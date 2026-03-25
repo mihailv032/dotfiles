@@ -77,6 +77,8 @@
  (add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
  (add-to-list 'load-path "~/.emacs.d/plugins/react-snippets.el")
  (add-to-list 'load-path "~/.emacs.d/plugins/emacs-prisma-mode")
+ (add-to-list 'load-path "~/.emacs.d/plugins/doom-modeline")
+
  (add-to-list 'load-path "~/.emacs.d/plugins")
  (add-to-list 'load-path "~/.emacs.d/plugins/vendor/emacs-powerline")
 
@@ -484,10 +486,8 @@ eshell-mode-hook))
 
 *** doommodeline
 #+BEGIN_SRC emacs-lisp
-;;(use-package doom-modeline
-;;  :ensure t
-;;  :init (doom-modeline-mode 1))
-
+  (require 'doom-modeline)
+  (doom-modeline-mode 1)
 #+END_SRC
 
 ** Minimap
@@ -774,4 +774,3 @@ eshell-mode-hook))
   (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
   
 #+END_SRC
-  

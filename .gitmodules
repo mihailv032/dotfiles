@@ -22,3 +22,6 @@
 [submodule "emacs-config/plugins/php-mode"]
 	path = emacs-config/plugins/php-mode
 	url = git@github.com:emacs-php/php-mode.git
+[submodule "emacs-config/plugins/doom-modeline"]
+	path = emacs-config/plugins/doom-modeline
+	url = git@github.com:seagle0128/doom-modeline.git
