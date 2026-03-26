@@ -101,6 +101,8 @@ config() {
 	ln -sf $dir/local/critical_bat_lvl.sh ~/.local/bin/critical_bat_lvl.sh
 
 	ln -nsf $dir/config/dunst ~/.config/dunst
+	ln -nsf $dir/config/hypr ~/.config/hypr
+	ln -nsf $dir/config/eww ~/.config/eww
 	ln -nsf $dir/.xmonad/scr ~/.xmonad/
 	ln -nsf $dir/config/colorls ~/.config/colorls
 	ln -nsf $dir/config/polybar ~/.config/polybar
