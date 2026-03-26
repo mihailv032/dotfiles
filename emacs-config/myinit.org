@@ -96,6 +96,10 @@
      (setq read-process-output-max (* 1024 1024))
      #+END_SRC
 
+** jump to declaration
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "M-<return>") 'xref-find-definitions)
+#+END_SRC
 * straight 
   #+BEGIN_SRC emacs-lisp
     (defvar bootstrap-version)
@@ -637,7 +641,7 @@ eshell-mode-hook))
       (require 'react-snippets)
 
     #+END_SRC
-*** typescript 
+** typescript 
    #+BEGIN_SRC emacs-lisp
      (use-package typescript-mode
      :ensure t
@@ -649,7 +653,7 @@ eshell-mode-hook))
      (dap-node-setup)
      (setq typescript-indent-level 2))
    #+END_SRC
-*** rjsx 
+** rjsx 
 #+BEGIN_SRC  emacs-lisp
   (use-package rjsx-mode
   :ensure t
@@ -659,7 +663,6 @@ eshell-mode-hook))
 	("\\.tsx\\'" . rjsx-mode))
   )
 #+END_SRC
-*** tide 
 ** prettier 
 #+BEGIN_SRC emacs-lisp
 
@@ -702,7 +705,7 @@ eshell-mode-hook))
   :after (rjsx-mode company flycheck)
   :hook (rjsx-mode . setup-tide-mode))
 #+END_SRC
-*** prisma mode
+** prisma mode
 #+BEGIN_SRC emacs-lisp
   (require 'prisma-mode)
 #+END_SRC
@@ -755,22 +758,18 @@ eshell-mode-hook))
    #+END_SRC
 
 * chat gpt
-#+BEGIN_SRC emacs-lisp
-  
-#+END_SRC
 *** copilot
 #+BEGIN_SRC emacs-lisp
   ;;deps
   (use-package editorconfig
-   :ensure t)
-   (use-package jsonrpc
-   :ensure t)
+    :ensure t)
+  (use-package jsonrpc
+    :ensure t)
 
   (use-package copilot
-  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
-  :ensure t)
+    :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
+    :ensure t)
   (add-hook 'prog-mode-hook 'copilot-mode)
   (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
   (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
-  
 #+END_SRC

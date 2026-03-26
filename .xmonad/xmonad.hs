@@ -89,7 +89,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 -- Workspaces
     [
       ((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_a, xK_s, xK_d] [2,0,1]
+        | (key, sc) <- zip [xK_a, xK_s, xK_d] [1,0,2]
         , (f, m) <- [(W.view, 0), (W.shift, mod1Mask)]
     ]
     ++
@@ -159,7 +159,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 -- Launching apps
     [
       ((modm        ,xK_Return          ), spawn $ XMonad.terminal conf                                   ),
-      ((modm        ,xK_4               ), spawn "chromium"                                               ),
+      ((modm        ,xK_4               ), spawn "firefox"                                               ),
       ((modm        ,xK_e               ), spawn "thunar"                                                 ),
                                           
       ((mod1Mask    ,xK_t               ), spawn "steam"                                                  ),
@@ -290,6 +290,10 @@ myStartupHook = do
     addRawWSGroup "G4"    [ (S 2, "L-G4"          ), (S 1,"P-G4"          ), (S 0,"M-G4")           ] 
     addRawWSGroup "G5"    [ (S 2, "L-G5"          ), (S 1,"P-G5"          ), (S 0,"M-G5")           ] 
     spawnOnce "copyq &"
+    spawnOnce "exec /home/krug/.screenlayout/dual.sh"
+    spawnOnce "np-applet &"
+    spawnOnce "cbatticon &"
+    spawnOnce "nm-applet &"
     spawnOnce "emacs --daemon"
     spawnOnce "dunst &"
     spawnOnce "~/.xmonad/.fehbg"
