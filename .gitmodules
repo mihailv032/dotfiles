@@ -1,27 +1,18 @@
 [submodule "emacs-config/plugins/emacs-config/plugins/emacs-prisma-mode"]
 	path = emacs-config/plugins/emacs-config/plugins/emacs-prisma-mode
 	url = git@github.com:pimeys/emacs-prisma-mode.git
-[submodule "emacs-config/plugins/emacs-prisma-mode"]
-	path = emacs-config/plugins/emacs-prisma-mode
-	url = git@github.com:pimeys/emacs-prisma-mode.git
-[submodule "emacs-config/plugins/yasnippet"]
-	path = emacs-config/plugins/yasnippet
-	url = git@github.com:joaotavora/yasnippet.git
-[submodule "emacs-config/plugins/emmet-mode"]
-	path = emacs-config/plugins/emmet-mode
-	url = git@github.com:smihica/emmet-mode.git
-[submodule "emacs-config/plugins/react-snippets.el"]
-	path = emacs-config/plugins/react-snippets.el
-	url = git@github.com:johnmastro/react-snippets.el.git
 [submodule "emacs-config/plugins/powerline"]
 	path = emacs-config/plugins/powerline
 	url = git@github.com:milkypostman/powerline.git
 [submodule "emacs-config/plugins/centaur-tabs"]
 	path = emacs-config/plugins/centaur-tabs
 	url = git@github.com:ema2159/centaur-tabs.git
-[submodule "emacs-config/plugins/php-mode"]
-	path = emacs-config/plugins/php-mode
-	url = git@github.com:emacs-php/php-mode.git
 [submodule "emacs-config/plugins/doom-modeline"]
 	path = emacs-config/plugins/doom-modeline
 	url = git@github.com:seagle0128/doom-modeline.git
+[submodule "emacs-config/plugins/emmet-mode"]
+	path = emacs-config/plugins/emmet-mode
+	url = git@github.com:smihica/emmet-mode.git
+[submodule "emacs-config/plugins/lsp-tailwindcss"]
+	path = emacs-config/plugins/lsp-tailwindcss
+	url = git@github.com:merrickluo/lsp-tailwindcss.git

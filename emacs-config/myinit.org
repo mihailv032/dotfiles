@@ -72,13 +72,8 @@
 ** loadpath
    #+BEGIN_SRC emacs-lisp
  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
- (add-to-list 'load-path "~/.emacs.d/plugins/emmet-mode")
  (add-to-list 'load-path "~/.emacs.d/plugins/powerline")
- (add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
- (add-to-list 'load-path "~/.emacs.d/plugins/react-snippets.el")
- (add-to-list 'load-path "~/.emacs.d/plugins/emacs-prisma-mode")
  (add-to-list 'load-path "~/.emacs.d/plugins/doom-modeline")
-
  (add-to-list 'load-path "~/.emacs.d/plugins")
  (add-to-list 'load-path "~/.emacs.d/plugins/vendor/emacs-powerline")
 
@@ -407,6 +402,8 @@
 #+END_SRC
 *** Load
    #+BEGIN_SRC emacs-lisp
+(set-frame-parameter (selected-frame) 'alpha '(85 85))
+(add-to-list 'default-frame-alist '(alpha 85 85))
      (load-theme 'doom-horizon t)
      ;doom-one
      ;doom-moonlight
@@ -509,12 +506,6 @@ eshell-mode-hook))
       (t (:background "#D3D3D3222222")))
     :group 'minimap))
   #+END_SRC
-* php
-** phpmode
-#+BEGIN_SRC emacs-lisp
-  (use-package php-mode
-:ensure t)
-#+END_SRC
 * Org mode
 ** org
    #+BEGIN_SRC emacs-lisp
@@ -553,16 +544,12 @@ eshell-mode-hook))
   #+BEGIN_SRC emacs-lisp
    (setq org-cycle-include-plain-lists 'children)
   #+END_SRC
-* php
-** phpmode
-#+BEGIN_SRC emacs-lisp
-(use-package php-mode
-  :ensure t
-  :config 
-  (lsp-mode t))
-
-#+END_SRC
 * Evil
+** disable evil want keybinding
+#+BEGIN_SRC emacs-lisp
+;;needs to be done or else the package will bitch at you
+(setq evil-want-keybinding nil)
+#+END_SRC
 ** Evil mode
   #+BEGIN_SRC emacs-lisp
     (use-package evil
@@ -698,14 +685,15 @@ eshell-mode-hook))
 #+END_SRC
 ** quickshell
 #+BEGIN_SRC emacs-lisp
-  (use-package qml-ts-mode
+  (use-package qml-mode
     :after lsp-mode
-  :config
-  (add-to-list 'lsp-language-id-configuration '(qml-ts-mode . "qml-ts"))
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("qmlls"))
-  		  :activation-fn (lsp-activate-on "qml-ts")
-  		  :server-id 'qmlls))
+    :ensure t
+    :config
+    (add-to-list 'lsp-language-id-configuration '(qml-mode . "qml"))
+    (lsp-register-client
+     (make-lsp-client :new-connection (lsp-stdio-connection '("qml"))
+  		    :activation-fn (lsp-activate-on "qml")
+  		    :server-id 'qmlls))
   (add-hook 'qml-ts-mode-hook (lambda ()
   			      (setq-local electric-indent-chars '(?\n ?\( ?\) ?{ ?} ?\[ ?\] ?\; ?,))
   			      (lsp-deferred))))
@@ -740,39 +728,21 @@ eshell-mode-hook))
 
 ** tailwind
 #+BEGIN_SRC emacs-lisp
-  (use-package lsp-tailwindcss
-  :ensure t
-  :init
-  (setq lsp-tailwindcss-add-on-mode t))
-
+  (straight-use-package
+   '(lsp-tailwindcss :type git :host github :repo "merrickluo/lsp-tailwindcss"))
+  ;;  (add-hook 'web-mode-hook 'minimap-create)
 #+END_SRC
 
 ** emmet mode
 #+BEGIN_SRC emacs-lisp
-  (use-package emmet-mode
-    :config
-    (add-hook 'sgml-mode-hook 'emmet-mode)
-    (add-hook 'css-mode-hook  'emmet-mode)
-    )
+  (straight-use-package
+   '(lsp-tailwindcss :type git :host github :repo "smihica/emmet-mode"))
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  (add-hook 'css-mode-hook  'emmet-mode)
+
 #+END_SRC
 ** jsx highlighting
    #+BEGIN_SRC emacs-lisp
       (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
    #+END_SRC
 
-* chat gpt
-*** copilot
-#+BEGIN_SRC emacs-lisp
-  ;;deps
-  (use-package editorconfig
-    :ensure t)
-  (use-package jsonrpc
-    :ensure t)
-
-  (use-package copilot
-    :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
-    :ensure t)
-  (add-hook 'prog-mode-hook 'copilot-mode)
-  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
-#+END_SRC
