@@ -32,8 +32,7 @@ alias cat='bat'
 
 #prog
 alias gp='cd ~/prog/'
-alias gpr='cd ~/prog/js/react/react-projects'
-alias gpn='cd ~/prog/js/react/nextjs'
+alias gpn='cd ~/prog/js/nextjs'
 alias gpe='cd ~/prog/js/electron'
 alias gprn='cd ~/prog/js/react/react-native'
 alias gpj='cd ~/prog/js/node'
