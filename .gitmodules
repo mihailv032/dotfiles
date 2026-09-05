@@ -4,15 +4,6 @@
 [submodule "emacs-config/plugins/powerline"]
 	path = emacs-config/plugins/powerline
 	url = git@github.com:milkypostman/powerline.git
-[submodule "emacs-config/plugins/centaur-tabs"]
-	path = emacs-config/plugins/centaur-tabs
-	url = git@github.com:ema2159/centaur-tabs.git
 [submodule "emacs-config/plugins/doom-modeline"]
 	path = emacs-config/plugins/doom-modeline
 	url = git@github.com:seagle0128/doom-modeline.git
-[submodule "emacs-config/plugins/emmet-mode"]
-	path = emacs-config/plugins/emmet-mode
-	url = git@github.com:smihica/emmet-mode.git
-[submodule "emacs-config/plugins/lsp-tailwindcss"]
-	path = emacs-config/plugins/lsp-tailwindcss
-	url = git@github.com:merrickluo/lsp-tailwindcss.git

@@ -1,3 +1,4 @@
+;;; init.el --- Description -*- lexical-binding: t -*-
 (require 'package)
 (setq package-archives
    '(("melpa" . "https://melpa.org/packages/")
@@ -15,9 +16,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(yasnippet-snippets yasnippet web-mode company doom-modeline
-			evil-multiedit evil exec-path-from-shell vterm
-			use-package))
+   '(web-mode company doom-modeline
+	      evil-multiedit evil exec-path-from-shell vterm
+	      use-package))
  '(safe-local-variable-values
    '((eval progn (require 'lsp-mode)
 	   (lsp-register-custom-settings

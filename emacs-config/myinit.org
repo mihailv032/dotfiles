@@ -1,3 +1,4 @@
+#+PROPERTY: header-args:elisp :lexical t
 * General
 ** startuptime
 #+BEGIN_SRC  emacs-lisp
@@ -111,6 +112,13 @@
       (load bootstrap-file nil 'nomessage))
   #+END_SRC
 * Core packages 
+** shin-path
+#+BEGIN_SRC emacs-lisp
+  (use-package shrink-path
+    :ensure t
+)
+#+END_SRC
+
 ** lsp
 #+BEGIN_SRC emacs-lisp
   (setq lsp-log-io nil)
@@ -545,11 +553,6 @@ eshell-mode-hook))
    (setq org-cycle-include-plain-lists 'children)
   #+END_SRC
 * Evil
-** disable evil want keybinding
-#+BEGIN_SRC emacs-lisp
-;;needs to be done or else the package will bitch at you
-(setq evil-want-keybinding nil)
-#+END_SRC
 ** Evil mode
   #+BEGIN_SRC emacs-lisp
     (use-package evil
@@ -736,7 +739,7 @@ eshell-mode-hook))
 ** emmet mode
 #+BEGIN_SRC emacs-lisp
   (straight-use-package
-   '(lsp-tailwindcss :type git :host github :repo "smihica/emmet-mode"))
+   '(emmet-mode :type git :host github :repo "smihica/emmet-mode"))
   (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'css-mode-hook  'emmet-mode)
 
