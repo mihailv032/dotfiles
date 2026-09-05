@@ -25,7 +25,7 @@
 ** Font
    #+BEGIN_SRC emacs-lisp
      (defun fontify-frame (frame)
-       (set-frame-parameter frame 'font "monospace-16"))
+       (set-frame-parameter frame 'font "AzeretMono-16"))
      
    #+END_SRC
 ** add node modules path
