@@ -632,15 +632,6 @@ eshell-mode-hook))
   ("\\.jsx\\'" . js2-mode))
   )
 #+END_SRC
-** react snippets 
-    #+BEGIN_SRC emacs-lisp
-      (require 'yasnippet)
-      (yas-global-mode 1)
-	    ;(yas-reload-all)
-	    ;(add-hook 'prog-mode-hook #'yas-minor-mode)
-      (require 'react-snippets)
-
-    #+END_SRC
 ** typescript 
    #+BEGIN_SRC emacs-lisp
      (use-package typescript-mode
@@ -705,9 +696,19 @@ eshell-mode-hook))
   :after (rjsx-mode company flycheck)
   :hook (rjsx-mode . setup-tide-mode))
 #+END_SRC
-** prisma mode
+** quickshell
 #+BEGIN_SRC emacs-lisp
-  (require 'prisma-mode)
+  (use-package qml-ts-mode
+    :after lsp-mode
+  :config
+  (add-to-list 'lsp-language-id-configuration '(qml-ts-mode . "qml-ts"))
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection '("qmlls"))
+  		  :activation-fn (lsp-activate-on "qml-ts")
+  		  :server-id 'qmlls))
+  (add-hook 'qml-ts-mode-hook (lambda ()
+  			      (setq-local electric-indent-chars '(?\n ?\( ?\) ?{ ?} ?\[ ?\] ?\; ?,))
+  			      (lsp-deferred))))
 #+END_SRC
 
 * Web 
@@ -747,11 +748,13 @@ eshell-mode-hook))
 #+END_SRC
 
 ** emmet mode
-   #+BEGIN_SRC emacs-lisp
-     (require 'emmet-mode)
-     (add-hook 'sgml-mode-hook 'emmet-mode)
-     (add-hook 'css-mode-hook  'emmet-mode)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package emmet-mode
+    :config
+    (add-hook 'sgml-mode-hook 'emmet-mode)
+    (add-hook 'css-mode-hook  'emmet-mode)
+    )
+#+END_SRC
 ** jsx highlighting
    #+BEGIN_SRC emacs-lisp
       (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))

@@ -20,6 +20,7 @@ alias sl='ls'
 alias la='colorls -A  | lolcat'
 alias ll='colorls -l  | lolcat'
 alias lal='colorls -la | lolcat'
+alias vim="nvim"
 #alias ls='colorls --sd | lolcat'
 alias r='ranger | lolcat'
 alias q='exit'

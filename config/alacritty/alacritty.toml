@@ -5,8 +5,13 @@ foreground = "#c5c8c6"
 size = 17.0
 
 [font.normal]
-family = "Comic mono"
-style = "Regular"
+family="B612Mono"
+
+[font.italic]
+family="B612Mono"
+
+[font.bold]
+family="B612Mono"
 
 [window.padding]
 x = 10
@@ -14,3 +19,8 @@ y = 15
 
 [window]
 opacity = 0.7
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B\r"
