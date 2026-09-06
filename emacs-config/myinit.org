@@ -73,11 +73,7 @@
 ** loadpath
    #+BEGIN_SRC emacs-lisp
  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
- (add-to-list 'load-path "~/.emacs.d/plugins/powerline")
- (add-to-list 'load-path "~/.emacs.d/plugins/doom-modeline")
  (add-to-list 'load-path "~/.emacs.d/plugins")
- (add-to-list 'load-path "~/.emacs.d/plugins/vendor/emacs-powerline")
-
    #+END_SRC
 
 ** follow symbolic link default to yes
@@ -489,13 +485,15 @@ eshell-mode-hook))
 ** taskbar
 *** powerline 
 #+BEGIN_SRC emacs-lisp
-;  (require 'powerline)
-;  (powerline-center-theme)
+  ;; (straight-use-package
+  ;;  '(emmet-mode :type git :host github :repo "milkypostman/powerline"))
+  ;; (powerline-center-theme)
 #+END_SRC
 
 *** doommodeline
 #+BEGIN_SRC emacs-lisp
-  (require 'doom-modeline)
+  (straight-use-package
+   '(emmet-mode :type git :host github :repo "seagle0128/doom-modeline"))
   (doom-modeline-mode 1)
 #+END_SRC
 

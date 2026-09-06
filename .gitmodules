@@ -1,9 +1,0 @@
-[submodule "emacs-config/plugins/emacs-config/plugins/emacs-prisma-mode"]
-	path = emacs-config/plugins/emacs-config/plugins/emacs-prisma-mode
-	url = git@github.com:pimeys/emacs-prisma-mode.git
-[submodule "emacs-config/plugins/powerline"]
-	path = emacs-config/plugins/powerline
-	url = git@github.com:milkypostman/powerline.git
-[submodule "emacs-config/plugins/doom-modeline"]
-	path = emacs-config/plugins/doom-modeline
-	url = git@github.com:seagle0128/doom-modeline.git
