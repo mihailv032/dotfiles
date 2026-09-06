@@ -1,7 +1,8 @@
-#+PROPERTY: header-args:elisp :lexical t
+#+PROPERTY: header-args:emacs-lisp :lexical t
 * General
 ** startuptime
 #+BEGIN_SRC  emacs-lisp
+;;; -*- lexical-binding: t; -*-
   (defun efs/display-startup-time ()
     (message "Emacs loaded in %s with %d garbage collections."
     (format "%.2f seconds"
@@ -406,9 +407,9 @@
 #+END_SRC
 *** Load
    #+BEGIN_SRC emacs-lisp
-(set-frame-parameter (selected-frame) 'alpha '(85 85))
-(add-to-list 'default-frame-alist '(alpha 85 85))
      (load-theme 'doom-horizon t)
+(add-to-list 'default-frame-alist '(alpha-background . 85))
+
      ;doom-one
      ;doom-moonlight
      ;doom-horizon
@@ -416,7 +417,7 @@
      ;(load-theme 'inkpot t)
      ;(load-theme 'ubuntu t)
    #+END_SRC
-** vscode icons
+** sidebar icons
    #+BEGIN_SRC emacs-lisp
      (use-package vscode-icon
        :ensure t
@@ -466,7 +467,7 @@ eshell-mode-hook))
   (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
   (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
 ;  (setq dired-sidebar-subtree-line-prefix "__")
-  (setq dired-sidebar-theme 'vscode)
+  (setq dired-sidebar-theme 'treemacs-icons-dired)
   (setq dired-sidebar-use-term-integration t)
   (setq dired-sidebar-use-custom-font t))
     #+END_SRC
@@ -486,14 +487,14 @@ eshell-mode-hook))
 *** powerline 
 #+BEGIN_SRC emacs-lisp
   ;; (straight-use-package
-  ;;  '(emmet-mode :type git :host github :repo "milkypostman/powerline"))
+  ;;  '(powerline :type git :host github :repo "milkypostman/powerline"))
   ;; (powerline-center-theme)
 #+END_SRC
 
 *** doommodeline
 #+BEGIN_SRC emacs-lisp
   (straight-use-package
-   '(emmet-mode :type git :host github :repo "seagle0128/doom-modeline"))
+   '(doom-modeline :type git :host github :repo "seagle0128/doom-modeline"))
   (doom-modeline-mode 1)
 #+END_SRC
 
@@ -553,11 +554,12 @@ eshell-mode-hook))
 * Evil
 ** Evil mode
   #+BEGIN_SRC emacs-lisp
+
+    (setq evil-want-keybinding nil)
     (use-package evil
       :ensure t
       :init
       (setq evil-want-integration t) 
-      (setq evil-want-keybinding t)
       :config
       (evil-mode 1)
       (setq evil-undo-system 'undo-fu)
@@ -568,7 +570,6 @@ eshell-mode-hook))
      (use-package evil-collection
         :init
          (setq evil-want-integration t) 
-         (setq evil-want-keybinding t)
         :after evil
         :ensure t 
         :custom (evil-collection-setup-minibuffer t) 
@@ -588,7 +589,6 @@ eshell-mode-hook))
   :after evil
   :init
     (setq evil-want-integration t) 
-    (setq evil-want-keybinding t)
   :ensure t
   :config 
    (evil-multiedit-default-keybinds)

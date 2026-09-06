@@ -85,6 +85,7 @@ config() {
 	ln -sf $dir/pacman.conf /etc/pacman.conf
 	ln -sf $dir/emacs-config/init.el ~/.emacs.d/init.el
 	ln -sf $dir/emacs-config/myinit.org ~/.emacs.d/myinit.org
+	ln -sf $dir/emacs-config/early-init.el ~/.emacs.d/early-init.el
 	ln -sf $dir/emacs-config/emacs.png ~/.emacs.d/emacs.png
 	ln -sf $dir/.bashrc ~/.bashrc
 	ln -sf $dir/.vimrc ~/.vimrc
