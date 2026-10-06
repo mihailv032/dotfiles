@@ -26,7 +26,6 @@ hl.bind("CTRL + ALT + D",          hl.dsp.exec_cmd("discord"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
 hl.bind("SUPER + Print",           hl.dsp.exec_cmd('grim -g "$(slurp -d -o)" - | wl-copy'))
 hl.bind(mainMod .. " + E",         hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("alacritty -t yazi -e yazi"))
 hl.bind(mainMod .. " + R",         hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + RETURN",    hl.dsp.exec_cmd(terminal))
 
@@ -96,6 +95,7 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 -- - - - - - - - - - Media Keys - - - - - - - - - - - -
 
 -------------------------------------------------------
+
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("pamixer -i 5"), { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("pamixer -d 5"), { locked = true, repeating = true })
 hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("pamixer -t"),   { locked = true, repeating = true })
@@ -109,3 +109,14 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("~/.config/de-scripts/sound.sh"),   { locked = true })
 
+
+--------------------------------------------------------
+
+-- - - - - - - - - - Terminal Apps - - - - - - - - - - -
+
+--------------------------------------------------------
+
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("kitty -T yazi yazi"))
+hl.bind("ALT + KP_End",   hl.dsp.exec_cmd("alacritty -e htop"))
+hl.bind("ALT + KP_Down",   hl.dsp.exec_cmd("alacritty -e mocp"), { locked = true})
+hl.bind("ALT + KP_Left",   hl.dsp.exec_cmd("emacsclient -c -a 'emacs' ~/.config/hypr/hyprland.lua"))
